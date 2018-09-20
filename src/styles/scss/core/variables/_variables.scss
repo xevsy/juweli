@@ -159,7 +159,7 @@ $link-hover-decoration:     underline !default;
 $paragraph-margin-bottom:   1rem !default;
 
 
-// Grid breakpoints
+// grid breakpoints
 //
 // Define the minimum dimensions at which your layout will change,
 // adapting to different screen sizes, for use in media queries.
@@ -176,7 +176,7 @@ $grid-breakpoints: (
 @include _assert-starts-at-zero($grid-breakpoints);
 
 
-// Grid containers
+// grid containers
 //
 // Define the maximum width of `.container` for different screen sizes.
 
@@ -190,7 +190,7 @@ $container-max-widths: (
 @include _assert-ascending($container-max-widths, "$container-max-widths");
 
 
-// Grid columns
+// grid columns
 //
 // Set the number of columns and specify the width of the gutters.
 

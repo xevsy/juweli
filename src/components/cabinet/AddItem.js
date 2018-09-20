@@ -2,19 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { startAddMainItem } from '../../actions/items'
 import MainItemForm from './forms/MainItemForm'
-import Header from '../Header'
+import Header from '../grid/Header'
 import Grid from '@material-ui/core/Grid/Grid'
 import Paper from '@material-ui/core/Paper/Paper'
 import MainMenu from './MainMenu'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { store } from '../../index'
-import { startSetCategories } from '../../actions/categories'
+import { store }  from '../../store/configureStore';
 import classNames from 'classnames'
 import componentsStyle from '../../styles/jss/material-kit-react/views/components'
+import { getTags } from '../../actions/tags'
+import { getCategories } from '../../actions/categories'
 
 class AddItem extends React.Component {
   componentDidMount() {
-    store.dispatch(startSetCategories());
+    store.dispatch(getCategories());
+    store.dispatch(getTags())
   }
 
   render() {
@@ -54,6 +56,7 @@ const MapStateToProps = (state) => {
   return {
     categories: state.categories,
     auth: state.auth,
+    tags: state.tags,
   }
 };
 

@@ -5,8 +5,6 @@ import MenuItem from '@material-ui/core/MenuItem/MenuItem'
 import * as PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ListItemText from '@material-ui/core/ListItemText/ListItemText'
-import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon'
-import SendIcon from '@material-ui/icons/Send'
 import { Link } from 'react-router-dom'
 
 class SidebarMenu extends React.Component {
@@ -19,7 +17,7 @@ class SidebarMenu extends React.Component {
   }
   render() {
     return (
-      <Paper className={this.props.classes.paper} elevation={10}>
+      <div>
         <h3>Разделы</h3>
         <MenuList>
         {this.props.categories.map((category) => {
@@ -30,25 +28,16 @@ class SidebarMenu extends React.Component {
               key={category.id}
               component={Link} to="/"
             >
-              <ListItemIcon className={this.props.classes.icon}>
-                <SendIcon />
-              </ListItemIcon>
               <ListItemText classes={{ primary: this.props.classes.primary }} inset primary={category.title} />
             </MenuItem>
           )})}
         </MenuList>
-      </Paper>
+      </div>
     )
   }
 }
 
 const styles = theme => ({
-  paper: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-    backgroundColor: '#EFEBE9',
-  },
   menuItem: {
     '&:focus': {
       backgroundColor: theme.palette.secondary.light,
@@ -57,7 +46,9 @@ const styles = theme => ({
       },
     },
   },
-  primary: {},
+  primary: {
+    padding: 0
+  },
   icon: {},
 });
 

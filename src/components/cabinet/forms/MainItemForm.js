@@ -12,6 +12,9 @@ import FileUploader from "react-firebase-file-uploader";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 import { storage } from '../../../firebase/firebase';
+import DownshiftMultiple from '../partial/DownshiftMultiple'
+import Switch from '@material-ui/core/Switch/Switch'
+import Typography from '@material-ui/core/Typography/Typography'
 
 // const imageThumbnail = require('image-thumbnail');
 
@@ -51,6 +54,8 @@ class MainItemForm extends React.PureComponent {
       files: [],
       error: '',
       auth: props.auth,
+      tags: props.item ? props.item.tags : [],
+      published: props.item ? props.item.published : true,
     }
 
     if (props.item) {
@@ -59,6 +64,12 @@ class MainItemForm extends React.PureComponent {
         .child(props.item.image)
         .getDownloadURL().then((url) => this.setState({'imageUrl': url}));
     }
+  }
+
+  handleToggle = () => {
+    const { published } = this.state;
+
+    this.setState({ published: !published });
   }
 
   handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
@@ -97,11 +108,17 @@ class MainItemForm extends React.PureComponent {
       amount: 0,
       count: 0,
       image: '',
+      tags: [],
+      published: true,
     });
   }
 
   handleDeleteButton = event => {
     this.props.onHandleDelete({});
+  }
+
+  handleTagChange = tags => {
+    this.setState({tags: tags})
   }
 
   onFormSubmit(e) {
@@ -117,6 +134,7 @@ class MainItemForm extends React.PureComponent {
       count: this.state.count,
       image: this.state.image,
       author_id: this.state.auth.uid,
+      tags: this.state.tags,
     });
   }
 
@@ -127,6 +145,15 @@ class MainItemForm extends React.PureComponent {
         onSubmit={this.onFormSubmit}
         onError={errors => console.log(errors)}
       >
+        <div>
+          <Typography>
+            Published
+          </Typography>
+          <Switch
+            onChange={this.handleToggle}
+            checked={this.state.published}
+          />
+        </div>
         <TextValidator
           id={"title"}
           label={"Title"}
@@ -223,6 +250,11 @@ class MainItemForm extends React.PureComponent {
             shrink: true,
           }}
           margin={"normal"}
+        />
+        <DownshiftMultiple
+          selectedValues={this.state.tags}
+          inputValues={this.props.tags}
+          handleTagChange={this.handleTagChange}
         />
         <div>
           {this.state.isUploading && <p>Progress: {this.state.progress}</p>}

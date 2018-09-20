@@ -1,0 +1,138 @@
+import React from 'react'
+import Card from '@material-ui/core/Card/Card'
+import CardHeader from '@material-ui/core/CardHeader/CardHeader'
+import Avatar from '@material-ui/core/Avatar/Avatar'
+import IconButton from '@material-ui/core/IconButton/IconButton'
+import MoreVertIcon from '@material-ui/icons/MoreVert'
+import CardMedia from '@material-ui/core/CardMedia/CardMedia'
+import CardContent from '@material-ui/core/CardContent/CardContent'
+import Typography from '@material-ui/core/Typography/Typography'
+import CardActions from '@material-ui/core/CardActions/CardActions'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import ShareIcon from '@material-ui/icons/Share'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import classnames from 'classnames'
+import Moment from 'react-moment'
+import { red } from '@material-ui/core/colors'
+import { withStyles } from '@material-ui/core'
+import Collapse from '@material-ui/core/Collapse/Collapse'
+import Chip from '@material-ui/core/Chip/Chip'
+import { Link } from 'react-router-dom'
+
+class ItemTeaser extends React.Component {
+  state = { expanded: false };
+
+  handleExpandClick = () => {
+    this.setState(state => ({ expanded: !state.expanded }));
+  };
+
+  render() {
+    const { classes, item } = this.props;
+    const itemDate = <Moment format={"YYYY/MM/DD"} date={item.updateAt} />
+
+    return (
+        <Card className={classes.card}>
+          <CardHeader
+            avatar={
+              <Avatar aria-label={item.amount} className={classes.avatar}>
+                {item.amount} {item.currency}
+              </Avatar>
+            }
+            action={
+              <Link to={"/cabinet/edit/" + item.id} >
+                <IconButton>
+                  <MoreVertIcon />
+                </IconButton>
+              </Link>
+            }
+            title={item.title}
+            subheader={itemDate}
+          />
+          <CardMedia
+            className={classes.media}
+            image={item.imageUrl}
+            title=""
+          />
+          <CardContent>
+            <Typography>
+              {item.amount} {item.currency}
+            </Typography>
+          </CardContent>
+          <CardActions className={classes.actions} disableActionSpacing>
+            <IconButton aria-label="Share">
+              <ShareIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => this.props.onBucketClick(item)}
+            >
+              <ShoppingCartIcon />
+            </IconButton>
+            <IconButton
+              className={classnames(classes.expand, {
+                [classes.expandOpen]: this.state.expanded,
+              })}
+              onClick={this.handleExpandClick}
+              aria-expanded={this.state.expanded}
+              aria-label="Show more"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </CardActions>
+          <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
+            <CardContent>
+              <Typography paragraph>
+                {item.description}
+              </Typography>
+              <Typography paragraph>
+                На складе: {item.count}
+              </Typography>
+              <div>
+                {item.tags && item.tags.map((tag) => {
+                  return <Chip label={tag} className={classes.chip} key={tag}/>
+                })}
+              </div>
+            </CardContent>
+          </Collapse>
+        </Card>
+    )
+  }
+}
+
+const styles = theme => ({
+  card: {
+    maxWidth: 350,
+    margin: 15,
+    minHeight: 400
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%', // 16:9
+  },
+  actions: {
+    display: 'flex',
+  },
+  expand: {
+    transform: 'rotate(0deg)',
+    transition: theme.transitions.create('transform', {
+      duration: theme.transitions.duration.shortest,
+    }),
+    marginLeft: 'auto',
+    [theme.breakpoints.up('sm')]: {
+    marginRight: -8,
+  },
+  },
+  expandOpen: {
+    transform: 'rotate(180deg)',
+  },
+  avatar: {
+    backgroundColor: red[500],
+    fontSize: '0.7rem',
+    width: 50,
+    height: 50
+  },
+  chip: {
+    margin: theme.spacing.unit,
+  },
+});
+
+export default withStyles(styles)(ItemTeaser);

@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddCategory } from '../../actions/categories'
 import Header from '../grid/Header'
 import Grid from '@material-ui/core/Grid/Grid'
 import Paper from '@material-ui/core/Paper/Paper'
 import MainMenu from './MainMenu'
 import withStyles from '@material-ui/core/styles/withStyles'
-import MainCategoryForm from './forms/MainCategoryForm'
 import componentsStyle from "../../styles/jss/material-kit-react/views/components"
 import classNames from 'classnames'
+import MainTagForm from './forms/MainTagForm'
+import { startAddTag } from '../../actions/tags'
 
-class AddCategory extends React.Component {
+class AddTag extends React.Component {
   render() {
     const {classes} = this.props;
     return (
@@ -25,8 +25,8 @@ class AddCategory extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Paper className={this.props.classes.paper}>
-                <h1>Add new category</h1>
-                <MainCategoryForm onFormSubmit={this.props.onFormSubmit}
+                <h1>Add new tag</h1>
+                <MainTagForm onFormSubmit={this.props.onFormSubmit}
                 />
               </Paper>
             </Grid>
@@ -42,10 +42,10 @@ class AddCategory extends React.Component {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onFormSubmit: category => {
-      dispatch(startAddCategory(category));
+      dispatch(startAddTag(category));
       props.history.push('/cabinet');
     }
   }
 }
 
-export default connect(undefined, mapDispatchToProps)(withStyles(componentsStyle)(AddCategory));
+export default connect(undefined, mapDispatchToProps)(withStyles(componentsStyle)(AddTag));

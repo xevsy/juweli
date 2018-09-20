@@ -20,9 +20,9 @@ export default (state = itemsReducerDefaultState, action) => {
       });
     case 'REMOVE_MAIN_ITEM':
       return state.filter(({ id }) => id !== action.id);
-    case 'SET_MAIN_ITEMS':
+    case 'GET_MAIN_ITEMS':
       return action.items;
-    case 'SET_IMAGE_URL':
+    case 'GET_IMAGE_URL':
       return state.map((item) => {
         if (item.id === action.id) {
           return {
@@ -34,8 +34,6 @@ export default (state = itemsReducerDefaultState, action) => {
           return item;
         }
       })
-    case 'GET_ITEMS_COUNT':
-      return action.items.length;
     default:
       return state;
   }

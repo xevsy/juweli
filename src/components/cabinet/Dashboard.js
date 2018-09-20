@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../Header'
+import Header from '../grid/Header'
 import Grid from '@material-ui/core/Grid/Grid'
 import Paper from '@material-ui/core/Paper/Paper'
 import MainMenu from './MainMenu'

@@ -10,6 +10,7 @@ export const addMainItem = (item) => ({
 export const startAddMainItem = (itemData = {}) => {
   return (dispatch) => {
     const {
+      published = true,
       title ='',
       description = '',
       category = '',
@@ -18,10 +19,11 @@ export const startAddMainItem = (itemData = {}) => {
       amount =  0,
       count = 0,
       image = '',
+      tags = [],
       createAt = moment().format(),
       updateAt = moment().format()
     } = itemData;
-    const item = { title, description, category, author_id, currency, amount, count, image, createAt, updateAt };
+    const item = { published, title, description, category, author_id, currency, amount, count, image, tags, createAt, updateAt };
     return database.ref('products').push(item).then((ref) => {
       dispatch(addMainItem({
         id: ref.key,
@@ -41,6 +43,7 @@ export const editMainItem = (id, updates) => ({
 export const startEditMainItem = (id, itemData = {}) => {
   return (dispatch) => {
     const {
+      published = true,
       title ='',
       description = '',
       category = '',
@@ -49,9 +52,10 @@ export const startEditMainItem = (id, itemData = {}) => {
       amount =  0,
       count = 0,
       image = '',
+      tags = [],
       updateAt = moment().format()
     } = itemData;
-    const item = { title, description, category, author_id, currency, amount, count, image, updateAt };
+    const item = { published, title, description, category, author_id, currency, amount, count, image, tags, updateAt };
     return database.ref(`products/${id}`).update(item).then(() => {
       dispatch(editMainItem({id, item}))
     });
@@ -71,14 +75,14 @@ export const startRemoveMainItem = (id) => {
   }
 }
 
-// SET_MAIN_ITEM
-export const setMainItems = (items) => ({
-  type: 'SET_MAIN_ITEMS',
+// GET_MAIN_ITEM
+export const getMainItems = (items) => ({
+  type: 'GET_MAIN_ITEMS',
   items,
 });
 
-export const startSetMainItems = () => {
-  return (dispatch) => {
+export const getItemsAll = () => {
+  return (dispatch, getState) => {
     return database.ref('products').orderByChild('updateAt').once('value').then((snapshot) => {
       const items = [];
       snapshot.forEach((childSnapshot) => {
@@ -89,9 +93,9 @@ export const startSetMainItems = () => {
         storage
           .ref("images")
           .child(childSnapshot.val().image)
-          .getDownloadURL().then((url) => dispatch(setImageUrl(childSnapshot.key, url)));
+          .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
       });
-      dispatch(setMainItems(items));
+      dispatch(getMainItems(items));
     });
   };
 };
@@ -108,20 +112,15 @@ export const getItemsByCategory = (categoryId) => {
         storage
           .ref("images")
           .child(childSnapshot.val().image)
-          .getDownloadURL().then((url) => dispatch(setImageUrl(childSnapshot.key, url)));
+          .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
       });
-      dispatch(setMainItems(items));
+      dispatch(getMainItems(items));
     });
   }
 }
 
-export const getItemsCount = (items) => ({
-  type: 'GET_ITEMS_COUNT',
-  items
-});
-
-export const setImageUrl = (id, url) => ({
-  type: 'SET_IMAGE_URL',
+export const getImageUrl = (id, url) => ({
+  type: 'GET_IMAGE_URL',
   id,
   url
 });

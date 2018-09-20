@@ -1,23 +1,19 @@
 import React from 'react'
-import Header from '../Header'
+import Header from '../grid/Header'
 import { connect } from 'react-redux'
 import MainItemForm from './forms/MainItemForm'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import { startEditMainItem, startRemoveMainItem, startSetMainItems } from '../../actions/items'
+import { startEditMainItem, startRemoveMainItem, getItemsAll } from '../../actions/items'
 import { withStyles } from '@material-ui/core/styles'
 import { storage } from '../../firebase/firebase'
 import MainMenu from './MainMenu'
-import { startSetCategories } from '../../actions/categories'
-import { store } from '../../index'
+import { store }  from '../../store/configureStore';
 import componentsStyle from '../../styles/jss/material-kit-react/views/components'
 import classNames from 'classnames'
+import { getTags } from '../../actions/tags'
+import { getCategories } from '../../actions/categories'
+import ItemTeaser from '../block/ItemTeaser'
 
 class EditItem extends React.Component {
   constructor(props) {
@@ -36,7 +32,8 @@ class EditItem extends React.Component {
   }
 
   componentDidMount() {
-    store.dispatch(startSetCategories());
+    store.dispatch(getCategories());
+    store.dispatch(getTags())
   }
 
   render() {
@@ -54,11 +51,12 @@ class EditItem extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Paper className={classes.paper}>
-                <h1>Edit item {this.props.item.title}</h1>
+                <h1>{this.props.item.title}</h1>
                 <MainItemForm
                   item={this.props.item}
                   categories={this.props.categories}
                   auth={this.props.auth}
+                  tags={this.props.tags}
                   onFormSubmit={this.props.onFormSubmit}
                   onHandleChange={this.props.onHandleChange}
                   onHandleDelete={this.props.onHandleDelete}
@@ -68,31 +66,10 @@ class EditItem extends React.Component {
             <Grid item xs={6} sm={3}>
               <Paper className={classes.paper}>
                 <h2>Preview</h2>
-                <Card className={classes.card}>
-                  <CardMedia
-                    component="img"
-                    className={classes.media}
-                    height="140"
-                    image={this.state.imageUrl}
-                    title="Juweli"
-                  />
-                  <CardContent>
-                    <Typography gutterBottom variant="headline" component="h2">
-                      {this.props.item.title}
-                    </Typography>
-                    <Typography component="p">
-                      {this.props.item.description}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      Share
-                    </Button>
-                    <Button size="small" color="primary">
-                      Learn More
-                    </Button>
-                  </CardActions>
-                </Card>
+                <ItemTeaser
+                  item={this.props.item}
+                  onBucketClick={() => console.log('test')}
+                />
               </Paper>
             </Grid>
           </Grid>
@@ -107,6 +84,7 @@ const mapStateToProps = (state, props) => {
     item: state.products.find((item) => item.id === props.match.params.id),
     categories: state.categories,
     auth: state.auth,
+    tags: state.tags,
   }
 };
 
@@ -114,11 +92,11 @@ const mapDispatchToProps = (dispatch, props) => {
   return {
     onFormSubmit: item => {
       dispatch(startEditMainItem(props.match.params.id, item));
-      dispatch(startSetMainItems());
+      dispatch(getItemsAll());
     },
     onHandleChange: item => {
       dispatch(startEditMainItem(props.match.params.id, item));
-      dispatch(startSetMainItems());
+      dispatch(getItemsAll());
     },
     onHandleDelete: () => {
       dispatch(startRemoveMainItem(props.match.params.id));

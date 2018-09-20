@@ -22,13 +22,13 @@ export const startAddCategory = (categoryData = {}) => {
   };
 };
 
-// SET_MAIN_CATEGORIES
-export const setMainCategories = (categories) => ({
-  type: 'SET_MAIN_CATEGORIES',
+// GET_MAIN_CATEGORIES
+export const getMainCategories = (categories) => ({
+  type: 'GET_MAIN_CATEGORIES',
   categories
 });
 
-export const startSetCategories = () => {
+export const getCategories = () => {
   return (dispatch) => {
     return database.ref('categories').once('value').then((snapshot) => {
       const categories = [];
@@ -38,7 +38,7 @@ export const startSetCategories = () => {
           ...childSnapshot.val()
         });
       });
-      dispatch(setMainCategories(categories));
+      dispatch(getMainCategories(categories));
     });
   };
 }

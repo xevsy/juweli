@@ -31,6 +31,14 @@ class MainMenu extends React.Component {
             <ListItemText classes={{ primary: this.props.classes.primary }} inset primary="Add new category" />
           </ListItem>
         </MenuItem>
+        <MenuItem className={this.props.classes.menuItem} component={Link} to="/cabinet/newTag">
+          <ListItem>
+            <ListItemIcon className={this.props.classes.icon}>
+              <DraftsIcon />
+            </ListItemIcon>
+            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary="Add new tag" />
+          </ListItem>
+        </MenuItem>
         <MenuItem className={this.props.classes.menuItem} component={Link} to="/cabinet/newProduct">
           <ListItem>
             <ListItemIcon className={this.props.classes.icon}>

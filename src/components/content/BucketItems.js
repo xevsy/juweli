@@ -67,7 +67,7 @@ class BucketItems extends React.Component {
     const numSelected = this.state.selected.length;
 
     return (
-      <Paper className={classes.paper} elevation={10}>
+      <Paper className={classNames(classes.paper)} elevation={0}>
         <Grid container>
           <Toolbar
             className={classNames(classes.root, {

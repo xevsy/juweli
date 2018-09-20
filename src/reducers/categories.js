@@ -7,7 +7,7 @@ export default (state = categoriesReducerDefaultState, action) => {
         ...state,
         action.category
       ];
-    case 'SET_MAIN_CATEGORIES':
+    case 'GET_MAIN_CATEGORIES':
       return action.categories;
     default:
       return state;

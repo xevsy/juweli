@@ -1,15 +1,16 @@
 import React from 'react';
-import NavBar from './NavBar';
+import NavBar from '../menu/NavBar';
 import { connect } from 'react-redux';
-import { startLogin, startLogout } from '../actions/auth';
-import { startSetMainItems } from '../actions/items'
+import { startLogin, startLogout } from '../../actions/auth';
+import HeaderLinks from '../block/HeaderLinks'
 
 const Header = () => (
   <div>
     <NavBar
+      // color="transparent"
       startLogin={startLogin()}
       startLogout={startLogout()}
-      startSetMainItems={startSetMainItems()}
+      rightLinks={<HeaderLinks />}
       fixed
       changeColorOnScroll={{
         height: 400,
@@ -22,7 +23,6 @@ const Header = () => (
 const mapDispatchToProps = (dispatch) => ({
   startLogin: () => dispatch(startLogin()),
   startLogout: () => dispatch(startLogout()),
-  startSetMainItems: () => dispatch(startSetMainItems())
 });
 
 
