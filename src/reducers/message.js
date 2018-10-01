@@ -17,7 +17,7 @@ export default (state = messageReducerDefaultState, action) => {
       return {
         ...state,
         message: "",
-        status: 'success',
+        status: action.status,
         open: false
       };
     default:

@@ -6,6 +6,7 @@ export const addMessage = (message, status) => ({
 });
 
 // REMOVE_MESSAGE
-export const removeMessage = () => ({
+export const removeMessage = (status) => ({
   type: 'REMOVE_MESSAGE',
+  status
 })

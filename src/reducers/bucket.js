@@ -21,6 +21,8 @@ export default (state = bucketReducerDefaultState, action) => {
       }
     case 'REMOVE_ITEM_FROM_BUCKET':
       return state.filter(({ id }) => id !== action.id);
+    case 'REMOVE_ITEMS_FROM_BUCKET':
+      return state.filter(({id}) => action.items.indexOf(id) === -1)
     default:
       return state;
   }

@@ -36,7 +36,7 @@ export const startSmartLogin = (email, password) => {
         if(provider.length === 0) {
           return firebase.auth().createUserWithEmailAndPassword(email, password)
         } else if (provider.indexOf("password") === -1) {
-          return dispatch(addMessage("У вас уже есть учетная запись -  " + provider[0], 'warning'));
+          return firebase.auth().signInWithPopup(googleAuthProvider);
         } else {
           return firebase.auth().signInWithEmailAndPassword(email, password);
         }

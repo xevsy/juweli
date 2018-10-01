@@ -20,6 +20,8 @@ import IconButton from '@material-ui/core/IconButton/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import Button from '@material-ui/core/Button/Button'
 import Favorite from "@material-ui/icons/Favorite"
+import { removeItemsFromBucket } from '../../actions/bucket'
+import { addMessage } from '../../actions/message'
 
 class BucketItems extends React.Component {
   constructor(props) {
@@ -89,7 +91,7 @@ class BucketItems extends React.Component {
             <div className={classes.actions}>
               {numSelected > 0 ? (
                 <Tooltip title="Удалить">
-                  <IconButton aria-label="Удалить">
+                  <IconButton aria-label="Удалить" onClick={() => this.props.onBucketClickRemoveItems(this.state.selected)}>
                     <DeleteIcon />
                   </IconButton>
                 </Tooltip>
@@ -245,4 +247,13 @@ const MapStateToProps = (state) => {
   }
 };
 
-export default connect(MapStateToProps)(withStyles(styles)(BucketItems));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onBucketClickRemoveItems: items => {
+      dispatch(removeItemsFromBucket(items));
+      dispatch(addMessage("Количество удаленных товаров: " + items.length, 'info'));
+    }
+  }
+}
+
+export default connect(MapStateToProps, mapDispatchToProps)(withStyles(styles)(BucketItems));

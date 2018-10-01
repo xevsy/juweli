@@ -14,6 +14,7 @@ import classNames from 'classnames'
 import { getTags } from '../../actions/tags'
 import { getCategories } from '../../actions/categories'
 import ItemTeaser from '../block/ItemTeaser'
+import { addMessage } from '../../actions/message'
 
 class EditItem extends React.Component {
   constructor(props) {
@@ -93,6 +94,7 @@ const mapDispatchToProps = (dispatch, props) => {
     onFormSubmit: item => {
       dispatch(startEditMainItem(props.match.params.id, item));
       dispatch(getItemsAll());
+      dispatch(addMessage('Тавар успешно сохранен!', 'success'))
     },
     onHandleChange: item => {
       dispatch(startEditMainItem(props.match.params.id, item));
