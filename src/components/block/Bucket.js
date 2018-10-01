@@ -6,8 +6,6 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import ListItem from '@material-ui/core/ListItem/ListItem'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import IconButton from '@material-ui/core/IconButton/IconButton'
-import Typography from '@material-ui/core/Typography/Typography'
-
 
 const Bucket = (props) => {
   const onBucketClickRemove = (id) => {

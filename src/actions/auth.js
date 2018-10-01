@@ -1,11 +1,17 @@
 import { firebase, googleAuthProvider } from '../firebase/firebase';
+import database from '../firebase/firebase'
+import { addMessage } from './message'
 
-export const login = (uid, displayName, photoURL) => ({
-  type: 'LOGIN',
-  uid,
-  displayName,
-  photoURL
-});
+export const login = (uid, displayName, photoURL, email) => {
+  return (dispatch) => {
+    return database.ref(`users/${uid}`).update({uid}).then(() => {
+      database.ref(`users/${uid}`).once('value').then((snapshot) => {
+        dispatch({type: 'LOGIN', uid, displayName, photoURL, email, 'role': snapshot.val().role});
+        dispatch(addMessage("ВЫ успешно зашли в систему как " + (displayName ? displayName : email), 'success'));
+      });
+    });
+  };
+};
 
 const startLogin = () => {
   return() => {
@@ -20,6 +26,23 @@ export const logout = () => ({
 const startLogout = () => {
   return() => {
     return firebase.auth().signOut();
+  }
+}
+
+export const startSmartLogin = (email, password) => {
+  return (dispatch) => {
+    firebase.auth().fetchSignInMethodsForEmail(email)
+      .then(provider => {
+        if(provider.length === 0) {
+          return firebase.auth().createUserWithEmailAndPassword(email, password)
+        } else if (provider.indexOf("password") === -1) {
+          return dispatch(addMessage("У вас уже есть учетная запись -  " + provider[0], 'warning'));
+        } else {
+          return firebase.auth().signInWithEmailAndPassword(email, password);
+        }
+      }).catch((e) => {
+        return dispatch(addMessage(e.message, 'error'));
+    });
   }
 }
 

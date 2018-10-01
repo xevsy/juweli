@@ -29,7 +29,6 @@ class ItemTeaser extends React.Component {
   render() {
     const { classes, item } = this.props;
     const itemDate = <Moment format={"YYYY/MM/DD"} date={item.updateAt} />
-
     return (
         <Card className={classes.card}>
           <CardHeader
@@ -39,11 +38,12 @@ class ItemTeaser extends React.Component {
               </Avatar>
             }
             action={
+              this.props.role === 'admin' ?
               <Link to={"/cabinet/edit/" + item.id} >
                 <IconButton>
                   <MoreVertIcon />
                 </IconButton>
-              </Link>
+              </Link> : <div></div>
             }
             title={item.title}
             subheader={itemDate}
@@ -52,7 +52,8 @@ class ItemTeaser extends React.Component {
             className={classes.media}
             image={item.imageUrl}
             title=""
-          />
+          >
+          </CardMedia>
           <CardContent>
             <Typography>
               {item.amount} {item.currency}
@@ -105,7 +106,7 @@ const styles = theme => ({
     minHeight: 400
   },
   media: {
-    height: 0,
+    height: 'auto',
     paddingTop: '56.25%', // 16:9
   },
   actions: {

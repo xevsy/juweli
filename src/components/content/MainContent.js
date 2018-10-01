@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import Grid from '@material-ui/core/Grid/Grid'
 import { addItemToBucket } from '../../actions/bucket'
 import ItemTeaser from '../block/ItemTeaser'
+import MessageSnackBar from '../custom/MessageSnackBar'
+import { addMessage, removeMessage } from '../../actions/message'
 
 class MainContent extends React.Component {
 
@@ -14,18 +16,20 @@ class MainContent extends React.Component {
 
     return (
       <Paper className={classes.paper} elevation={0}>
+        <MessageSnackBar {...this.props.notification} handleMessageClose={this.props.handleMessageClose}/>
         <Grid container>
         {this.props.items.length > 0 && this.props.items.map((item) => {
           return (
             <Grid item xs={12} sm={6} key={item.id}>
               <ItemTeaser
                 item={item}
+                role={this.props.role}
                 onBucketClick={() => this.props.onBucketClick(item)}
               />
             </Grid>
           )
         }
-        )}}
+        )}
         </Grid>
       </Paper>
     )
@@ -48,7 +52,9 @@ MainContent.propTypes = {
 
 const MapStateToProps = (state) => {
   return {
-    items: state.products
+    items: state.products,
+    role: state.auth.role,
+    notification: state.notification,
   }
 };
 
@@ -56,6 +62,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onBucketClick: item => {
       dispatch(addItemToBucket(item));
+      dispatch(addMessage(item.title + ' добавленна в корзину', 'success'))
+    },
+    handleMessageClose: () => {
+      dispatch(removeMessage());
     }
   }
 }

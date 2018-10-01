@@ -132,6 +132,7 @@ class BucketItems extends React.Component {
                       hover
                       onClick={event => this.handleClick(event, item.id)}
                       role="checkbox"
+                      aria-checked={true}
                       tabIndex={-1}
                       key={item.id}
                       selected={isSelected}
@@ -142,7 +143,7 @@ class BucketItems extends React.Component {
                       <TableCell scope="row">
                         <img
                           src={item.imageUrl}
-                          alt="image"
+                          alt={"test something"}
                           className={
                             classes.imgRaised +
                             " " +

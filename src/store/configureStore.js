@@ -5,6 +5,7 @@ import itemsReducer from '../reducers/items';
 import bucketReducer from '../reducers/bucket'
 import categoriesReducer from '../reducers/categories'
 import tagsReducer from '../reducers/tags'
+import messageReducer from '../reducers/message'
 import { reducer as formReducer } from 'redux-form';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
@@ -16,7 +17,7 @@ const persistConfig = {
   key: 'root',
   storage: storage,
   stateReconciler: hardSet,
-  blacklist: ['auth', 'categories', 'form', 'products', 'tags']
+  blacklist: ['auth', 'categories', 'form', 'products', 'tags', 'notification']
 }
 
 const rootReducer = persistReducer(persistConfig, combineReducers({
@@ -25,6 +26,7 @@ const rootReducer = persistReducer(persistConfig, combineReducers({
   bucket: bucketReducer,
   categories: categoriesReducer,
   tags: tagsReducer,
+  notification: messageReducer,
   form: formReducer
 }));
 

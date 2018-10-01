@@ -38,6 +38,7 @@ class AddItem extends React.Component {
                 <MainItemForm
                   categories={this.props.categories}
                   auth={this.props.auth}
+                  tags={this.props.tags}
                   onFormSubmit={this.props.onFormSubmit}
                   onHandleChange={this.props.onHandleChange}
                 />

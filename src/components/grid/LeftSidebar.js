@@ -9,13 +9,18 @@ import classNames from 'classnames'
 
 const LeftSidebar = (props) => (
   <Paper className={classNames(props.classes.paper, props.classes.fixed)} elevation={0}>
-    <SidebarMenu categories={props.categories} onHandleClick={props.onHandleClick}/>
+    <SidebarMenu
+      categories={props.categories}
+      onHandleClick={props.onHandleClick}
+      role={props.role}
+    />
   </Paper>
 );
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories
+    categories: state.categories,
+    role: state.auth.role,
   }
 };
 

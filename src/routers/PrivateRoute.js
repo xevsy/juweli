@@ -17,7 +17,7 @@ export const PrivateRoute = ({
 );
 
 const mapPropsToState = (state) => ({
-  isAuth: !!state.auth.uid
+  isAuth: state.auth.role === 'admin'
 })
 
 export default connect(mapPropsToState)(PrivateRoute);

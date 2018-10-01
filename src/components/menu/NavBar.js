@@ -140,7 +140,7 @@ class NavBar extends React.Component {
                   />
                 </IconButton>
                 {this.props.auth.displayName ?
-                  this.props.auth.displayName : ''}
+                  this.props.auth.displayName : this.props.auth.email}
               </Typography>
               {this.props.auth.uid !== undefined ?
                 <Button color={"transparent"} onClick={this.props.startLogout}>Logout</Button> :
@@ -188,12 +188,13 @@ class NavBar extends React.Component {
           >
             Profile
           </MenuItem>
+          { this.props.auth.role === 'admin' ?
           <MenuItem
             component={Link}
             to={"/cabinet"}
           >
             Кабинет
-          </MenuItem>
+          </MenuItem> : '' }
           <MenuItem onClick={this.handleClose}>My account</MenuItem>
           { this.props.auth.uid !== undefined ?
             <MenuItem onClick={this.props.startLogout}>Logout</MenuItem> :

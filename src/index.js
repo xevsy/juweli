@@ -32,7 +32,8 @@ registerServiceWorker();
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    store.dispatch(login(user.uid, user.displayName, user.photoURL));
+    console.log(user)
+    store.dispatch(login(user.uid, user.displayName, user.photoURL, user.email));
   } else {
     store.dispatch(logout());
   }
