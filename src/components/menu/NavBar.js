@@ -176,6 +176,10 @@ class NavBar extends React.Component {
             </Drawer>
           </Hidden>
         </AppBar>
+        {/*<AppBar className={appBarClasses}>*/}
+          {/*<ToolBar className={classes.container}>*/}
+          {/*</ToolBar>*/}
+        {/*</AppBar>*/}
         <Menu
           id={"simple-menu"}
           anchorEl={anchorEl}

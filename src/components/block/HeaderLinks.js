@@ -11,6 +11,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Button from "../custom/Button.jsx";
 
 import headerLinksStyle from "../../styles/jss/material-kit-react/components/headerLinksStyle.jsx";
+import IconButton from '@material-ui/core/IconButton/IconButton'
 
 function HeaderLinks({ ...props }) {
   const { classes } = props;
@@ -48,6 +49,17 @@ function HeaderLinks({ ...props }) {
           >
             <i className={classes.socialIcons + " fab fa-instagram"} />
           </Button>
+        </Tooltip>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Tooltip
+          id={"instagram-tooltip"}
+          title={"Follow us on instagram"}
+          placement={window.innerWidth > 959 ? "top" : "left"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <IconButton>
+          </IconButton>
         </Tooltip>
       </ListItem>
     </List>

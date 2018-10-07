@@ -92,6 +92,7 @@ export const getItemsAll = () => {
         });
         storage
           .ref("images")
+          // .child('thumb_' + childSnapshot.val().image)
           .child(childSnapshot.val().image)
           .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
       });

@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia/CardMedia'
 import CardContent from '@material-ui/core/CardContent/CardContent'
 import Typography from '@material-ui/core/Typography/Typography'
 import CardActions from '@material-ui/core/CardActions/CardActions'
+import CardActionArea from '@material-ui/core/CardActionArea'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import ShareIcon from '@material-ui/icons/Share'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
@@ -51,9 +52,8 @@ class ItemTeaser extends React.Component {
           <CardMedia
             className={classes.media}
             image={item.imageUrl}
-            title=""
-          >
-          </CardMedia>
+            title="Test"
+          />
           <CardContent>
             <Typography>
               {item.amount} {item.currency}
@@ -106,7 +106,7 @@ const styles = theme => ({
     minHeight: 400
   },
   media: {
-    height: 'auto',
+    height: 0,
     paddingTop: '56.25%', // 16:9
   },
   actions: {
