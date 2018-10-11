@@ -67,11 +67,13 @@ export const removeMainItem = (id) => ({
   id
 });
 
-export const startRemoveMainItem = (id) => {
+export const startRemoveMainItem = (id, image) => {
   return (dispatch) => {
-    return database.ref(`products/${id}`).remove().then(() => [
-      dispatch(removeMainItem(id))
-    ]);
+    return database.ref(`products/${id}`).remove().then(() => {
+      storage.ref(`images/${image.image}`).delete().then(() => {
+        dispatch(removeMainItem(id))
+      })
+    });
   }
 }
 
@@ -82,7 +84,7 @@ export const getMainItems = (items) => ({
 });
 
 export const getItemsAll = () => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     return database.ref('products').orderByChild('updateAt').once('value').then((snapshot) => {
       const items = [];
       snapshot.forEach((childSnapshot) => {
@@ -91,9 +93,8 @@ export const getItemsAll = () => {
           ...childSnapshot.val()
         });
         storage
-          .ref("images")
-          // .child('thumb_' + childSnapshot.val().image)
-          .child(childSnapshot.val().image)
+          .ref("images/350x")
+          .child('thumb_' + childSnapshot.val().image)
           .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
       });
       dispatch(getMainItems(items));
@@ -111,8 +112,8 @@ export const getItemsByCategory = (categoryId) => {
           ...childSnapshot.val()
         });
         storage
-          .ref("images")
-          .child(childSnapshot.val().image)
+          .ref("images/350x")
+          .child('thumb_' + childSnapshot.val().image)
           .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
       });
       dispatch(getMainItems(items));

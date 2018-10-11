@@ -16,8 +16,6 @@ import DownshiftMultiple from '../partial/DownshiftMultiple'
 import Switch from '@material-ui/core/Switch/Switch'
 import Typography from '@material-ui/core/Typography/Typography'
 
-// const imageThumbnail = require('image-thumbnail');
-
 const currencies = [
   {
     value: 'UAH',
@@ -38,6 +36,7 @@ class MainItemForm extends React.PureComponent {
     super(props);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleDeleteButton = this.handleDeleteButton.bind(this);
     this.handleClearButton = this.handleClearButton.bind(this);
 
     this.state = {
@@ -114,7 +113,9 @@ class MainItemForm extends React.PureComponent {
   }
 
   handleDeleteButton = event => {
-    this.props.onHandleDelete({});
+    this.props.onHandleDelete({
+        image: this.state.image
+      });
   }
 
   handleTagChange = tags => {

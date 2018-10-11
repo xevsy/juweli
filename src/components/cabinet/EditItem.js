@@ -100,8 +100,8 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(startEditMainItem(props.match.params.id, item));
       dispatch(getItemsAll());
     },
-    onHandleDelete: () => {
-      dispatch(startRemoveMainItem(props.match.params.id));
+    onHandleDelete: image => {
+      dispatch(startRemoveMainItem(props.match.params.id, image));
       props.history.push('/cabinet');
     }
   }

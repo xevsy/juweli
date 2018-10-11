@@ -45,7 +45,7 @@ class Dashboard extends React.Component {
                             <ListItemText inset primary={item.title} />
                           </Link>
                           <ListItemSecondaryAction>
-                            <IconButton aria-label="Delete" onClick={() => this.props.onHandleDelete(item.id)}>
+                            <IconButton aria-label="Delete" onClick={() => this.props.onHandleDelete(item.id, item.image)}>
                               <DeleteIcon />
                             </IconButton>
                           </ListItemSecondaryAction>
@@ -74,8 +74,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps= (dispatch) => {
   return {
-    onHandleDelete: itemId => {
-      dispatch(startRemoveMainItem(itemId))
+    onHandleDelete: (itemId, image) => {
+      dispatch(startRemoveMainItem(itemId, {image: image}))
     }
   }
 }

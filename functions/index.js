@@ -5,6 +5,7 @@ const projectId = 'juweli-58262';
 const os = require('os');
 const path = require('path');
 const spawn = require('child-process-promise').spawn;
+const fs = require('fs');
 
 const gcs = new Storage({
   projectId: projectId,
@@ -35,11 +36,11 @@ exports.onImageUpload = functions.storage.object().onFinalize((object) => {
   return destBucket.file(filePath).download({
     destination: tmpFilePath
   }).then(() => {
-    return spawn('convert', [tmpFilePath, '-thumbnail', '200x200>', tmpFilePath]);
+    return spawn('convert', [tmpFilePath, '-thumbnail', '350x', tmpFilePath]);
   }).then(() => {
     console.log('Thumbnail created at', tmpFilePath);
     const thumbFileName = `thumb_${fileName}`;
-    const thumbFilePath = path.join(path.dirname(filePath), thumbFileName);
+    const thumbFilePath = path.join(path.dirname(filePath), '350x', thumbFileName);
     return destBucket.upload(tmpFilePath,  {
       destination: thumbFilePath,
       metadata: metadata
