@@ -12,6 +12,7 @@
     "image-thumbnail": "^1.0.0",
     "keycode": "^2.2.0",
     "moment": "^2.22.2",
+    "path": "^0.12.7",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
