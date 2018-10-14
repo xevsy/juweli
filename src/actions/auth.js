@@ -31,6 +31,7 @@ const startLogout = () => {
 
 export const startSmartLogin = (email, password) => {
   return (dispatch) => {
+    firebase.auth().languageCode = 'ru';
     firebase.auth().fetchSignInMethodsForEmail(email)
       .then(provider => {
         if(provider.length === 0) {
@@ -43,6 +44,17 @@ export const startSmartLogin = (email, password) => {
       }).catch((e) => {
         return dispatch(addMessage(e.message, 'error'));
     });
+  }
+}
+
+export const resetPassword = (email) => {
+  return (dispatch) => {
+    firebase.auth().languageCode = 'ru';
+    firebase.auth().sendPasswordResetEmail(email).then(() => {
+      return dispatch(addMessage('Востановление паролы было выслано на ваш email адрес', 'info'))
+    }).catch((e) => {
+      return dispatch(addMessage(e.message, 'error'));
+    })
   }
 }
 

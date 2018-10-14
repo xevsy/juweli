@@ -8,6 +8,11 @@ import IconButton from '@material-ui/core/IconButton/IconButton'
 import Visibility from '@material-ui/icons/Visibility'
 import VisibilityOff from '@material-ui/icons/VisibilityOff'
 import Button from '../custom/Button'
+import Dialog from '@material-ui/core/Dialog/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle/DialogTitle'
+import DialogContent from '@material-ui/core/DialogContent/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText/DialogContentText'
+import DialogActions from '@material-ui/core/DialogActions/DialogActions'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -17,6 +22,8 @@ class LoginForm extends React.Component {
       passwordInput: '',
       showPassword: false,
       errorMessage: '',
+      resetEmail: '',
+      open: false,
     }
   }
   EmailAndPasswordAuthentication = (e) => {
@@ -31,6 +38,19 @@ class LoginForm extends React.Component {
 
   handleClickShowPassword = () => {
     this.setState(state => ({ showPassword: !state.showPassword }));
+  };
+
+  handleSetPasswordReset = () => {
+    this.props.resetPassword(this.state.resetEmail)
+    this.setState({ open: false });
+  }
+
+  handleClickOpenPasswordResetDialog = () => {
+    this.setState({ open: true });
+  };
+
+  handleClosePasswordResetDialog = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -81,6 +101,40 @@ class LoginForm extends React.Component {
         <Button variant="contained" className={classes.button} type={"submit"}>
           Вход
         </Button>
+        <Button onClick={this.handleClickOpenPasswordResetDialog}>Востановление пароля</Button>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClosePasswordResetDialog}
+          aria-labelledby="form-dialog-title"
+        >
+          <DialogTitle id="form-dialog-title">Востановление пароля</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Укажите Ваш email, и мы пришлем Вам письмо с возможностью указать новый пароль.
+            </DialogContentText>
+            <TextValidator
+              id={"ResetEmail"}
+              label={"Email для восстановления"}
+              name={"ResetEmail"}
+              autoFocus
+              margin="dense"
+              type="email"
+              value={this.state.resetEmail}
+              onChange={this.handleChange('resetEmail')}
+              fullWidth
+              validators={['required', 'isEmail']}
+              errorMessages={['this field is required', 'email is not valid']}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClosePasswordResetDialog} color="transparent">
+              Отменить
+            </Button>
+            <Button onClick={this.handleSetPasswordReset} color="primary">
+              Выслать
+            </Button>
+          </DialogActions>
+        </Dialog>
       </ValidatorForm>
     )
   }

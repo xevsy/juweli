@@ -1,7 +1,7 @@
 'use strict';
 const functions = require('firebase-functions');
 const { Storage } = require('@google-cloud/storage');
-const projectId = 'juweli-58262';
+const projectId = 'juweli-prod';
 const os = require('os');
 const path = require('path');
 const spawn = require('child-process-promise').spawn;

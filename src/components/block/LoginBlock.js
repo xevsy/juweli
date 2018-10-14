@@ -12,7 +12,7 @@ class LoginBlock extends React.Component {
     let formView;
 
     if (this.props.auth.uid === undefined) {
-      formView = <LoginForm startSmartLogin={this.props.startSmartLogin} auth={this.props.auth} />
+      formView = <LoginForm startSmartLogin={this.props.startSmartLogin} auth={this.props.auth} resetPassword={this.props.resetPassword}/>
     } else {
       formView = <LoginFormSuccess startLogout={this.props.startLogout} auth={this.props.auth} />
     }

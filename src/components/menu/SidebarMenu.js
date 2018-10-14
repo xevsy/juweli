@@ -5,32 +5,36 @@ import * as PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ListItemText from '@material-ui/core/ListItemText/ListItemText'
 import { Link } from 'react-router-dom'
+import List from '@material-ui/core/List/List'
+import ListItem from '@material-ui/core/ListItem/ListItem'
 
 class SidebarMenu extends React.Component {
   constructor(props) {
     super(props);
     this.onHandleClick = this.onHandleClick.bind(this);
+    this.state = {
+      selectedIndex: 0,
+    };
   }
   onHandleClick = (categoryId) => {
+    this.setState({ selectedIndex: categoryId });
     this.props.onHandleClick(categoryId);
   }
   render() {
     return (
       <div>
         <h3>Разделы</h3>
-        <MenuList>
+        <List>
         {this.props.categories.map((category) => {
           return(
-            <MenuItem
-              className={this.props.classes.menuItem}
-              onClick={() => this.onHandleClick(category.id)}
-              key={category.id}
-              component={Link} to="/"
+            <ListItem button dense disableGutters
+                  key={category.id}
+                  onClick={() => this.onHandleClick(category.id)} selected={this.state.selectedIndex === category.id}
             >
               <ListItemText classes={{ primary: this.props.classes.primary }} inset primary={category.title} />
-            </MenuItem>
+            </ListItem>
           )})}
-        </MenuList>
+        </List>
       </div>
     )
   }

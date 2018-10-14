@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper/Paper'
 import classNames from 'classnames'
 import * as PropTypes from 'prop-types'
 import LoginBlock from '../block/LoginBlock'
-import { startLogout, startSmartLogin } from '../../actions/auth'
+import { resetPassword, startLogout, startSmartLogin } from '../../actions/auth'
 
 const RightSidebar = (props) => (
   <Paper className={classNames(props.classes.paper, props.classes.fixed)} elevation={0} >
@@ -15,6 +15,7 @@ const RightSidebar = (props) => (
     <LoginBlock
       startLogout={props.startLogout}
       startSmartLogin={props.startSmartLogin}
+      resetPassword={props.resetPassword}
       auth={props.auth}
     />
   </Paper>
@@ -53,7 +54,10 @@ const mapDispatchToProps = (dispatch) => {
     startSmartLogin: (email, password) => {
       dispatch(startSmartLogin(email, password));
     },
-    startLogout: () => dispatch(startLogout())
+    startLogout: () => dispatch(startLogout()),
+    resetPassword: (email) => {
+      dispatch(resetPassword(email));
+    }
   }
 };
 
