@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Button from '../custom/Button'
 import TextField from '@material-ui/core/TextField/TextField'
+import T from 'i18n-react'
 
 class LoginFormSuccess extends React.Component {
 
@@ -19,14 +20,14 @@ class LoginFormSuccess extends React.Component {
         <TextField
           disabled
           id="filled-disabled-email"
-          label={'Вы вошли в систему как'}
+          label={T.translate("auth.loginSuccess")}
           defaultValue={this.props.auth.displayName ? this.props.auth.displayName : this.props.auth.email}
           className={classes.textField}
           margin="normal"
           variant="filled"
         />
         <Button variant="contained" className={classes.button} type={"submit"}>
-          Выход
+          {T.translate("auth.logout")}
         </Button>
       </form>
     )

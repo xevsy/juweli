@@ -12,6 +12,7 @@ import classNames from 'classnames'
 import componentsStyle from '../../styles/jss/material-kit-react/views/components'
 import { getTags } from '../../actions/tags'
 import { getCategories } from '../../actions/categories'
+import T from 'i18n-react'
 
 class AddItem extends React.Component {
   componentDidMount() {
@@ -34,7 +35,7 @@ class AddItem extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Paper className={classes.paper}>
-                <h1>Add new item</h1>
+                <h1>{T.translate("cabinet.addProduct")}</h1>
                 <MainItemForm
                   categories={this.props.categories}
                   auth={this.props.auth}

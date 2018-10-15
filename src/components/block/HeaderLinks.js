@@ -11,7 +11,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Button from "../custom/Button.jsx";
 
 import headerLinksStyle from "../../styles/jss/material-kit-react/components/headerLinksStyle.jsx";
-import IconButton from '@material-ui/core/IconButton/IconButton'
+import T from 'i18n-react'
 
 function HeaderLinks({ ...props }) {
   const { classes } = props;
@@ -20,7 +20,7 @@ function HeaderLinks({ ...props }) {
       <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-facebook"
-          title="Follow us on facebook"
+          title={T.translate("social.follow_facebook")}
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
         >
@@ -37,7 +37,7 @@ function HeaderLinks({ ...props }) {
       <ListItem className={classes.listItem}>
         <Tooltip
           id={"instagram-tooltip"}
-          title={"Follow us on instagram"}
+          title={T.translate("social.follow_instagram")}
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
         >
@@ -53,13 +53,34 @@ function HeaderLinks({ ...props }) {
       </ListItem>
       <ListItem className={classes.listItem}>
         <Tooltip
-          id={"instagram-tooltip"}
-          title={"Follow us on instagram"}
+          id={"language-ru-tooltip"}
+          title={T.translate("social.language.ru")}
           placement={window.innerWidth > 959 ? "top" : "left"}
           classes={{ tooltip: classes.tooltip }}
         >
-          <IconButton>
-          </IconButton>
+          <Button
+            color={"transparent"}
+            className={classes.navLink}
+            onClick={() => props.changeLanguage("ru")}
+          >
+            <img src="/images/ukraine.svg" width="18px" alt={T.translate("social.language.ru")} />
+          </Button>
+        </Tooltip>
+      </ListItem>
+      <ListItem className={classes.listItem}>
+        <Tooltip
+          id={"language-en-tooltip"}
+          title={T.translate("social.language.en")}
+          placement={window.innerWidth > 959 ? "top" : "left"}
+          classes={{ tooltip: classes.tooltip }}
+        >
+          <Button
+            color={"transparent"}
+            className={classes.navLink}
+            onClick={() => props.changeLanguage("en")}
+          >
+            <img src="/images/england.svg" width="18px" alt={T.translate("social.language.en")} />
+          </Button>
         </Tooltip>
       </ListItem>
     </List>

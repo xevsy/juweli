@@ -3,6 +3,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import LoginForm from '../forms/LoginForm'
 import * as PropTypes from 'prop-types'
 import LoginFormSuccess from '../forms/LoginFormSuccess'
+import T from 'i18n-react'
 
 class LoginBlock extends React.Component {
 
@@ -18,7 +19,7 @@ class LoginBlock extends React.Component {
     }
     return (
       <div className={classes.root}>
-        <h3>Вход</h3>
+        <h3>{T.translate("auth.login")}</h3>
         <div>
           {formView}
         </div>

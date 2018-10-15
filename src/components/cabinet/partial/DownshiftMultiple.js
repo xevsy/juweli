@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Chip from '@material-ui/core/Chip/Chip'
 import TextField from '@material-ui/core/TextField/TextField'
 import MenuItem from '@material-ui/core/MenuItem/MenuItem'
+import T from 'i18n-react'
 
 class DownshiftMultiple extends React.Component {
 
@@ -139,9 +140,9 @@ class DownshiftMultiple extends React.Component {
                 )),
                 onChange: this.handleInputChange,
                 onKeyDown: this.handleKeyDown,
-                placeholder: 'Select multiple tags',
+                placeholder: T.translate("cabinet.itemTagsSelect"),
               }),
-              label: 'Label',
+              label: T.translate("cabinet.itemTags"),
             })}
             {isOpen ? (
               <Paper className={classes.paper} square>

@@ -6,6 +6,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import ListItem from '@material-ui/core/ListItem/ListItem'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import IconButton from '@material-ui/core/IconButton/IconButton'
+import T from 'i18n-react'
 
 const Bucket = (props) => {
   const onBucketClickRemove = (id) => {
@@ -13,7 +14,7 @@ const Bucket = (props) => {
   }
   return (
     <div className={props.classes.root}>
-      <h3>Корзина</h3>
+      <h3>{T.translate("common.bucket")}</h3>
       <div>
         <List>
           {props.bucket && props.bucket.map((item) => {

@@ -19,6 +19,7 @@ import { withStyles } from '@material-ui/core'
 import Collapse from '@material-ui/core/Collapse/Collapse'
 import Chip from '@material-ui/core/Chip/Chip'
 import { Link } from 'react-router-dom'
+import T from 'i18n-react'
 
 class ItemTeaser extends React.Component {
   state = { expanded: false };
@@ -85,7 +86,7 @@ class ItemTeaser extends React.Component {
                 {item.description}
               </Typography>
               <Typography paragraph>
-                На складе: {item.count}
+                {T.translate("item.count")}: {item.count}
               </Typography>
               <div>
                 {item.tags && item.tags.map((tag) => {

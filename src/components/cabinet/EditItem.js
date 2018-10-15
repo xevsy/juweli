@@ -15,6 +15,7 @@ import { getTags } from '../../actions/tags'
 import { getCategories } from '../../actions/categories'
 import ItemTeaser from '../block/ItemTeaser'
 import { addMessage } from '../../actions/message'
+import T from 'i18n-react'
 
 class EditItem extends React.Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class EditItem extends React.Component {
             </Grid>
             <Grid item xs={6} sm={3}>
               <Paper className={classes.paper}>
-                <h2>Preview</h2>
+                <h2>{T.translate("cabinet.preview")}</h2>
                 <ItemTeaser
                   item={this.props.item}
                   onBucketClick={() => console.log('test')}

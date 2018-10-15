@@ -15,6 +15,7 @@ import { storage } from '../../../firebase/firebase';
 import DownshiftMultiple from '../partial/DownshiftMultiple'
 import Switch from '@material-ui/core/Switch/Switch'
 import Typography from '@material-ui/core/Typography/Typography'
+import T from 'i18n-react'
 
 const currencies = [
   {
@@ -148,7 +149,7 @@ class MainItemForm extends React.PureComponent {
       >
         <div>
           <Typography>
-            Published
+            {T.translate("cabinet.itemPublished")}
           </Typography>
           <Switch
             onChange={this.handleToggle}
@@ -157,18 +158,18 @@ class MainItemForm extends React.PureComponent {
         </div>
         <TextValidator
           id={"title"}
-          label={"Title"}
+          label={T.translate("cabinet.itemTitle")}
           className={this.props.classes.textFieldFull}
           name={"title"}
           value={this.state.title}
           onChange={this.handleChange('title')}
           validators={['required']}
-          errorMessages={['this field is required']}
+          errorMessages={[T.translate("cabinet.requiredField")]}
           margin={"normal"}
         />
         <TextField
           id={"description"}
-          label={"Description"}
+          label={T.translate("cabinet.itemDescription")}
           multiline
           rowsMax={"4"}
           className={this.props.classes.textFieldFull}
@@ -179,19 +180,19 @@ class MainItemForm extends React.PureComponent {
         <TextValidator
           id="select-category"
           select
-          label="Select category"
+          label={T.translate("cabinet.itemCategory")}
           name={"select-category"}
           className={this.props.classes.textFieldFull}
           value={this.state.category}
           onChange={this.handleChange('category')}
           validators={[]}
-          errorMessages={['please select category']}
+          errorMessages={[T.translate("cabinet.categorySelect")]}
           SelectProps={{
             MenuProps: {
               className: this.props.classes.menu,
             },
           }}
-          helperText="Please select your category"
+          helperText={T.translate("cabinet.categorySelect")}
           margin="normal"
         >
           {Boolean(this.props.categories) && this.props.categories.map(option => (
@@ -204,7 +205,7 @@ class MainItemForm extends React.PureComponent {
           <TextField
             id="select-currency"
             select
-            label="Select"
+            label={T.translate("cabinet.itemCurrency")}
             name={"select-currency"}
             className={this.props.classes.textFieldSmall}
             value={this.state.currency}
@@ -214,7 +215,7 @@ class MainItemForm extends React.PureComponent {
                 className: this.props.classes.menu,
               },
             }}
-            helperText="Please select your currency"
+            helperText={T.translate("cabinet.currencySelect")}
             margin="normal"
           >
             {currencies.map(option => (
@@ -225,14 +226,14 @@ class MainItemForm extends React.PureComponent {
           </TextField>
           <TextValidator
             id={"amount"}
-            label={"Amount"}
+            label={T.translate("cabinet.itemAmount")}
             name={"amount"}
             className={this.props.classes.textFieldMedium}
             value={this.state.amount}
             onChange={this.handleChange('amount')}
             type={"number"}
             validators={[]}
-            errorMessages={['this field should be grater then 0']}
+            errorMessages={[T.translate("cabinet.graterThen0")]}
             InputLabelProps={{
               shrink: true,
             }}
@@ -241,7 +242,7 @@ class MainItemForm extends React.PureComponent {
         </div>
         <TextField
           id={"count"}
-          label={"Count"}
+          label={T.translate("cabinet.itemCount")}
           className={this.props.classes.textFieldFull}
           value={this.state.count}
           onChange={this.handleChange('count')}
@@ -258,7 +259,7 @@ class MainItemForm extends React.PureComponent {
           handleTagChange={this.handleTagChange}
         />
         <div>
-          {this.state.isUploading && <p>Progress: {this.state.progress}</p>}
+          {this.state.isUploading && <p>{T.translate("cabinet.itemImageProgress")}: {this.state.progress}</p>}
           {this.state.image ?
             <Card className={this.props.classes.card}>
               <CardMedia
@@ -268,7 +269,7 @@ class MainItemForm extends React.PureComponent {
                 width="140"
                 src={this.state.imageUrl}
                 image={this.state.imageUrl}
-                title="Contemplative Reptile"
+                title=""
               />
             </Card> : ''
           }
@@ -290,7 +291,7 @@ class MainItemForm extends React.PureComponent {
             className={this.props.classes.button}
             type={"submit"}
           >
-            Save
+            {T.translate("common.saveButton")}
             <Icon className={this.props.classes.rightIcon}>send</Icon>
           </Button>
           <Button
@@ -299,7 +300,7 @@ class MainItemForm extends React.PureComponent {
             className={this.props.classes.button}
             onClick={this.handleClearButton}
           >
-            Clear
+            {T.translate("common.clearButton")}
             <Icon className={this.props.classes.rightIcon}>clear</Icon>
           </Button>
           {this.props.item ?
@@ -309,7 +310,7 @@ class MainItemForm extends React.PureComponent {
               className={this.props.classes.button}
               onClick={this.handleDeleteButton}
             >
-              Delete
+              {T.translate("common.deleteButton")}
               <DeleteIcon className={this.props.classes.rightIcon} />
             </Button>
             : ''}

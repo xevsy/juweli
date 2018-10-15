@@ -10,6 +10,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import ListItem from '@material-ui/core/ListItem/ListItem'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import T from 'i18n-react'
 
 class MainMenu extends React.Component {
   render() {
@@ -20,7 +21,7 @@ class MainMenu extends React.Component {
             <ListItemIcon className={this.props.classes.icon}>
               <SendIcon />
             </ListItemIcon>
-            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary="Dashboard" />
+            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary={T.translate("cabinet.dashboard")} />
           </ListItem>
         </MenuItem>
         <MenuItem className={this.props.classes.menuItem} component={Link} to="/cabinet/newCategory">
@@ -28,7 +29,7 @@ class MainMenu extends React.Component {
             <ListItemIcon className={this.props.classes.icon}>
               <DraftsIcon />
             </ListItemIcon>
-            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary="Add new category" />
+            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary={T.translate("cabinet.addCategory")} />
           </ListItem>
         </MenuItem>
         <MenuItem className={this.props.classes.menuItem} component={Link} to="/cabinet/newTag">
@@ -36,7 +37,7 @@ class MainMenu extends React.Component {
             <ListItemIcon className={this.props.classes.icon}>
               <DraftsIcon />
             </ListItemIcon>
-            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary="Add new tag" />
+            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary={T.translate("cabinet.addTag")} />
           </ListItem>
         </MenuItem>
         <MenuItem className={this.props.classes.menuItem} component={Link} to="/cabinet/newProduct">
@@ -44,7 +45,7 @@ class MainMenu extends React.Component {
             <ListItemIcon className={this.props.classes.icon}>
               <InboxIcon />
             </ListItemIcon>
-            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary="Add new product" />
+            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary={T.translate("cabinet.addProduct")} />
           </ListItem>
         </MenuItem>
       </MenuList>

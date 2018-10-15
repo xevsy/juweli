@@ -17,6 +17,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction/L
 import List from '@material-ui/core/List/List'
 import classNames from 'classnames'
 import componentsStyle from '../../styles/jss/material-kit-react/views/components'
+import T from 'i18n-react'
 
 class Dashboard extends React.Component {
   render() {
@@ -33,7 +34,7 @@ class Dashboard extends React.Component {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Paper className={classes.paper}>
-                  <h1>Dashboard</h1>
+                  <h1>{T.translate("cabinet.dashboard")}</h1>
                   <List>
                   {this.props.items.map((item) => {
                     return (
@@ -45,7 +46,7 @@ class Dashboard extends React.Component {
                             <ListItemText inset primary={item.title} />
                           </Link>
                           <ListItemSecondaryAction>
-                            <IconButton aria-label="Delete" onClick={() => this.props.onHandleDelete(item.id, item.image)}>
+                            <IconButton aria-label={T.translate("common.deleteButton")} onClick={() => this.props.onHandleDelete(item.id, item.image)}>
                               <DeleteIcon />
                             </IconButton>
                           </ListItemSecondaryAction>

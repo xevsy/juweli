@@ -22,6 +22,7 @@ import Button from '@material-ui/core/Button/Button'
 import Favorite from "@material-ui/icons/Favorite"
 import { removeItemsFromBucket } from '../../actions/bucket'
 import { addMessage } from '../../actions/message'
+import T from 'i18n-react'
 
 class BucketItems extends React.Component {
   constructor(props) {
@@ -60,10 +61,10 @@ class BucketItems extends React.Component {
     const {classes} = this.props;
 
     const rows = [
-      { id: 'count', numeric: false, disablePadding: true, label: 'Количество' },
-      { id: 'title', numeric: false, disablePadding: false, label: 'Товар' },
-      { id: 'price', numeric: false, disablePadding: false, label: 'Цена за единицу' },
-      { id: 'sum_price', numeric: false, disablePadding: false, label: 'Всего' },
+      { id: 'count', numeric: false, disablePadding: true, label: T.translate("common.bucketCount") },
+      { id: 'title', numeric: false, disablePadding: false, label: T.translate("common.bucketItem") },
+      { id: 'price', numeric: false, disablePadding: false, label: T.translate("common.bucketItemPrice") },
+      { id: 'sum_price', numeric: false, disablePadding: false, label: T.translate("common.bucketItemTotal") },
     ];
 
     const numSelected = this.state.selected.length;
@@ -79,19 +80,19 @@ class BucketItems extends React.Component {
             <div className={classes.title}>
               {numSelected > 0 ? (
                 <Typography color="inherit" variant="subheading">
-                  {numSelected} выбрано
+                  {numSelected} {T.translate("common.selected")}
                 </Typography>
               ) : (
                 <Typography variant="title" id="tableTitle">
-                  Корзина
+                  {T.translate("common.bucket")}
                 </Typography>
               )}
             </div>
             <div className={classes.spacer} />
             <div className={classes.actions}>
               {numSelected > 0 ? (
-                <Tooltip title="Удалить">
-                  <IconButton aria-label="Удалить" onClick={() => this.props.onBucketClickRemoveItems(this.state.selected)}>
+                <Tooltip title={T.translate("common.deleteButton")}>
+                  <IconButton aria-label={T.translate("common.deleteButton")} onClick={() => this.props.onBucketClickRemoveItems(this.state.selected)}>
                     <DeleteIcon />
                   </IconButton>
                 </Tooltip>
@@ -167,8 +168,8 @@ class BucketItems extends React.Component {
               </TableBody>
             </Table>
             <Toolbar>
-              <Button variant="extendedFab" aria-label="Оформить" color="secondary">
-                <Favorite className={classes.icons} /> Оформить заказ
+              <Button variant="extendedFab" aria-label={T.translate("common.applyOrder")} color="secondary">
+                <Favorite className={classes.icons} /> {T.translate("common.applyOrder")}
               </Button>
             </Toolbar>
           </div>
@@ -251,7 +252,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onBucketClickRemoveItems: items => {
       dispatch(removeItemsFromBucket(items));
-      dispatch(addMessage("Количество удаленных товаров: " + items.length, 'info'));
+      dispatch(addMessage(T.translate("messages.itemsRemoved") + items.length, 'info'));
     }
   }
 }

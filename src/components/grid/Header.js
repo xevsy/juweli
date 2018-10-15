@@ -5,26 +5,30 @@ import { startLogin, startLogout } from '../../actions/auth';
 import HeaderLinks from '../block/HeaderLinks'
 import MessageSnackBar from '../custom/MessageSnackBar'
 import { removeMessage } from '../../actions/message'
+import { setLanguage } from '../../actions/language'
 
-const Header = (props) => (
-  <div>
-    <MessageSnackBar
-      {...props.notification}
-      handleMessageClose={() => props.handleMessageClose(props.notification.status)}
-    />
-    <NavBar
-      // color="transparent"
-      startLogin={startLogin()}
-      startLogout={startLogout()}
-      rightLinks={<HeaderLinks />}
-      fixed
-      changeColorOnScroll={{
-        height: 400,
-        color: "black"
-      }}
-    />
-  </div>
-);
+const Header = (props) => {
+
+  return (
+    <div>
+      <MessageSnackBar
+        {...props.notification}
+        handleMessageClose={() => props.handleMessageClose(props.notification.status)}
+      />
+      <NavBar
+        // color="transparent"
+        startLogin={startLogin()}
+        startLogout={startLogout()}
+        rightLinks={<HeaderLinks changeLanguage={props.changeLanguage} />}
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "black"
+        }}
+      />
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -37,6 +41,10 @@ const mapDispatchToProps = (dispatch) => ({
   startLogout: () => dispatch(startLogout()),
   handleMessageClose: status => {
     dispatch(removeMessage(status));
+  },
+  changeLanguage: lang => {
+    dispatch(setLanguage(lang));
+
   }
 });
 

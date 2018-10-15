@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid/Grid'
 import { addItemToBucket } from '../../actions/bucket'
 import ItemTeaser from '../block/ItemTeaser'
 import { addMessage } from '../../actions/message'
+import T from 'i18n-react'
 
 class MainContent extends React.Component {
 
@@ -59,7 +60,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onBucketClick: item => {
       dispatch(addItemToBucket(item));
-      dispatch(addMessage(item.title + ' добавленна в корзину', 'success'))
+      dispatch(addMessage(item.title + T.translate("messages.itemAdded"), 'success'))
     }
   }
 }

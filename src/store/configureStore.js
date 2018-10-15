@@ -6,6 +6,7 @@ import bucketReducer from '../reducers/bucket'
 import categoriesReducer from '../reducers/categories'
 import tagsReducer from '../reducers/tags'
 import messageReducer from '../reducers/message'
+import languageReducer from '../reducers/language'
 import { reducer as formReducer } from 'redux-form';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
@@ -27,6 +28,7 @@ const rootReducer = persistReducer(persistConfig, combineReducers({
   categories: categoriesReducer,
   tags: tagsReducer,
   notification: messageReducer,
+  language: languageReducer,
   form: formReducer
 }));
 

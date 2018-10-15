@@ -7,20 +7,31 @@ import registerServiceWorker from './registerServiceWorker';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
 import { getItemsAll } from './actions/items';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import "./styles/scss/material-kit-react.css?v=1.2.0"
 import { PersistGate } from 'redux-persist/integration/react'
 import { getCategories } from './actions/categories'
+import T from 'i18n-react'
+
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+    suppressDeprecationWarnings: true
+  }
+});
 
 const jsx = (
-  <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <AppRouter />
-    </PersistGate>
-  </Provider>
+  <MuiThemeProvider theme={theme} >
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppRouter />
+      </PersistGate>
+    </Provider>
+  </MuiThemeProvider>
 );
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('root'));
+ReactDOM.render(<p>{T.translate("common.loading")}</p>, document.getElementById('root'));
 
 store.dispatch(getCategories());
 

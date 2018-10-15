@@ -1,0 +1,74 @@
+{
+  "cabinet": {
+    "dashboard": "Главная",
+    "addCategory": "Добавить новую категория",
+    "addTag": "Добавить новый тег",
+    "addProduct": "Добавить новый продукт",
+    "preview": "Превью",
+    "itemPublished": "Опубликовать",
+    "itemTitle": "Название",
+    "itemDescription": "Описание",
+    "itemCategory": "Категория",
+    "itemCurrency": "Валюта",
+    "itemAmount": "Цена",
+    "itemCount": "Количество",
+    "itemTags": "Теги",
+    "itemImageProgress": "Прогресс",
+    "itemTagsSelect": "Выбирите несколько тегов",
+    "requiredField": "Это обязательно поле для заполения",
+    "requiredEmail": "Email неправильного формата",
+    "categorySelect": "Пожалуйста выберите категорию",
+    "currencySelect": "Пожалуйста выберите валюту",
+    "graterThen0": "Значение должно быть больше 0"
+  },
+  "common": {
+    "deleteButton": "Удалить",
+    "saveButton": "Сохранить",
+    "clearButton": "Очистить",
+    "cancelButton": "Отменить",
+    "sendButton": "Выслать",
+    "bucket": "Корзина",
+    "applyOrder": "Оформить заказ",
+    "pageNotFound": "404 - Страница не найдена",
+    "categories": "Разделы",
+    "bucketCount": "Количество",
+    "bucketItem": "Товар",
+    "bucketItemPrice": "Цена за единицу",
+    "bucketItemTotal": "Всего",
+    "selected": "выбрано",
+    "email": "Email",
+    "password": "Пароль",
+    "loading": "Загрузка..."
+  },
+  "social": {
+    "follow_facebook": "Ищите нас на Facebook",
+    "follow_instagram": "Ищите нас на Instagram",
+    "language": {
+      "en": "Английский",
+      "ru": "Русский"
+    }
+  },
+  "item": {
+    "count": "На складе"
+  },
+  "auth": {
+    "login:" : "Вход",
+    "logout" : "Выход",
+    "passwordReset": "Востановление пароля",
+    "passwordResetText": "Укажите Ваш email, и мы пришлем Вам письмо с возможностью указать новый пароль.",
+    "emailPasswordReset": "Email для восстановления",
+    "loginSuccess": "Вы вошли в систему как"
+  },
+  "messages": {
+    "itemsRemoved": "Количество удаленных товаров: ",
+    "itemAdded": " добавленна в корзину",
+    "loginSuccess": "Вы успешно зашли в систему как "
+  },
+  "menu": {
+    "profile": "Профиль",
+    "cabinet": "Кабинет",
+    "account": "Мой аккаунт",
+    "login" : "Вход",
+    "logout" : "Выход"
+  }
+}

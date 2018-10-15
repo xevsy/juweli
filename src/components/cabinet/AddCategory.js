@@ -9,6 +9,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 import MainCategoryForm from './forms/MainCategoryForm'
 import componentsStyle from "../../styles/jss/material-kit-react/views/components"
 import classNames from 'classnames'
+import T from 'i18n-react'
 
 class AddCategory extends React.Component {
   render() {
@@ -25,7 +26,7 @@ class AddCategory extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Paper className={this.props.classes.paper}>
-                <h1>Add new category</h1>
+                <h1>{T.translate("cabinet.addCategory")}</h1>
                 <MainCategoryForm onFormSubmit={this.props.onFormSubmit}
                 />
               </Paper>

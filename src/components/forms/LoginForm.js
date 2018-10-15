@@ -13,6 +13,7 @@ import DialogTitle from '@material-ui/core/DialogTitle/DialogTitle'
 import DialogContent from '@material-ui/core/DialogContent/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions/DialogActions'
+import T from 'i18n-react'
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -63,14 +64,14 @@ class LoginForm extends React.Component {
       >
         <TextValidator
           id={"email"}
-          label={"Email"}
+          label={T.translate("common.email")}
           name={"email"}
           variant={"outlined"}
           className={classNames(classes.margin, classes.textField)}
           value={this.state.emailInput}
           onChange={this.handleChange('emailInput')}
           validators={['required', 'isEmail']}
-          errorMessages={['this field is required', 'email is not valid']}
+          errorMessages={[T.translate("cabinet.requiredField"), T.translate("cabinet.requiredEmail")]}
           margin={"normal"}
         />
         <TextValidator
@@ -79,11 +80,11 @@ class LoginForm extends React.Component {
           className={classNames(classes.margin, classes.textField)}
           variant="outlined"
           type={this.state.showPassword ? 'text' : 'password'}
-          label={"Пароль"}
+          label={T.translate("common.password")}
           value={this.state.passwordInput}
           onChange={this.handleChange('passwordInput')}
           validators={['required']}
-          errorMessages={['this field is required']}
+          errorMessages={[T.translate("cabinet.requiredField")]}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -99,22 +100,22 @@ class LoginForm extends React.Component {
           margin={"normal"}
         />
         <Button variant="contained" className={classes.button} type={"submit"}>
-          Вход
+          {T.translate("auth.login")}
         </Button>
-        <Button onClick={this.handleClickOpenPasswordResetDialog}>Востановление пароля</Button>
+        <Button onClick={this.handleClickOpenPasswordResetDialog}>{T.translate("auth.passwordReset")}</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClosePasswordResetDialog}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Востановление пароля</DialogTitle>
+          <DialogTitle id="form-dialog-title">{T.translate("auth.passwordReset")}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Укажите Ваш email, и мы пришлем Вам письмо с возможностью указать новый пароль.
+              {T.translate("auth.passwordResetText")}
             </DialogContentText>
             <TextValidator
               id={"ResetEmail"}
-              label={"Email для восстановления"}
+              label={T.translate("auth.emailPasswordReset")}
               name={"ResetEmail"}
               autoFocus
               margin="dense"
@@ -123,15 +124,15 @@ class LoginForm extends React.Component {
               onChange={this.handleChange('resetEmail')}
               fullWidth
               validators={['required', 'isEmail']}
-              errorMessages={['this field is required', 'email is not valid']}
+              errorMessages={[T.translate("cabinet.requiredField"), T.translate("cabinet.requiredEmail")]}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClosePasswordResetDialog} color="transparent">
-              Отменить
+              {T.translate("common.cancelButton")}
             </Button>
             <Button onClick={this.handleSetPasswordReset} color="primary">
-              Выслать
+              {T.translate("common.sendButton")}
             </Button>
           </DialogActions>
         </Dialog>

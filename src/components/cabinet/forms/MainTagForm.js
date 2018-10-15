@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon'
 import { withStyles } from '@material-ui/core/styles';
+import T from 'i18n-react'
 
 class MainTagForm extends React.Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class MainTagForm extends React.Component {
             className={this.props.classes.button}
             onClick={this.onFormSubmit}
           >
-            Save
+            {T.translate("common.saveButton")}
             <Icon className={this.props.classes.rightIcon}>save</Icon>
           </Button>
         </div>

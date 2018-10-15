@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText/ListItemText'
 import { Link } from 'react-router-dom'
 import List from '@material-ui/core/List/List'
 import ListItem from '@material-ui/core/ListItem/ListItem'
+import T from 'i18n-react'
 
 class SidebarMenu extends React.Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class SidebarMenu extends React.Component {
   render() {
     return (
       <div>
-        <h3>Разделы</h3>
+        <h3>{T.translate("common.categories")}</h3>
         <List>
         {this.props.categories.map((category) => {
           return(

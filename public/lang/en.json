@@ -1,0 +1,74 @@
+{
+  "cabinet": {
+    "dashboard": "Dashboard",
+    "addCategory": "Add new category",
+    "addTag": "Add new tag",
+    "addProduct": "Add new product",
+    "preview": "Preview",
+    "itemPublished": "Published",
+    "itemTitle": "Title",
+    "itemDescription": "Description",
+    "itemCategory": "Category",
+    "itemCurrency": "Currency",
+    "itemAmount": "Amount",
+    "itemCount": "Count",
+    "itemTags": "Tags",
+    "itemImageProgress": "Progress",
+    "itemTagsSelect": "Select multiple tags",
+    "requiredField": "This field is required",
+    "requiredEmail": "email is not valid",
+    "categorySelect": "Please select category",
+    "currencySelect": "Please select currency",
+    "graterThen0": "This field should be grater then 0"
+  },
+  "common": {
+    "deleteButton": "Delete",
+    "saveButton": "Save",
+    "clearButton": "Clear",
+    "cancelButton": "Cancel",
+    "sendButton": "Send",
+    "bucket": "Bucket",
+    "applyOrder": "Apply order",
+    "categories": "Categories",
+    "pageNotFound": "404 - Page not found",
+    "bucketCount": "Count",
+    "bucketItem": "Item",
+    "bucketItemPrice": "Price per item",
+    "bucketItemTotal": "Total price",
+    "selected": "selected",
+    "email": "Email",
+    "password": "Password",
+    "loading": "Loading..."
+  },
+  "social": {
+    "follow_facebook": "Follow us on Facebook",
+    "follow_instagram": "Follow us on Instagram",
+    "language": {
+      "en": "English",
+      "ru": "Russian"
+    }
+  },
+  "item": {
+    "count": "Count"
+  },
+  "auth": {
+    "login" : "Login",
+    "logout" : "Logout",
+    "passwordReset": "Password recovery",
+    "passwordResetText": "Enter your email, and we will send you an email with the ability to set a new password.",
+    "emailPasswordReset": "Email for recovery",
+    "loginSuccess": "You are logged in as"
+  },
+  "messages": {
+    "itemsRemoved": "Amount of removed items: ",
+    "itemAdded": " item has been added to the bucket",
+    "loginSuccess": "You are successfully logged in as "
+  },
+  "menu": {
+    "profile": "Profile",
+    "cabinet": "Cabinet",
+    "account": "My account",
+    "login" : "Login",
+    "logout" : "Logout"
+  }
+}

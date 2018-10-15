@@ -1,13 +1,14 @@
 import { firebase, googleAuthProvider } from '../firebase/firebase';
 import database from '../firebase/firebase'
 import { addMessage } from './message'
+import T from 'i18n-react'
 
 export const login = (uid, displayName, photoURL, email) => {
   return (dispatch) => {
     return database.ref(`users/${uid}`).update({uid}).then(() => {
       database.ref(`users/${uid}`).once('value').then((snapshot) => {
         dispatch({type: 'LOGIN', uid, displayName, photoURL, email, 'role': snapshot.val().role});
-        dispatch(addMessage("ВЫ успешно зашли в систему как " + (displayName ? displayName : email), 'success'));
+        dispatch(addMessage(T.translate("messages.loginSuccess") + (displayName ? displayName : email), 'success'));
       });
     });
   };

@@ -18,6 +18,7 @@ import classNames from 'classnames'
 import Avatar from '@material-ui/core/Avatar/Avatar'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import Drawer from '@material-ui/core/Drawer/Drawer'
+import T from 'i18n-react'
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -103,7 +104,7 @@ class NavBar extends React.Component {
             <Typography
               component={Link}
               to={"/"}
-              varian={"title"}
+              varian={"h6"}
               color={"inherit"}
               className={classes.flex}
             >
@@ -126,7 +127,7 @@ class NavBar extends React.Component {
                 </Badge>
               </Typography>
               <Typography
-                varian={"title"}
+                varian={"h6"}
                 color={"inherit"}
               >
                 <IconButton
@@ -143,8 +144,8 @@ class NavBar extends React.Component {
                   this.props.auth.displayName : this.props.auth.email}
               </Typography>
               {this.props.auth.uid !== undefined ?
-                <Button color={"transparent"} onClick={this.props.startLogout}>Logout</Button> :
-                <Button color={"transparent"} onClick={this.props.startLogin}>Login</Button>
+                <Button color={"transparent"} onClick={this.props.startLogout}>{T.translate("auth.logout")}</Button> :
+                <Button color={"transparent"} onClick={this.props.startLogin}>{T.translate("auth.login")}</Button>
               }
               <div>
                 {rightLinks}
@@ -158,6 +159,10 @@ class NavBar extends React.Component {
                 >
                   <Menu />
                 </IconButton>
+                {this.props.auth.uid !== undefined ?
+                  <Button color={"transparent"} onClick={this.props.startLogout}>{T.translate("auth.logout")}</Button> :
+                  <Button color={"transparent"} onClick={this.props.startLogin}>{T.translate("auth.login")}</Button>
+                }
               </Hidden>
           </ToolBar>
           <Hidden smUp implementation="css">
@@ -190,19 +195,19 @@ class NavBar extends React.Component {
             component={Link}
             to={"/profile"}
           >
-            Profile
+            {T.translate("menu.profile")}
           </MenuItem>
           { this.props.auth.role === 'admin' ?
           <MenuItem
             component={Link}
             to={"/cabinet"}
           >
-            Кабинет
+            {T.translate("menu.cabinet")}
           </MenuItem> : '' }
-          <MenuItem onClick={this.handleClose}>My account</MenuItem>
+          <MenuItem onClick={this.handleClose}>{T.translate("menu.account")}</MenuItem>
           { this.props.auth.uid !== undefined ?
-            <MenuItem onClick={this.props.startLogout}>Logout</MenuItem> :
-            <MenuItem onClick={this.props.startLogin}>Login</MenuItem>
+            <MenuItem onClick={this.props.startLogout}>{T.translate("menu.logout")}</MenuItem> :
+            <MenuItem onClick={this.props.startLogin}>{T.translate("menu.login")}</MenuItem>
           }
         </Menu>
       </div>

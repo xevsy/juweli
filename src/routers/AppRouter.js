@@ -10,22 +10,38 @@ import AddCategory from '../components/cabinet/AddCategory'
 import BucketPage from '../components/pages/BucketPage'
 import PrivateRoute from './PrivateRoute'
 import AddTag from '../components/cabinet/AddTag'
+import { connect } from 'react-redux'
+import axios from 'axios'
+import T from 'i18n-react'
 
-const AppRouter = () => (
-  <BrowserRouter>
-    <div>
-      <Switch>
-        <Route path={"/"} component={FrontPage} exact={true} />
-        <Route path={"/bucket"} component={BucketPage} exact={true} />
-        <PrivateRoute path={"/cabinet"} component={Dashboard} exact={true}/>
-        <PrivateRoute path={"/cabinet/newCategory"} component={AddCategory} />
-        <PrivateRoute path={"/cabinet/newTag"} component={AddTag} />
-        <PrivateRoute path={"/cabinet/newProduct"} component={AddItem} />
-        <PrivateRoute path={"/cabinet/edit/:id"} component={EditItem} />
-        <Route component={NotFoundPage}/>
-      </Switch>
-    </div>
-  </BrowserRouter>
-);
+const AppRouter = (props) => {
+  const language = props.language || 'en';
+  axios.get(`/lang/${language}.json`).then(res => {
+    T.setTexts(res.data);
+  });
 
-export default AppRouter;
+  return (
+    <BrowserRouter>
+      <div>
+        <Switch>
+          <Route path={"/"} component={FrontPage} exact={true}/>
+          <Route path={"/bucket"} component={BucketPage} exact={true}/>
+          <PrivateRoute path={"/cabinet"} component={Dashboard} exact={true}/>
+          <PrivateRoute path={"/cabinet/newCategory"} component={AddCategory}/>
+          <PrivateRoute path={"/cabinet/newTag"} component={AddTag}/>
+          <PrivateRoute path={"/cabinet/newProduct"} component={AddItem}/>
+          <PrivateRoute path={"/cabinet/edit/:id"} component={EditItem}/>
+          <Route component={NotFoundPage}/>
+        </Switch>
+      </div>
+    </BrowserRouter>
+  );
+};
+
+const MapStateToProps = (state) => {
+  return {
+    language: state.language
+  }
+};
+
+export default connect(MapStateToProps)(AppRouter);
