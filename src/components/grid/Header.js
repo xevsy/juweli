@@ -43,8 +43,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(removeMessage(status));
   },
   changeLanguage: lang => {
-    dispatch(setLanguage(lang));
-
+    dispatch(setLanguage(lang))
+    window.location.reload();
   }
 });
 

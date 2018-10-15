@@ -16,6 +16,8 @@ import T from 'i18n-react'
 
 const AppRouter = (props) => {
   const language = props.language || 'en';
+  console.log(props.language)
+  console.log(language);
   axios.get(`/lang/${language}.json`).then(res => {
     T.setTexts(res.data);
   });
