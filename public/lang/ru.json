@@ -19,7 +19,11 @@
     "requiredEmail": "Email неправильного формата",
     "categorySelect": "Пожалуйста выберите категорию",
     "currencySelect": "Пожалуйста выберите валюту",
-    "graterThen0": "Значение должно быть больше 0"
+    "graterThen0": "Значение должно быть больше 0",
+    "categoryParent": "Основная категория",
+    "categoryTitle": "Название",
+    "categoryDescription": "Описание",
+    "categoriesList": "Категории"
   },
   "common": {
     "deleteButton": "Удалить",

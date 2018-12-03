@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon'
 import { withStyles } from '@material-ui/core/styles';
 import T from 'i18n-react'
+import MenuItem from '@material-ui/core/MenuItem/MenuItem'
 
 class MainCategoryForm extends React.Component {
   constructor(props) {
@@ -13,8 +14,9 @@ class MainCategoryForm extends React.Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
 
     this.state = {
-      title: props.item ? props.item.title : '',
-      description: props.item ? props.item.description : '',
+      title: props.currentCategory ? props.currentCategory.title : '',
+      description: props.currentCategory ? props.currentCategory.description : '',
+      parentId: props.currentCategory ? props.currentCategory.parentId : '',
       error: '',
     }
   }
@@ -32,15 +34,17 @@ class MainCategoryForm extends React.Component {
       {
         title: this.state.title,
         description: this.state.description,
+        parentId: this.state.parentId
       });
   }
 
   render() {
+    console.log(this.state)
     return (
       <form>
         <TextField
           id={"title"}
-          label={"Title"}
+          label={T.translate("cabinet.categoryTitle")}
           className={this.props.classes.textFieldFull}
           value={this.state.title}
           onChange={this.handleChange('title')}
@@ -49,7 +53,7 @@ class MainCategoryForm extends React.Component {
         />
         <TextField
           id={"description"}
-          label={"Description"}
+          label={T.translate("cabinet.categoryDescription")}
           multiline
           rowsMax={"4"}
           className={this.props.classes.textFieldFull}
@@ -58,6 +62,32 @@ class MainCategoryForm extends React.Component {
           errortext={this.state.error}
           margin={"normal"}
         />
+        <TextField
+          id={"parentId"}
+          select
+          label={T.translate("cabinet.categoryParent")}
+          name={"parentId"}
+          className={this.props.classes.textFieldFull}
+          value={this.state.parentId}
+          onChange={this.handleChange('parentId')}
+          SelectProps={{
+            MenuProps: {
+              className: this.props.classes.menu,
+            },
+          }}
+          margin={"left"}
+        >
+          <MenuItem key={0} value={0} selected={0 === this.state.parentId}>---</MenuItem>
+          {this.props.parentCategories.map((option) => (
+            <MenuItem
+              key={option.id}
+              value={option.id}
+              selected={option.id === this.state.parentId}
+            >
+              {option.title}
+            </MenuItem>
+          ))}
+        </TextField>
         <div>
           <Button
             variant="contained"
@@ -122,6 +152,7 @@ const styles = theme => ({
 
 MainCategoryForm.propTypes = {
   classes: PropTypes.object.isRequired,
+  currentCategory: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(MainCategoryForm);

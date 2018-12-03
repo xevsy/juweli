@@ -12,7 +12,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import "./styles/scss/material-kit-react.css?v=1.2.0"
 import { PersistGate } from 'redux-persist/integration/react'
 import { getCategories } from './actions/categories'
-import T from 'i18n-react'
+import { getLanguage } from './actions/language'
 
 const theme = createMuiTheme({
   typography: {
@@ -31,19 +31,19 @@ const jsx = (
   </MuiThemeProvider>
 );
 
-ReactDOM.render(<p>{T.translate("common.loading")}</p>, document.getElementById('root'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('root'));
 
 store.dispatch(getCategories());
+store.dispatch(getItemsAll()).then(async () => {
+  const res = await store.dispatch(getLanguage());
+  setTimeout(() => {ReactDOM.render(jsx, document.getElementById('root'))}, 100)
 
-store.dispatch(getItemsAll()).then(() => {
-  ReactDOM.render(jsx, document.getElementById('root'));
 });
 
 registerServiceWorker();
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
-    console.log(user)
     store.dispatch(login(user.uid, user.displayName, user.photoURL, user.email));
   } else {
     store.dispatch(logout());

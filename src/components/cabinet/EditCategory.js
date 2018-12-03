@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddCategory } from '../../actions/categories'
+import { startAddCategory, startEditCategory } from '../../actions/categories'
 import { store }  from '../../store/configureStore'
 import Header from '../grid/Header'
 import Grid from '@material-ui/core/Grid/Grid'
@@ -12,8 +12,9 @@ import componentsStyle from "../../styles/jss/material-kit-react/views/component
 import classNames from 'classnames'
 import T from 'i18n-react'
 import { getParentCategories } from '../../actions/parentCategories'
+import { addMessage } from '../../actions/message'
 
-class AddCategory extends React.Component {
+class EditCategory extends React.Component {
   componentDidMount() {
     store.dispatch(getParentCategories());
   }
@@ -34,6 +35,7 @@ class AddCategory extends React.Component {
               <Paper className={this.props.classes.paper}>
                 <h1>{T.translate("cabinet.addCategory")}</h1>
                 <MainCategoryForm
+                  currentCategory={this.props.category}
                   parentCategories={this.props.parentCategories}
                   onFormSubmit={this.props.onFormSubmit}
                 />
@@ -48,8 +50,9 @@ class AddCategory extends React.Component {
   }
 }
 
-const MapStateToProps = (state) => {
+const MapStateToProps = (state, props) => {
   return {
+    category: state.categories.find((category) => category.id === props.match.params.id),
     parentCategories: state.parentCategories,
   }
 };
@@ -57,10 +60,10 @@ const MapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onFormSubmit: category => {
-      dispatch(startAddCategory(category));
-      props.history.push('/cabinet/categories');
+      dispatch(startEditCategory(props.match.params.id, category));
+      dispatch(addMessage('Категория успешно сохранена!', 'success'))
     }
   }
 }
 
-export default connect(MapStateToProps, mapDispatchToProps)(withStyles(componentsStyle)(AddCategory));
+export default connect(MapStateToProps, mapDispatchToProps)(withStyles(componentsStyle)(EditCategory));

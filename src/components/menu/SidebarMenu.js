@@ -1,10 +1,7 @@
 import React from 'react';
-import MenuList from '@material-ui/core/MenuList/MenuList'
-import MenuItem from '@material-ui/core/MenuItem/MenuItem'
 import * as PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import ListItemText from '@material-ui/core/ListItemText/ListItemText'
-import { Link } from 'react-router-dom'
 import List from '@material-ui/core/List/List'
 import ListItem from '@material-ui/core/ListItem/ListItem'
 import T from 'i18n-react'

@@ -4,6 +4,7 @@ import authReducer from '../reducers/auth';
 import itemsReducer from '../reducers/items';
 import bucketReducer from '../reducers/bucket'
 import categoriesReducer from '../reducers/categories'
+import parentCategoriesReducer from '../reducers/parentCategories'
 import tagsReducer from '../reducers/tags'
 import messageReducer from '../reducers/message'
 import languageReducer from '../reducers/language'
@@ -26,6 +27,7 @@ const rootReducer = persistReducer(persistConfig, combineReducers({
   products: itemsReducer,
   bucket: bucketReducer,
   categories: categoriesReducer,
+  parentCategories: parentCategoriesReducer,
   tags: tagsReducer,
   notification: messageReducer,
   language: languageReducer,

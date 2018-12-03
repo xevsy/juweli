@@ -21,6 +21,7 @@ const mapStateToProps = (state) => {
   return {
     categories: state.categories,
     role: state.auth.role,
+    language: state.language,
   }
 };
 

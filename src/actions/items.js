@@ -33,7 +33,7 @@ export const startAddMainItem = (itemData = {}) => {
   };
 };
 
-// EDIT_EXPENSE
+// EDIT_CATEGORY
 export const editMainItem = (id, updates) => ({
   type: 'EDIT_MAIN_ITEM',
   id,

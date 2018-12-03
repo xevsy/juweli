@@ -19,7 +19,11 @@
     "requiredEmail": "email is not valid",
     "categorySelect": "Please select category",
     "currencySelect": "Please select currency",
-    "graterThen0": "This field should be grater then 0"
+    "graterThen0": "This field should be grater then 0",
+    "categoryParent": "Parent category",
+    "categoryTitle": "Title",
+    "categoryDescription": "Description",
+    "categoriesList": "Categories"
   },
   "common": {
     "deleteButton": "Delete",
