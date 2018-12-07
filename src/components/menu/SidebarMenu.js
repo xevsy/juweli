@@ -39,7 +39,16 @@ class SidebarMenu extends React.Component {
               >
                 <ListItemText classes={{primary: this.props.classes.primary}} inset primary={category.title}/>
               </ListItem>
-
+            )
+          } else {
+            return (
+              <ListItem button dense disableGutters
+                        key={category.id}
+                        onClick={() => this.onHandleClick(category.id)}
+                        selected={this.state.selectedIndex === category.id}
+              >
+                <ListItemText classes={{primary: this.props.classes.primary}} inset primary={category.title}/>
+              </ListItem>
             )
           }
          })}

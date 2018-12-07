@@ -13,7 +13,7 @@ class MainContent extends React.Component {
 
   render() {
     const { classes } = this.props;
-
+    console.log(this.props.currency)
     return (
       <Paper className={classes.paper} elevation={0}>
         <Grid container>
@@ -22,6 +22,7 @@ class MainContent extends React.Component {
             <Grid item xs={12} sm={6} key={item.id}>
               <ItemTeaser
                 item={item}
+                currency={this.props.currency}
                 role={this.props.role}
                 onBucketClick={() => this.props.onBucketClick(item)}
               />
@@ -54,6 +55,7 @@ const MapStateToProps = (state) => {
     items: state.products,
     role: state.auth.role,
     language: state.language,
+    currency: state.currency,
   }
 };
 

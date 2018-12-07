@@ -15,6 +15,7 @@ import { getCategories, getParentCategories } from './actions/categories'
 import { getLanguage, setLanguage } from './actions/language'
 import axios from 'axios'
 import T from 'i18n-react'
+import { getCurrency } from './actions/currency'
 
 const theme = createMuiTheme({
   typography: {
@@ -45,6 +46,7 @@ axios.get(`/lang/${lang}.json`).then(res => {
 
 store.dispatch(getCategories());
 store.dispatch(getParentCategories());
+store.dispatch(getCurrency());
 store.dispatch(getItemsAll()).then(async () => {
   const user = firebase.auth().currentUser;
   if (user) {

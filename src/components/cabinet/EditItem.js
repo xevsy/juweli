@@ -70,6 +70,7 @@ class EditItem extends React.Component {
                 <h2>{T.translate("cabinet.preview")}</h2>
                 <ItemTeaser
                   item={this.props.item}
+                  currency={this.props.currency}
                   onBucketClick={() => console.log('test')}
                 />
               </Paper>
@@ -88,6 +89,7 @@ const mapStateToProps = (state, props) => {
     auth: state.auth,
     tags: state.tags,
     language: state.language,
+    currency: state.currency,
   }
 };
 

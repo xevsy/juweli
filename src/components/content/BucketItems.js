@@ -58,13 +58,13 @@ class BucketItems extends React.Component {
 
   render() {
 
-    const {classes} = this.props;
+    const { classes, currency } = this.props;
 
     const rows = [
       { id: 'count', numeric: false, disablePadding: true, label: T.translate("common.bucketCount") },
       { id: 'title', numeric: false, disablePadding: false, label: T.translate("common.bucketItem") },
-      { id: 'price', numeric: false, disablePadding: false, label: T.translate("common.bucketItemPrice") },
-      { id: 'sum_price', numeric: false, disablePadding: false, label: T.translate("common.bucketItemTotal") },
+      { id: 'price', numeric: false, disablePadding: false, label: T.translate("common.bucketItemPrice") + ' (UAH)' },
+      { id: 'sum_price', numeric: false, disablePadding: false, label: T.translate("common.bucketItemTotal") + ' (UAH)' },
     ];
 
     const numSelected = this.state.selected.length;
@@ -83,7 +83,7 @@ class BucketItems extends React.Component {
                   {numSelected} {T.translate("common.selected")}
                 </Typography>
               ) : (
-                <Typography variant="title" id="tableTitle">
+                <Typography variant="inherit" id="tableTitle">
                   {T.translate("common.bucket")}
                 </Typography>
               )}
@@ -160,15 +160,15 @@ class BucketItems extends React.Component {
                         {item.bucket}
                       </TableCell>
                       <TableCell>{item.title}</TableCell>
-                      <TableCell>{item.amount}</TableCell>
-                      <TableCell>{item.bucket * item.amount}</TableCell>
+                      <TableCell>{(item.amount * currency[item.currency.toLowerCase()]).toFixed(2)}</TableCell>
+                      <TableCell>{(item.bucket * item.amount * currency[item.currency.toLowerCase()]).toFixed(2)}</TableCell>
                     </TableRow>
                   );
                 })}
               </TableBody>
             </Table>
             <Toolbar>
-              <Button variant="extendedFab" aria-label={T.translate("common.applyOrder")} color="secondary">
+              <Button variant="contained" aria-label={T.translate("common.applyOrder")} color="secondary">
                 <Favorite className={classes.icons} /> {T.translate("common.applyOrder")}
               </Button>
             </Toolbar>
@@ -246,6 +246,7 @@ const MapStateToProps = (state) => {
   return {
     bucket: state.bucket,
     language: state.language,
+    currency: state.currency,
   }
 };
 

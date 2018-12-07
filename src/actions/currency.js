@@ -28,7 +28,7 @@ export const getCurrencyRate = (currency) => ({
 export const getCurrency = () => {
   return (dispatch) => {
     return database.ref('currency').once('value').then((snapshot) => {
-      let currency = {}
+      let currency = {uah: 1}
       snapshot.forEach((childSnapshot) => {
         currency = {
           ...currency,

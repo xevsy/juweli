@@ -16,7 +16,7 @@ class MainCategoryForm extends React.Component {
     this.state = {
       title: props.currentCategory ? props.currentCategory.title : '',
       description: props.currentCategory ? props.currentCategory.description : '',
-      parentId: props.currentCategory ? props.currentCategory.parentId : '',
+      parentId: props.currentCategory && props.currentCategory.parentId ? props.currentCategory.parentId : 0,
       error: '',
     }
   }
@@ -74,7 +74,7 @@ class MainCategoryForm extends React.Component {
               className: this.props.classes.menu,
             },
           }}
-          margin={"left"}
+          margin={"dense"}
         >
           <MenuItem key={0} value={0} selected={0 === this.state.parentId}>---</MenuItem>
           {this.props.parentCategories.map((option) => (
@@ -151,7 +151,6 @@ const styles = theme => ({
 
 MainCategoryForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  currentCategory: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(MainCategoryForm);

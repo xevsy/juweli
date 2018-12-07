@@ -21,21 +21,21 @@ import { Link } from 'react-router-dom'
 import T from 'i18n-react'
 
 class ItemTeaser extends React.Component {
-  state = { expanded: false };
+  state = { expanded: false, uah: 'UAH' };
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
   render() {
-    const { classes, item } = this.props;
+    const { classes, item, currency } = this.props;
     const itemDate = <Moment format={"YYYY/MM/DD"} date={item.updateAt} />
     return (
         <Card className={classes.card}>
           <CardHeader
             avatar={
               <Avatar aria-label={item.amount} className={classes.avatar}>
-                {item.amount} {item.currency}
+                {(item.amount * currency[item.currency.toLowerCase()]).toFixed(2)} {this.state.uah}
               </Avatar>
             }
             action={
@@ -56,7 +56,7 @@ class ItemTeaser extends React.Component {
           />
           <CardContent>
             <Typography>
-              {item.amount} {item.currency}
+              {(item.amount * currency[item.currency.toLowerCase()]).toFixed(2)} {this.state.uah}
             </Typography>
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>

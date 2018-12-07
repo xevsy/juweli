@@ -109,13 +109,27 @@ export const getParentCategories = () => {
 export const getNestedCategories = () => {
   return (dispatch) => {
     return database.ref('categories').orderByChild("parentId").once('value').then((snapshot) => {
-      const categories = [];
+      let categories = {};
       snapshot.forEach((childSnapshot) => {
-        categories.push({
-          id: childSnapshot.key,
-          ...childSnapshot.val()
-        });
+        const parentId = childSnapshot.val().parentId;
+        if (parentId === 0) {
+          categories = {
+            ...categories,
+            ...{[childSnapshot.key]: childSnapshot.val()}
+          }
+        } else {
+          categories[parentId] = {
+            ...categories[parentId],
+            ...{subcategory: [childSnapshot.val()]}
+          }
+        }
+        // console.log(childSnapshot.val().parentId)
+        // categories.push({
+        //   id: childSnapshot.key,
+        //   ...childSnapshot.val()
+        // });
       });
+      console.log(categories)
       dispatch(getMainNestedCategories(categories));
     });
   };
