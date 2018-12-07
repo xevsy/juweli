@@ -11,10 +11,9 @@ import BucketPage from '../components/pages/BucketPage'
 import PrivateRoute from './PrivateRoute'
 import AddTag from '../components/cabinet/AddTag'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import T from 'i18n-react'
 import EditCategory from '../components/cabinet/EditCategory'
 import CategoriesList from '../components/cabinet/CategoriesList'
+import Currency from '../components/cabinet/Currency'
 
 const AppRouter = (props) => {
   return (
@@ -30,6 +29,7 @@ const AppRouter = (props) => {
           <PrivateRoute path={"/cabinet/newTag"} component={AddTag}/>
           <PrivateRoute path={"/cabinet/newProduct"} component={AddItem}/>
           <PrivateRoute path={"/cabinet/edit/:id"} component={EditItem}/>
+          <PrivateRoute path={"/cabinet/currency"} component={Currency}/>
           <Route component={NotFoundPage}/>
         </Switch>
       </div>
@@ -39,7 +39,7 @@ const AppRouter = (props) => {
 
 const MapStateToProps = (state) => {
   return {
-    language: state.language
+    language: state.language,
   }
 };
 

@@ -11,7 +11,6 @@ import ListItemText from '@material-ui/core/ListItemText/ListItemText'
 import ListItem from '@material-ui/core/ListItem/ListItem'
 import IconButton from '@material-ui/core/IconButton/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { startRemoveMainItem } from '../../actions/items'
 import { Link } from 'react-router-dom'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction'
 import List from '@material-ui/core/List/List'
@@ -69,7 +68,8 @@ class CategoriesList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    categories: state.categories
+    categories: state.categories.all,
+    language: state.language,
   }
 };
 

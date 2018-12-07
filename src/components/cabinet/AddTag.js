@@ -40,6 +40,12 @@ class AddTag extends React.Component {
   }
 }
 
+const MapStateToProps = (state) => {
+  return {
+    language: state.language,
+  }
+};
+
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onFormSubmit: category => {
@@ -49,4 +55,4 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 }
 
-export default connect(undefined, mapDispatchToProps)(withStyles(componentsStyle)(AddTag));
+export default connect(MapStateToProps, mapDispatchToProps)(withStyles(componentsStyle)(AddTag));

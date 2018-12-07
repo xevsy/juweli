@@ -43,6 +43,7 @@ const mapStateToProps = (state) => {
   return {
     bucket: state.bucket,
     auth: state.auth,
+    language: state.language,
   }
 };
 

@@ -1,4 +1,4 @@
-import database, { storage } from '../firebase/firebase'
+import database from '../firebase/firebase'
 
 // ADD_CATEGORY
 export const addCategory = (category) => ({
@@ -24,7 +24,7 @@ export const startAddCategory = (categoryData = {}) => {
 };
 
 // EDIT_CATEGORY
-export const editCategory = (id, updates) => ({
+export const editCategory = (id, updates) => (console.log(updates) || {
   type: 'EDIT_CATEGORY',
   id,
   updates
@@ -37,10 +37,9 @@ export const startEditCategory = (id, categoryData = {}) => {
       description = '',
       parentId = 0
     } = categoryData;
-    const category = { title, description, parentId};
-    console.log(category);
+    const category = { title, description, parentId };
     return database.ref(`categories/${id}`).update(category).then(() => {
-      dispatch(editCategory({id, category}))
+      dispatch(editCategory(id, category))
     });
   };
 };
@@ -62,7 +61,19 @@ export const startRemoveMainCategory = (id) => {
 // GET_MAIN_CATEGORIES
 export const getMainCategories = (categories) => ({
   type: 'GET_MAIN_CATEGORIES',
-  categories
+  categories: categories
+});
+
+// GET_MAIN_PARENT_CATEGORIES
+export const getMainParentCategories = (categories) => ({
+  type: 'GET_MAIN_PARENT_CATEGORIES',
+  categories: categories
+});
+
+// GET_MAIN_NESTED_CATEGORIES
+export const getMainNestedCategories = (categories) => ({
+  type: 'GET_MAIN_NESTED_CATEGORIES',
+  categories: categories
 });
 
 export const getCategories = () => {
@@ -76,6 +87,36 @@ export const getCategories = () => {
         });
       });
       dispatch(getMainCategories(categories));
+    });
+  };
+}
+
+export const getParentCategories = () => {
+  return (dispatch) => {
+    return database.ref('categories').orderByChild("parentId").equalTo(0).once('value').then((snapshot) => {
+      const categories = [];
+      snapshot.forEach((childSnapshot) => {
+        categories.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });
+      dispatch(getMainParentCategories(categories));
+    });
+  };
+}
+
+export const getNestedCategories = () => {
+  return (dispatch) => {
+    return database.ref('categories').orderByChild("parentId").once('value').then((snapshot) => {
+      const categories = [];
+      snapshot.forEach((childSnapshot) => {
+        categories.push({
+          id: childSnapshot.key,
+          ...childSnapshot.val()
+        });
+      });
+      dispatch(getMainNestedCategories(categories));
     });
   };
 }

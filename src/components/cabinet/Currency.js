@@ -1,20 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddCategory, getParentCategories } from '../../actions/categories'
 import { store }  from '../../store/configureStore'
 import Header from '../grid/Header'
 import Grid from '@material-ui/core/Grid/Grid'
 import Paper from '@material-ui/core/Paper/Paper'
 import MainMenu from './MainMenu'
 import withStyles from '@material-ui/core/styles/withStyles'
-import MainCategoryForm from './forms/MainCategoryForm'
 import componentsStyle from "../../styles/jss/material-kit-react/views/components"
 import classNames from 'classnames'
 import T from 'i18n-react'
+import CurrencyForm from './forms/CurrencyForm'
+import { addMessage } from '../../actions/message'
+import { getCurrency, startUpdateCurrencyRate } from '../../actions/currency'
 
-class AddCategory extends React.Component {
+class Currency extends React.Component {
   componentDidMount() {
-    store.dispatch(getParentCategories());
+    store.dispatch(getCurrency());
   }
 
   render() {
@@ -31,9 +32,9 @@ class AddCategory extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Paper className={this.props.classes.paper}>
-                <h1>{T.translate("cabinet.addCategory")}</h1>
-                <MainCategoryForm
-                  parentCategories={this.props.parentCategories}
+                <h1>{T.translate("cabinet.currencyTitle")}</h1>
+                <CurrencyForm
+                  currency={this.props.currency}
                   onFormSubmit={this.props.onFormSubmit}
                 />
               </Paper>
@@ -49,18 +50,18 @@ class AddCategory extends React.Component {
 
 const MapStateToProps = (state) => {
   return {
-    parentCategories: state.categories.parent,
     language: state.language,
+    currency: state.currency
   }
 };
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onFormSubmit: category => {
-      dispatch(startAddCategory(category));
-      props.history.push('/cabinet/categories');
+    onFormSubmit: (usd, eur) => {
+      dispatch(startUpdateCurrencyRate(usd, eur));
+      dispatch(addMessage(T.translate("messages.currencyChange"), 'success'))
     }
   }
 }
 
-export default connect(MapStateToProps, mapDispatchToProps)(withStyles(componentsStyle)(AddCategory));
+export default connect(MapStateToProps, mapDispatchToProps)(withStyles(componentsStyle)(Currency));

@@ -57,7 +57,7 @@ export const startEditMainItem = (id, itemData = {}) => {
     } = itemData;
     const item = { published, title, description, category, author_id, currency, amount, count, image, tags, updateAt };
     return database.ref(`products/${id}`).update(item).then(() => {
-      dispatch(editMainItem({id, item}))
+      dispatch(editMainItem(id, item))
     });
   };
 };

@@ -244,7 +244,8 @@ BucketItems.propTypes = {
 
 const MapStateToProps = (state) => {
   return {
-    bucket: state.bucket
+    bucket: state.bucket,
+    language: state.language,
   }
 };
 

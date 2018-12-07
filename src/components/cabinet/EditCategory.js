@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startAddCategory, startEditCategory } from '../../actions/categories'
+import { getParentCategories, startEditCategory } from '../../actions/categories'
 import { store }  from '../../store/configureStore'
 import Header from '../grid/Header'
 import Grid from '@material-ui/core/Grid/Grid'
@@ -11,7 +11,6 @@ import MainCategoryForm from './forms/MainCategoryForm'
 import componentsStyle from "../../styles/jss/material-kit-react/views/components"
 import classNames from 'classnames'
 import T from 'i18n-react'
-import { getParentCategories } from '../../actions/parentCategories'
 import { addMessage } from '../../actions/message'
 
 class EditCategory extends React.Component {
@@ -52,8 +51,9 @@ class EditCategory extends React.Component {
 
 const MapStateToProps = (state, props) => {
   return {
-    category: state.categories.find((category) => category.id === props.match.params.id),
-    parentCategories: state.parentCategories,
+    category: state.categories.all.find((category) => category.id === props.match.params.id),
+    parentCategories: state.categories.parent,
+    language: state.language,
   }
 };
 

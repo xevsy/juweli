@@ -53,6 +53,7 @@ const MapStateToProps = (state) => {
   return {
     items: state.products,
     role: state.auth.role,
+    language: state.language,
   }
 };
 

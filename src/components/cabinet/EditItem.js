@@ -56,7 +56,7 @@ class EditItem extends React.Component {
                 <h1>{this.props.item.title}</h1>
                 <MainItemForm
                   item={this.props.item}
-                  categories={this.props.categories}
+                  categories={this.props.categories.all}
                   auth={this.props.auth}
                   tags={this.props.tags}
                   onFormSubmit={this.props.onFormSubmit}
@@ -87,6 +87,7 @@ const mapStateToProps = (state, props) => {
     categories: state.categories,
     auth: state.auth,
     tags: state.tags,
+    language: state.language,
   }
 };
 

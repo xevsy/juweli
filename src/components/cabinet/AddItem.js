@@ -56,9 +56,10 @@ class AddItem extends React.Component {
 
 const MapStateToProps = (state) => {
   return {
-    categories: state.categories,
+    categories: state.categories.all,
     auth: state.auth,
     tags: state.tags,
+    language: state.language,
   }
 };
 

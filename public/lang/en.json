@@ -23,7 +23,10 @@
     "categoryParent": "Parent category",
     "categoryTitle": "Title",
     "categoryDescription": "Description",
-    "categoriesList": "Categories"
+    "categoriesList": "Categories",
+    "currencyTitle": "Currency rate",
+    "currencyUSD": "Rate $",
+    "currencyEUR": "Rate €"
   },
   "common": {
     "deleteButton": "Delete",
@@ -66,7 +69,8 @@
   "messages": {
     "itemsRemoved": "Amount of removed items: ",
     "itemAdded": " item has been added to the bucket",
-    "loginSuccess": "You are successfully logged in as "
+    "loginSuccess": "You are successfully logged in as ",
+    "currencyChange": "Currency rate has been successfully updated"
   },
   "menu": {
     "profile": "Profile",

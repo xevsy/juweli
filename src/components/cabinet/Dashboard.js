@@ -69,7 +69,8 @@ class Dashboard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     items: state.products,
-    categories: state.categories
+    categories: state.categories.all,
+    language: state.language,
   }
 };
 

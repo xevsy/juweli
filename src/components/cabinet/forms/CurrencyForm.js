@@ -5,18 +5,16 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon'
 import { withStyles } from '@material-ui/core/styles';
 import T from 'i18n-react'
-import MenuItem from '@material-ui/core/MenuItem/MenuItem'
 
-class MainCategoryForm extends React.Component {
+class CurrencyForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
 
     this.state = {
-      title: props.currentCategory ? props.currentCategory.title : '',
-      description: props.currentCategory ? props.currentCategory.description : '',
-      parentId: props.currentCategory ? props.currentCategory.parentId : '',
+      usd: this.props.currency.usd ? this.props.currency.usd : 0,
+      eur: this.props.currency.eur ? this.props.currency.eur : 0,
       error: '',
     }
   }
@@ -32,9 +30,8 @@ class MainCategoryForm extends React.Component {
 
     this.props.onFormSubmit(
       {
-        title: this.state.title,
-        description: this.state.description,
-        parentId: this.state.parentId
+        usd: this.state.usd,
+        eur: this.state.eur
       });
   }
 
@@ -42,51 +39,23 @@ class MainCategoryForm extends React.Component {
     return (
       <form>
         <TextField
-          id={"title"}
-          label={T.translate("cabinet.categoryTitle")}
+          id={"currency-usd"}
+          label={T.translate("cabinet.currencyUSD")}
           className={this.props.classes.textFieldFull}
-          value={this.state.title}
-          onChange={this.handleChange('title')}
+          value={this.state.usd}
+          onChange={this.handleChange('usd')}
           errortext={this.state.error}
           margin={"normal"}
         />
         <TextField
-          id={"description"}
-          label={T.translate("cabinet.categoryDescription")}
-          multiline
-          rowsMax={"4"}
+          id={"currency-eur"}
+          label={T.translate("cabinet.currencyEUR")}
           className={this.props.classes.textFieldFull}
-          value={this.state.description}
-          onChange={this.handleChange('description')}
+          value={this.state.eur}
+          onChange={this.handleChange('eur')}
           errortext={this.state.error}
           margin={"normal"}
         />
-        <TextField
-          id={"parentId"}
-          select
-          label={T.translate("cabinet.categoryParent")}
-          name={"parentId"}
-          className={this.props.classes.textFieldFull}
-          value={this.state.parentId}
-          onChange={this.handleChange('parentId')}
-          SelectProps={{
-            MenuProps: {
-              className: this.props.classes.menu,
-            },
-          }}
-          margin={"left"}
-        >
-          <MenuItem key={0} value={0} selected={0 === this.state.parentId}>---</MenuItem>
-          {this.props.parentCategories.map((option) => (
-            <MenuItem
-              key={option.id}
-              value={option.id}
-              selected={option.id === this.state.parentId}
-            >
-              {option.title}
-            </MenuItem>
-          ))}
-        </TextField>
         <div>
           <Button
             variant="contained"
@@ -149,9 +118,8 @@ const styles = theme => ({
   },
 });
 
-MainCategoryForm.propTypes = {
+CurrencyForm.propTypes = {
   classes: PropTypes.object.isRequired,
-  currentCategory: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MainCategoryForm);
+export default withStyles(styles)(CurrencyForm);

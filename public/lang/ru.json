@@ -1,9 +1,9 @@
 {
   "cabinet": {
     "dashboard": "Главная",
-    "addCategory": "Добавить новую категория",
-    "addTag": "Добавить новый тег",
-    "addProduct": "Добавить новый продукт",
+    "addCategory": "Новую категория",
+    "addTag": "Новый тег",
+    "addProduct": "Новый продукт",
     "preview": "Превью",
     "itemPublished": "Опубликовать",
     "itemTitle": "Название",
@@ -23,7 +23,10 @@
     "categoryParent": "Основная категория",
     "categoryTitle": "Название",
     "categoryDescription": "Описание",
-    "categoriesList": "Категории"
+    "categoriesList": "Категории",
+    "currencyTitle": "Курс валют",
+    "currencyUSD": "Курс $",
+    "currencyEUR": "Курс €"
   },
   "common": {
     "deleteButton": "Удалить",
@@ -56,7 +59,7 @@
     "count": "На складе"
   },
   "auth": {
-    "login:" : "Вход",
+    "login" : "Вход",
     "logout" : "Выход",
     "passwordReset": "Востановление пароля",
     "passwordResetText": "Укажите Ваш email, и мы пришлем Вам письмо с возможностью указать новый пароль.",
@@ -66,7 +69,8 @@
   "messages": {
     "itemsRemoved": "Количество удаленных товаров: ",
     "itemAdded": " добавленна в корзину",
-    "loginSuccess": "Вы успешно зашли в систему как "
+    "loginSuccess": "Вы успешно зашли в систему как ",
+    "currencyChange": "Курс валют успешно обновлен"
   },
   "menu": {
     "profile": "Профиль",

@@ -56,6 +56,14 @@ class MainMenu extends React.Component {
             <ListItemText classes={{ primary: this.props.classes.primary }} inset primary={T.translate("cabinet.addProduct")} />
           </ListItem>
         </MenuItem>
+        <MenuItem className={this.props.classes.menuItem} component={Link} to="/cabinet/currency">
+          <ListItem>
+            <ListItemIcon className={this.props.classes.icon}>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText classes={{ primary: this.props.classes.primary }} inset primary={T.translate("cabinet.currencyTitle")} />
+          </ListItem>
+        </MenuItem>
       </MenuList>
     )
   }
@@ -76,6 +84,7 @@ const styles = theme => ({
 
 const mapStateToProps = (state, props) => {
   return {
+    language: state.language,
   }
 };
 

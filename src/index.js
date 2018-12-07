@@ -11,8 +11,10 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import "./styles/scss/material-kit-react.css?v=1.2.0"
 import { PersistGate } from 'redux-persist/integration/react'
-import { getCategories } from './actions/categories'
-import { getLanguage } from './actions/language'
+import { getCategories, getParentCategories } from './actions/categories'
+import { getLanguage, setLanguage } from './actions/language'
+import axios from 'axios'
+import T from 'i18n-react'
 
 const theme = createMuiTheme({
   typography: {
@@ -33,11 +35,22 @@ const jsx = (
 
 ReactDOM.render(<p>Loading...</p>, document.getElementById('root'));
 
-store.dispatch(getCategories());
-store.dispatch(getItemsAll()).then(async () => {
-  const res = await store.dispatch(getLanguage());
-  setTimeout(() => {ReactDOM.render(jsx, document.getElementById('root'))}, 100)
+// TODO get from local storage
+store.dispatch(getLanguage());
+const lang = store.getState().language;
+axios.get(`/lang/${lang}.json`).then(res => {
+  T.setTexts(res.data);
+  store.dispatch(setLanguage(lang));
+});
 
+store.dispatch(getCategories());
+store.dispatch(getParentCategories());
+store.dispatch(getItemsAll()).then(async () => {
+  const user = firebase.auth().currentUser;
+  if (user) {
+    await store.dispatch(login(user.uid, user.displayName, user.photoURL, user.email));
+  }
+  ReactDOM.render(jsx, document.getElementById('root'));
 });
 
 registerServiceWorker();

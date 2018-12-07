@@ -6,6 +6,8 @@ import HeaderLinks from '../block/HeaderLinks'
 import MessageSnackBar from '../custom/MessageSnackBar'
 import { removeMessage } from '../../actions/message'
 import { setLanguage } from '../../actions/language'
+import axios from 'axios'
+import T from 'i18n-react'
 
 const Header = (props) => {
 
@@ -33,6 +35,7 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   return {
     notification: state.notification,
+    language: state.language,
   }
 };
 
@@ -43,8 +46,10 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(removeMessage(status));
   },
   changeLanguage: lang => {
-    dispatch(setLanguage(lang));
-    window.location.reload();
+    axios.get(`/lang/${lang}.json`).then(res => {
+      T.setTexts(res.data);
+      dispatch(setLanguage(lang));
+    });
   }
 });
 
