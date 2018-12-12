@@ -113,21 +113,13 @@ export const getNestedCategories = () => {
       snapshot.forEach((childSnapshot) => {
         const parentId = childSnapshot.val().parentId;
         if (parentId === 0) {
-          categories = {
-            ...categories,
-            ...{[childSnapshot.key]: childSnapshot.val()}
-          }
+          categories[childSnapshot.key] = childSnapshot.val();
         } else {
-          categories[parentId] = {
-            ...categories[parentId],
-            ...{subcategory: [childSnapshot.val()]}
+          if (!categories[parentId].subcategory) {
+            categories[parentId].subcategory = {};
           }
+          categories[parentId].subcategory[childSnapshot.key] = childSnapshot.val();
         }
-        // console.log(childSnapshot.val().parentId)
-        // categories.push({
-        //   id: childSnapshot.key,
-        //   ...childSnapshot.val()
-        // });
       });
       console.log(categories)
       dispatch(getMainNestedCategories(categories));
