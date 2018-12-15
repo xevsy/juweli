@@ -36,6 +36,8 @@
     "sendButton": "Выслать",
     "bucket": "Корзина",
     "applyOrder": "Оформить заказ",
+    "applyOrderTitle": "Форма заполнения заказа",
+    "applyOrderButton": "Заказать",
     "pageNotFound": "404 - Страница не найдена",
     "categories": "Разделы",
     "bucketCount": "Количество",

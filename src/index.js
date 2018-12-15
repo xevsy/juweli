@@ -11,7 +11,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import "./styles/scss/material-kit-react.css?v=1.2.0"
 import { PersistGate } from 'redux-persist/integration/react'
-import { getCategories, getParentCategories } from './actions/categories'
+import { getCategories, getNestedCategories, getParentCategories } from './actions/categories'
 import { getLanguage, setLanguage } from './actions/language'
 import axios from 'axios'
 import T from 'i18n-react'
@@ -47,6 +47,7 @@ axios.get(`/lang/${lang}.json`).then(res => {
 store.dispatch(getCategories());
 store.dispatch(getParentCategories());
 store.dispatch(getCurrency());
+store.dispatch(getNestedCategories());
 store.dispatch(getItemsAll()).then(async () => {
   const user = firebase.auth().currentUser;
   if (user) {

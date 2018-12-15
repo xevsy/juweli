@@ -11,7 +11,10 @@ import { resetPassword, startLogout, startSmartLogin } from '../../actions/auth'
 
 const RightSidebar = (props) => (
   <Paper className={classNames(props.classes.paper, props.classes.fixed)} elevation={0} >
-    <Bucket bucket={props.bucket} onBucketClickRemove={props.onBucketClickRemove}/>
+    <Bucket
+      bucket={props.bucket}
+      onBucketClickRemove={props.onBucketClickRemove}
+    />
     <LoginBlock
       startLogout={props.startLogout}
       startSmartLogin={props.startSmartLogin}

@@ -13,7 +13,7 @@ class MainContent extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props.currency)
+
     return (
       <Paper className={classes.paper} elevation={0}>
         <Grid container>

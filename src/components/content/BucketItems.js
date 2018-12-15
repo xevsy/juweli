@@ -18,11 +18,10 @@ import classNames from 'classnames'
 import { lighten } from '@material-ui/core/styles/colorManipulator'
 import IconButton from '@material-ui/core/IconButton/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
-import Button from '@material-ui/core/Button/Button'
-import Favorite from "@material-ui/icons/Favorite"
 import { removeItemsFromBucket } from '../../actions/bucket'
 import { addMessage } from '../../actions/message'
 import T from 'i18n-react'
+import ApplyOrderForm from '../forms/ApplyOrderForm'
 
 class BucketItems extends React.Component {
   constructor(props) {
@@ -168,9 +167,7 @@ class BucketItems extends React.Component {
               </TableBody>
             </Table>
             <Toolbar>
-              <Button variant="contained" aria-label={T.translate("common.applyOrder")} color="secondary">
-                <Favorite className={classes.icons} /> {T.translate("common.applyOrder")}
-              </Button>
+              <ApplyOrderForm bucket={this.props.bucket} />
             </Toolbar>
           </div>
         </Grid>

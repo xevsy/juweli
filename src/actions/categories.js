@@ -121,7 +121,6 @@ export const getNestedCategories = () => {
           categories[parentId].subcategory[childSnapshot.key] = childSnapshot.val();
         }
       });
-      console.log(categories)
       dispatch(getMainNestedCategories(categories));
     });
   };

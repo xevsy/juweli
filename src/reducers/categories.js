@@ -31,21 +31,6 @@ export default (state = categoriesReducerDefaultState, action) => {
         parent: action.categories
       };
     case 'GET_MAIN_NESTED_CATEGORIES':
-      let nestedObject = {};
-
-      for (let index in action.categories) {
-        let category = action.categories[index];
-        if (category.parentId === 0) {
-          nestedObject[category.id] = { ...nestedObject[category.id], ...category }
-        } else if (nestedObject[category.parentId] !== undefined) {
-          if (nestedObject[category.parentId]['subcategories'] !== undefined) {
-            nestedObject[category.parentId]['subcategories'] = [];
-          }
-          //console.log(nestedObject[category.parentId])
-          //nestedObject[category.parentId]['subcategories'].push(category);
-        }
-      }
-      //console.log(nestedObject)
       return {
         ...state,
         nested: action.categories

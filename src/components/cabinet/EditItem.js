@@ -13,9 +13,7 @@ import componentsStyle from '../../styles/jss/material-kit-react/views/component
 import classNames from 'classnames'
 import { getTags } from '../../actions/tags'
 import { getCategories } from '../../actions/categories'
-import ItemTeaser from '../block/ItemTeaser'
 import { addMessage } from '../../actions/message'
-import T from 'i18n-react'
 
 class EditItem extends React.Component {
   constructor(props) {
@@ -46,12 +44,12 @@ class EditItem extends React.Component {
         <Header/>
         <div>
           <Grid container spacing={24}>
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={12} sm={4}>
               <Paper className={classes.paper}>
                 <MainMenu/>
               </Paper>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={8}>
               <Paper className={classes.paper}>
                 <h1>{this.props.item.title}</h1>
                 <MainItemForm
@@ -62,16 +60,6 @@ class EditItem extends React.Component {
                   onFormSubmit={this.props.onFormSubmit}
                   onHandleChange={this.props.onHandleChange}
                   onHandleDelete={this.props.onHandleDelete}
-                />
-              </Paper>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-              <Paper className={classes.paper}>
-                <h2>{T.translate("cabinet.preview")}</h2>
-                <ItemTeaser
-                  item={this.props.item}
-                  currency={this.props.currency}
-                  onBucketClick={() => console.log('test')}
                 />
               </Paper>
             </Grid>

@@ -25,12 +25,12 @@ class Currency extends React.Component {
         <Header/>
         <div>
           <Grid container spacing={24}>
-            <Grid item xs={6} sm={3}>
+            <Grid item xs={12} sm={4}>
               <Paper className={this.props.classes.paper}>
                 <MainMenu/>
               </Paper>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={8}>
               <Paper className={this.props.classes.paper}>
                 <h1>{T.translate("cabinet.currencyTitle")}</h1>
                 <CurrencyForm
@@ -38,8 +38,6 @@ class Currency extends React.Component {
                   onFormSubmit={this.props.onFormSubmit}
                 />
               </Paper>
-            </Grid>
-            <Grid item xs={6} sm={3}>
             </Grid>
           </Grid>
         </div>

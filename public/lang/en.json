@@ -36,6 +36,8 @@
     "sendButton": "Send",
     "bucket": "Bucket",
     "applyOrder": "Apply order",
+    "applyOrderTitle": "Apply order form",
+    "applyOrderButton": "Order",
     "categories": "Categories",
     "pageNotFound": "404 - Page not found",
     "bucketCount": "Count",

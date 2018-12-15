@@ -181,35 +181,33 @@ class NavBar extends React.Component {
             </Drawer>
           </Hidden>
         </AppBar>
-        {/*<AppBar className={appBarClasses}>*/}
-          {/*<ToolBar className={classes.container}>*/}
-          {/*</ToolBar>*/}
-        {/*</AppBar>*/}
-        <Menu
-          id={"simple-menu"}
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
-          <MenuItem
-            component={Link}
-            to={"/profile"}
+        <Hidden smDown implementation="css">
+          <Menu
+            id={"simple-menu"}
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={this.handleClose}
           >
-            {T.translate("menu.profile")}
-          </MenuItem>
-          { this.props.auth.role === 'admin' ?
-          <MenuItem
-            component={Link}
-            to={"/cabinet"}
-          >
-            {T.translate("menu.cabinet")}
-          </MenuItem> : '' }
-          <MenuItem onClick={this.handleClose}>{T.translate("menu.account")}</MenuItem>
-          { this.props.auth.uid !== undefined ?
-            <MenuItem onClick={this.props.startLogout}>{T.translate("menu.logout")}</MenuItem> :
-            <MenuItem onClick={this.props.startLogin}>{T.translate("menu.login")}</MenuItem>
-          }
-        </Menu>
+            <MenuItem
+              component={Link}
+              to={"/profile"}
+            >
+              {T.translate("menu.profile")}
+            </MenuItem>
+            { this.props.auth.role === 'admin' ?
+            <MenuItem
+              component={Link}
+              to={"/cabinet"}
+            >
+              {T.translate("menu.cabinet")}
+            </MenuItem> : '' }
+            <MenuItem onClick={this.handleClose}>{T.translate("menu.account")}</MenuItem>
+            { this.props.auth.uid !== undefined ?
+              <MenuItem onClick={this.props.startLogout}>{T.translate("menu.logout")}</MenuItem> :
+              <MenuItem onClick={this.props.startLogin}>{T.translate("menu.login")}</MenuItem>
+            }
+          </Menu>
+        </Hidden>
       </div>
     );
   }

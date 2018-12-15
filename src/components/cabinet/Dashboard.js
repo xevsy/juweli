@@ -27,12 +27,12 @@ class Dashboard extends React.Component {
         <Header/>
           <div>
             <Grid container spacing={24}>
-              <Grid item xs={6} sm={3}>
+              <Grid item xs={12} sm={4}>
                 <Paper className={classes.paper}>
                   <MainMenu/>
                 </Paper>
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={8}>
                 <Paper className={classes.paper}>
                   <h1>{T.translate("cabinet.dashboard")}</h1>
                   <List>
@@ -56,8 +56,6 @@ class Dashboard extends React.Component {
                   )}
                   </List>
                 </Paper>
-              </Grid>
-              <Grid item xs={6} sm={3}>
               </Grid>
             </Grid>
           </div>

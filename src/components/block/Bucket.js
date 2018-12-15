@@ -7,6 +7,7 @@ import ListItem from '@material-ui/core/ListItem/ListItem'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import IconButton from '@material-ui/core/IconButton/IconButton'
 import T from 'i18n-react'
+import ApplyOrderForm from '../forms/ApplyOrderForm'
 
 const Bucket = (props) => {
   const onBucketClickRemove = (id) => {
@@ -31,6 +32,7 @@ const Bucket = (props) => {
             )
           })}
         </List>
+        <ApplyOrderForm bucket={props.bucket}/>
       </div>
     </div>
   )
