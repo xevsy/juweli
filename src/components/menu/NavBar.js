@@ -19,6 +19,7 @@ import Avatar from '@material-ui/core/Avatar/Avatar'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import Drawer from '@material-ui/core/Drawer/Drawer'
 import T from 'i18n-react'
+import { getItemsAll } from '../../actions/items'
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -107,6 +108,7 @@ class NavBar extends React.Component {
               varian={"h6"}
               color={"inherit"}
               className={classes.flex}
+              onClick={this.props.resetCategories}
             >
               Juweli
             </Typography>
@@ -221,4 +223,12 @@ const MapStateToProps = (state) => {
   }
 };
 
-export default connect(MapStateToProps)(withStyles(headerStyle)(NavBar));
+const mapDispatchToProps = (dispatch) => {
+  return {
+    resetCategories: () => {
+      dispatch(getItemsAll());
+    }
+  }
+};
+
+export default connect(MapStateToProps, mapDispatchToProps)(withStyles(headerStyle)(NavBar));
