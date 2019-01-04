@@ -19,7 +19,7 @@ import Avatar from '@material-ui/core/Avatar/Avatar'
 import Hidden from '@material-ui/core/Hidden/Hidden'
 import Drawer from '@material-ui/core/Drawer/Drawer'
 import T from 'i18n-react'
-import { getItemsAll } from '../../actions/items'
+import { getPublishedItemsAll } from '../../actions/items'
 
 class NavBar extends React.Component {
   constructor(props) {
@@ -226,7 +226,7 @@ const MapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     resetCategories: () => {
-      dispatch(getItemsAll());
+      dispatch(getPublishedItemsAll());
     }
   }
 };

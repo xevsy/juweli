@@ -1,7 +1,7 @@
 import React from 'react';
 import SidebarMenu from '../menu/SidebarMenu'
 import { connect } from 'react-redux'
-import { getItemsByCategory } from '../../actions/items'
+import { getPublishedItemsByCategory } from '../../actions/items'
 import * as PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import Paper from '@material-ui/core/Paper/Paper'
@@ -28,7 +28,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onHandleClick: categoryId => {
-      dispatch(getItemsByCategory(categoryId));
+      dispatch(getPublishedItemsByCategory(categoryId));
     }
   }
 };

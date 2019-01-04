@@ -137,6 +137,7 @@ class MainItemForm extends React.PureComponent {
       image: this.state.image,
       author_id: this.state.auth.uid,
       tags: this.state.tags,
+      published: this.state.published,
     });
   }
 

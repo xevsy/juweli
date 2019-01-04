@@ -88,33 +88,56 @@ export const getItemsAll = () => {
     return database.ref('products').orderByChild('updateAt').once('value').then((snapshot) => {
       const items = [];
       snapshot.forEach((childSnapshot) => {
-        items.push({
-          id: childSnapshot.key,
-          ...childSnapshot.val()
-        });
-        storage
-          .ref("images/350x")
-          .child('thumb_' + childSnapshot.val().image)
-          .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
+          items.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          });
+          storage
+            .ref("images/350x")
+            .child('thumb_' + childSnapshot.val().image)
+            .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
       });
       dispatch(getMainItems(items));
     });
   };
 };
 
-export const getItemsByCategory = (categoryId) => {
+export const getPublishedItemsAll = () => {
+  return (dispatch) => {
+    return database.ref('products').orderByChild('updateAt').once('value').then((snapshot) => {
+      const items = [];
+      snapshot.forEach((childSnapshot) => {
+        if (childSnapshot.val().published === true) {
+          items.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          });
+          storage
+            .ref("images/350x")
+            .child('thumb_' + childSnapshot.val().image)
+            .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
+        }
+      });
+      dispatch(getMainItems(items));
+    });
+  };
+};
+
+export const getPublishedItemsByCategory = (categoryId) => {
   return (dispatch) => {
     return database.ref('products').orderByChild('category').equalTo(categoryId).once('value').then((snapshot) => {
       const items = [];
       snapshot.forEach((childSnapshot) => {
-        items.push({
-          id: childSnapshot.key,
-          ...childSnapshot.val()
-        });
-        storage
-          .ref("images/350x")
-          .child('thumb_' + childSnapshot.val().image)
-          .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
+        if (childSnapshot.val().published === true) {
+          items.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val()
+          });
+          storage
+            .ref("images/350x")
+            .child('thumb_' + childSnapshot.val().image)
+            .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
+        }
       });
       dispatch(getMainItems(items));
     });

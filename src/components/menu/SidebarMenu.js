@@ -39,7 +39,7 @@ class SidebarMenu extends React.Component {
           return (
             <div key={categoryId}>
               <ListItem button dense disableGutters
-                        onClick={() => this.onHandleToggleSubcategories(categoryId)}
+                        onClick={() => this.onHandleClick(categoryId)}
               >
                 <ListItemText classes={{primary: this.props.classes.primary}} inset primary={this.state.nestedMenu[categoryId].title}/>
               </ListItem>

@@ -6,7 +6,7 @@ import AppRouter from './routers/AppRouter';
 import registerServiceWorker from './registerServiceWorker';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
-import { getItemsAll } from './actions/items';
+import { getPublishedItemsAll } from './actions/items';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import "./styles/scss/material-kit-react.css?v=1.2.0"
@@ -48,7 +48,7 @@ store.dispatch(getCategories());
 store.dispatch(getParentCategories());
 store.dispatch(getCurrency());
 store.dispatch(getNestedCategories());
-store.dispatch(getItemsAll()).then(async () => {
+store.dispatch(getPublishedItemsAll()).then(async () => {
   const user = firebase.auth().currentUser;
   if (user) {
     await store.dispatch(login(user.uid, user.displayName, user.photoURL, user.email));
