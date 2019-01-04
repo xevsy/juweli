@@ -13,6 +13,7 @@ class SidebarMenu extends React.Component {
   constructor(props) {
     super(props);
     this.onHandleClick = this.onHandleClick.bind(this);
+    this.onHandleToggleSubcategories = this.onHandleToggleSubcategories.bind(this);
     this.state = {
       selectedIndex: 0,
       open: true,
@@ -23,31 +24,50 @@ class SidebarMenu extends React.Component {
     this.setState({ selectedIndex: categoryId });
     this.props.onHandleClick(categoryId);
   }
+  onHandleToggleSubcategories = (categoryId) => {
+    this.setState((state) => {
+      return {open: !state.open[categoryId]}
+    });
+    console.log(categoryId)
+  }
   render() {
     return (
       <div>
         <h3>{T.translate("common.categories")}</h3>
         <List>
-          <ListItem button onClick={this.handleClick} dense disableGutters>
-            <ListItemText inset primary="Inbox" />
-            {this.state.open ? <ExpandLess /> : <ExpandMore />}
-          </ListItem>
-          <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItem button dense className={this.props.classes.nested}>
-                <ListItemText inset primary="Starred" />
-              </ListItem>
-            </List>
-          </Collapse>
         {Object.keys(this.state.nestedMenu).map((categoryId) => {
           return (
-            <ListItem button dense disableGutters
-                      key={categoryId}
-                      onClick={() => this.onHandleClick(categoryId)}
-                      selected={this.state.selectedIndex === categoryId}
-            >
-              <ListItemText classes={{primary: this.props.classes.primary}} inset primary={this.state.nestedMenu[categoryId].title}/>
-            </ListItem>
+            <div key={categoryId}>
+              <ListItem button dense disableGutters
+                        onClick={() => this.onHandleToggleSubcategories(categoryId)}
+              >
+                <ListItemText classes={{primary: this.props.classes.primary}} inset primary={this.state.nestedMenu[categoryId].title}/>
+              </ListItem>
+              {this.state.nestedMenu[categoryId].subcategory &&
+                <div>
+                  <ListItem button onClick={this.handleClick} dense disableGutters>
+                  <ListItemText inset primary="Inbox" />
+                  {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                  </ListItem>
+                  <Collapse in={this.state.open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                      {Object.keys(this.state.nestedMenu[categoryId].subcategory).map((subCategoryId) => {
+                        return (
+                          <ListItem key={subCategoryId} button dense
+                                    className={this.props.classes.nested}
+                                    onClick={() => this.onHandleClick(subCategoryId)}
+                                    selected={this.state.selectedIndex === subCategoryId}
+                          >
+                            <ListItemText inset primary={this.state.nestedMenu[categoryId].subcategory[subCategoryId].title} />
+                          </ListItem>
+                        )
+                      })
+                      }
+                    </List>
+                  </Collapse>
+                </div>
+              }
+            </div>
           )
         })}
         </List>
@@ -75,7 +95,7 @@ const styles = theme => ({
   },
   icon: {},
   nested: {
-    paddingLeft: theme.spacing.unit * 4,
+    paddingLeft: theme.spacing.unit * 2,
   },
 });
 

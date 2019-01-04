@@ -34,6 +34,7 @@ class ItemTeaser extends React.Component {
         <Card className={classes.card}>
           <CardHeader
             avatar={
+              item.amount > 0 &&
               <Avatar aria-label={item.amount} className={classes.avatar}>
                 {(item.amount * currency[item.currency.toLowerCase()]).toFixed(2)} {this.state.uah}
               </Avatar>
@@ -55,19 +56,23 @@ class ItemTeaser extends React.Component {
             title="Test"
           />
           <CardContent>
-            <Typography>
-              {(item.amount * currency[item.currency.toLowerCase()]).toFixed(2)} {this.state.uah}
-            </Typography>
+            {item.amount > 0 &&
+              <Typography>
+                {(item.amount * currency[item.currency.toLowerCase()]).toFixed(2)} {this.state.uah}
+              </Typography>
+            }
           </CardContent>
           <CardActions className={classes.actions} disableActionSpacing>
             <IconButton aria-label="Share">
               <ShareIcon />
             </IconButton>
-            <IconButton
-              onClick={() => this.props.onBucketClick(item)}
-            >
-              <ShoppingCartIcon />
-            </IconButton>
+            {item.amount > 0 &&
+              <IconButton
+                onClick={() => this.props.onBucketClick(item)}
+              >
+                <ShoppingCartIcon/>
+              </IconButton>
+            }
             <IconButton
               className={classnames(classes.expand, {
                 [classes.expandOpen]: this.state.expanded,
