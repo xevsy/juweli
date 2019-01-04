@@ -38,16 +38,18 @@ class SidebarMenu extends React.Component {
         {Object.keys(this.state.nestedMenu).map((categoryId) => {
           return (
             <div key={categoryId}>
-              <ListItem button dense disableGutters
-                        onClick={() => this.onHandleClick(categoryId)}
-              >
-                <ListItemText classes={{primary: this.props.classes.primary}} inset primary={this.state.nestedMenu[categoryId].title}/>
-              </ListItem>
+              {!this.state.nestedMenu[categoryId].subcategory &&
+                <ListItem button dense disableGutters
+                          onClick={() => this.onHandleClick(categoryId)}
+                >
+                  <ListItemText classes={{primary: this.props.classes.primary}} inset primary={this.state.nestedMenu[categoryId].title}/>
+                </ListItem>
+              }
               {this.state.nestedMenu[categoryId].subcategory &&
                 <div>
                   <ListItem button onClick={this.handleClick} dense disableGutters>
-                  <ListItemText inset primary="Inbox" />
-                  {this.state.open ? <ExpandLess /> : <ExpandMore />}
+                    <ListItemText inset primary={this.state.nestedMenu[categoryId].title} />
+                    {this.state.open ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
                   <Collapse in={this.state.open} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
