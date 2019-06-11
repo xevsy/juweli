@@ -8,6 +8,7 @@
     "itemPublished": "Published",
     "itemTitle": "Title",
     "itemDescription": "Description",
+    "itemIdentifier": "Identifier",
     "itemCategory": "Category",
     "itemCurrency": "Currency",
     "itemAmount": "Amount",

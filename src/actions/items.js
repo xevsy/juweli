@@ -13,17 +13,18 @@ export const startAddMainItem = (itemData = {}) => {
       published = true,
       title ='',
       description = '',
+      identifier = '',
       category = '',
       author_id = 0,
-      currency = 'UAH',
+      currency = 'USD',
       amount =  0,
       count = 0,
-      image = '',
+      images = [],
       tags = [],
       createAt = moment().format(),
       updateAt = moment().format()
     } = itemData;
-    const item = { published, title, description, category, author_id, currency, amount, count, image, tags, createAt, updateAt };
+    const item = { published, title, description, identifier, category, author_id, currency, amount, count, images, tags, createAt, updateAt };
     return database.ref('products').push(item).then((ref) => {
       dispatch(addMainItem({
         id: ref.key,
@@ -46,16 +47,17 @@ export const startEditMainItem = (id, itemData = {}) => {
       published = true,
       title ='',
       description = '',
+      identifier = '',
       category = '',
       author_id = 0,
-      currency = 'UAH',
+      currency = 'USD',
       amount =  0,
       count = 0,
-      image = '',
+      images = [],
       tags = [],
       updateAt = moment().format()
     } = itemData;
-    const item = { published, title, description, category, author_id, currency, amount, count, image, tags, updateAt };
+    const item = { published, title, description, identifier, category, author_id, currency, amount, count, images, tags, updateAt };
     return database.ref(`products/${id}`).update(item).then(() => {
       dispatch(editMainItem(id, item))
     });
@@ -92,12 +94,12 @@ export const getItemsAll = () => {
             id: childSnapshot.key,
             ...childSnapshot.val()
           });
-          storage
-            .ref("images/350x")
-            .child('thumb_' + childSnapshot.val().image)
-            .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
+          // storage
+          //   .ref("images/350x")
+          //   .child('thumb_' + childSnapshot.val().image)
+          //   .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
       });
-      dispatch(getMainItems(items));
+      dispatch(getMainItems(items.reverse()));
     });
   };
 };
@@ -112,13 +114,15 @@ export const getPublishedItemsAll = () => {
             id: childSnapshot.key,
             ...childSnapshot.val()
           });
-          storage
-            .ref("images/350x")
-            .child('thumb_' + childSnapshot.val().image)
-            .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
+          // if (childSnapshot.val().images && childSnapshot.val().images.length > 0) {
+          //   storage
+          //     .ref("images/350x")
+          //     .child('thumb_' + childSnapshot.val().images[0].public_id)
+          //     .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
+          // }
         }
       });
-      dispatch(getMainItems(items));
+      dispatch(getMainItems(items.reverse()));
     });
   };
 };
@@ -133,13 +137,13 @@ export const getPublishedItemsByCategory = (categoryId) => {
             id: childSnapshot.key,
             ...childSnapshot.val()
           });
-          storage
-            .ref("images/350x")
-            .child('thumb_' + childSnapshot.val().image)
-            .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
+          // storage
+          //   .ref("images/350x")
+          //   .child('thumb_' + childSnapshot.val().image)
+          //   .getDownloadURL().then((url) => dispatch(getImageUrl(childSnapshot.key, url)));
         }
       });
-      dispatch(getMainItems(items));
+      dispatch(getMainItems(items.reverse()));
     });
   }
 }

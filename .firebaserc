@@ -1,5 +1,6 @@
 {
   "projects": {
-    "staging": "juweli-58262"
+    "staging": "juweli-58262",
+    "default": "juweli-58262"
   }
 }

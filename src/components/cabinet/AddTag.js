@@ -46,9 +46,9 @@ const MapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    onFormSubmit: category => {
-      dispatch(startAddTag(category));
-      props.history.push('/cabinet');
+    onFormSubmit: tag => {
+      dispatch(startAddTag(tag));
+      props.history.push('/cabinet/tags');
     }
   }
 }

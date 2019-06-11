@@ -6,7 +6,6 @@ import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import { startEditMainItem, startRemoveMainItem, getItemsAll } from '../../actions/items'
 import { withStyles } from '@material-ui/core/styles'
-import { storage } from '../../firebase/firebase'
 import MainMenu from './MainMenu'
 import { store }  from '../../store/configureStore';
 import componentsStyle from '../../styles/jss/material-kit-react/views/components'
@@ -16,20 +15,6 @@ import { getCategories } from '../../actions/categories'
 import { addMessage } from '../../actions/message'
 
 class EditItem extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      imageUrl: "",
-    }
-
-    if (props.item) {
-      storage
-        .ref("images")
-        .child(props.item.image)
-        .getDownloadURL().then((url) => this.setState({'imageUrl': url}));
-    }
-  }
 
   componentDidMount() {
     store.dispatch(getCategories());

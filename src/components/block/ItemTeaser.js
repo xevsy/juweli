@@ -27,9 +27,14 @@ class ItemTeaser extends React.Component {
     this.setState(state => ({ expanded: !state.expanded }));
   };
 
+  rawMarkup(content){
+    return { __html: content };
+  }
+
   render() {
     const { classes, item, currency } = this.props;
     const itemDate = <Moment format={"YYYY/MM/DD"} date={item.updateAt} />
+
     return (
         <Card className={classes.card}>
           <CardHeader
@@ -50,11 +55,13 @@ class ItemTeaser extends React.Component {
             title={item.title}
             subheader={itemDate}
           />
-          <CardMedia
-            className={classes.media}
-            image={item.imageUrl}
-            title="Test"
-          />
+          <Link to={"/item/" + item.id} >
+            <CardMedia
+              className={classes.media}
+              image={this.props.item.images ? this.props.item.images[0].url : '/images/no-image.jpg'}
+              title="Test"
+            />
+          </Link>
           <CardContent>
             {item.amount > 0 &&
               <Typography>
@@ -87,7 +94,7 @@ class ItemTeaser extends React.Component {
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph>
-                {item.description}
+                <span dangerouslySetInnerHTML={this.rawMarkup(item.description)} />
               </Typography>
               <Typography paragraph>
                 {T.translate("item.count")}: {item.count}

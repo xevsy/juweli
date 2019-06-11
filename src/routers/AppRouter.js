@@ -14,6 +14,9 @@ import { connect } from 'react-redux'
 import EditCategory from '../components/cabinet/EditCategory'
 import CategoriesList from '../components/cabinet/CategoriesList'
 import Currency from '../components/cabinet/Currency'
+import TagsList from '../components/cabinet/TagsList'
+import ItemPage from '../components/pages/ItemPage'
+import CategoryPage from '../components/pages/CategoryPage'
 
 const AppRouter = (props) => {
   return (
@@ -21,12 +24,15 @@ const AppRouter = (props) => {
       <div>
         <Switch>
           <Route path={"/"} component={FrontPage} exact={true}/>
+          <Route path={"/category/:id"} component={CategoryPage}/>
           <Route path={"/bucket"} component={BucketPage} exact={true}/>
+          <Route path={"/item/:id"} component={ItemPage}/>
           <PrivateRoute path={"/cabinet"} component={Dashboard} exact={true}/>
           <PrivateRoute path={"/cabinet/categories"} component={CategoriesList} exact={true}/>
           <PrivateRoute path={"/cabinet/newCategory"} component={AddCategory}/>
           <PrivateRoute path={"/cabinet/categories/edit/:id"} component={EditCategory}/>
           <PrivateRoute path={"/cabinet/newTag"} component={AddTag}/>
+          <PrivateRoute path={"/cabinet/tags"} component={TagsList} exact={true}/>
           <PrivateRoute path={"/cabinet/newProduct"} component={AddItem}/>
           <PrivateRoute path={"/cabinet/edit/:id"} component={EditItem}/>
           <PrivateRoute path={"/cabinet/currency"} component={Currency}/>

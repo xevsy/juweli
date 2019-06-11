@@ -105,12 +105,22 @@ class NavBar extends React.Component {
             <Typography
               component={Link}
               to={"/"}
+              varian={"h3"}
+              color={"inherit"}
+              className={classes.flex}
+              onClick={this.props.resetCategories}
+            >
+              <h3>INDI</h3>
+            </Typography>
+            <Typography
+              component={Link}
+              to={"/"}
               varian={"h6"}
               color={"inherit"}
               className={classes.flex}
               onClick={this.props.resetCategories}
             >
-              Juweli
+              Авторские украшения <br/>из натуральных камней Индии
             </Typography>
             <Hidden xsDown>
               <Typography

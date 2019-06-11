@@ -1,4 +1,5 @@
 import database from '../firebase/firebase';
+import { removeMainCategory } from './categories'
 
 // ADD_CATEGORY
 export const addTag = (category) => ({
@@ -9,9 +10,10 @@ export const addTag = (category) => ({
 export const startAddTag = (tagData = {}) => {
   return (dispatch) => {
     const {
-      name =''
+      name ='',
+      count = 0
     } = tagData;
-    const tag = { name };
+    const tag = { name, count };
     return database.ref('tags').push(tag).then((ref) => {
       dispatch(addTag({
         id: ref.key,
@@ -40,4 +42,18 @@ export const getTags = () => {
       dispatch(getMainTags(tags));
     });
   };
+}
+
+// REMOVE_MAIN_CATEGORY
+export const removeTag = (id) => ({
+  type: 'REMOVE_TAG',
+  id
+});
+
+export const startRemoveTag = (id) => {
+  return (dispatch) => {
+    return database.ref(`tags/${id}`).remove().then(() => {
+      dispatch(removeTag(id))
+    });
+  }
 }

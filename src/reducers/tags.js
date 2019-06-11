@@ -9,6 +9,8 @@ export default (state = tagsReducerDefaultState, action) => {
       ];
     case 'GET_MAIN_TAGS':
       return action.tags;
+    case 'REMOVE_TAG':
+      return state.filter(({ id }) => id !== action.id);
     default:
       return state;
   }

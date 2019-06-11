@@ -12,8 +12,9 @@ export const startAddCategory = (categoryData = {}) => {
       title ='',
       description = '',
       parentId = 0,
+      images = [],
     } = categoryData;
-    const category = { title, description, parentId };
+    const category = { title, description, parentId, images };
     return database.ref('categories').push(category).then((ref) => {
       dispatch(addCategory({
         id: ref.key,
@@ -35,9 +36,10 @@ export const startEditCategory = (id, categoryData = {}) => {
     const {
       title ='',
       description = '',
-      parentId = 0
+      parentId = 0,
+      images = [],
     } = categoryData;
-    const category = { title, description, parentId };
+    const category = { title, description, parentId, images };
     return database.ref(`categories/${id}`).update(category).then(() => {
       dispatch(editCategory(id, category))
     });

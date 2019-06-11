@@ -8,6 +8,7 @@
     "itemPublished": "Опубликовать",
     "itemTitle": "Название",
     "itemDescription": "Описание",
+    "itemIdentifier": "Идентификатор",
     "itemCategory": "Категория",
     "itemCurrency": "Валюта",
     "itemAmount": "Цена",

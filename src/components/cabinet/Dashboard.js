@@ -11,15 +11,20 @@ import ListItemText from '@material-ui/core/ListItemText/ListItemText'
 import ListItem from '@material-ui/core/ListItem/ListItem'
 import IconButton from '@material-ui/core/IconButton/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
-import { startRemoveMainItem } from '../../actions/items'
+import { getItemsAll, startRemoveMainItem } from '../../actions/items'
 import { Link } from 'react-router-dom'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction'
 import List from '@material-ui/core/List/List'
 import classNames from 'classnames'
 import componentsStyle from '../../styles/jss/material-kit-react/views/components'
 import T from 'i18n-react'
+import { store }  from '../../store/configureStore'
 
 class Dashboard extends React.Component {
+
+  componentDidMount() {
+    store.dispatch(getItemsAll())
+  }
   render() {
     const {classes} = this.props;
     return (

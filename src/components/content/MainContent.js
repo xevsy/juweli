@@ -8,6 +8,10 @@ import { addItemToBucket } from '../../actions/bucket'
 import ItemTeaser from '../block/ItemTeaser'
 import { addMessage } from '../../actions/message'
 import T from 'i18n-react'
+import Typography from '@material-ui/core/Typography/Typography'
+import Card from '@material-ui/core/Card/Card'
+import CardContent from '@material-ui/core/CardContent/CardContent'
+import CardMedia from '@material-ui/core/CardMedia/CardMedia'
 
 class MainContent extends React.Component {
 
@@ -16,6 +20,24 @@ class MainContent extends React.Component {
 
     return (
       <Paper className={classes.paper} elevation={0}>
+        <Card className={classes.card}>
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <Typography component="h5" variant="h5">
+                {this.props.category.title}
+              </Typography>
+              <Typography variant="subtitle1" color="textSecondary">
+                {this.props.category.description}
+              </Typography>
+            </CardContent>
+            <div className={classes.controls}>
+            </div>
+          </div>
+          <CardMedia
+            className={classes.cover}
+            image={this.props.category.images ? this.props.category.images[0].url : ''}
+            title={this.props.category.title}/>
+        </Card>
         <Grid container>
         {this.props.items.length > 0 && this.props.items.map((item) => {
           return (
@@ -44,15 +66,35 @@ const styles = theme => ({
     backgroundColor: '#EFEBE9',
     borderRadius: 0,
   },
+  card: {
+    display: 'flex',
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+  cover: {
+    width: 151,
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  playIcon: {
+    height: 38,
+    width: 38,
+  },
 });
 
 MainContent.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const MapStateToProps = (state) => {
-  return {
-    items: state.products,
+const MapStateToProps = (state, props) => {
+  return  {
     role: state.auth.role,
     language: state.language,
     currency: state.currency,

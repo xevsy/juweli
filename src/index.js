@@ -6,7 +6,6 @@ import AppRouter from './routers/AppRouter';
 import registerServiceWorker from './registerServiceWorker';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
-import { getPublishedItemsAll } from './actions/items';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import "./styles/scss/material-kit-react.css?v=1.2.0"
@@ -16,6 +15,7 @@ import { getLanguage, setLanguage } from './actions/language'
 import axios from 'axios'
 import T from 'i18n-react'
 import { getCurrency } from './actions/currency'
+import { getPublishedItemsAll } from './actions/items'
 
 const theme = createMuiTheme({
   typography: {
@@ -47,8 +47,9 @@ axios.get(`/lang/${lang}.json`).then(res => {
 store.dispatch(getCategories());
 store.dispatch(getParentCategories());
 store.dispatch(getCurrency());
-store.dispatch(getNestedCategories());
-store.dispatch(getPublishedItemsAll()).then(async () => {
+store.dispatch(getPublishedItemsAll());
+//store.dispatch(getNestedCategories());
+store.dispatch(getNestedCategories()).then(async () => {
   const user = firebase.auth().currentUser;
   if (user) {
     await store.dispatch(login(user.uid, user.displayName, user.photoURL, user.email));

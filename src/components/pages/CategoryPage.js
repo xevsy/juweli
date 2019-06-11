@@ -7,19 +7,19 @@ import classNames from "classnames"
 import componentsStyle from "../../styles/jss/material-kit-react/views/components"
 import Grid from '@material-ui/core/Grid/Grid'
 import LeftSidebar from '../grid/LeftSidebar'
+import MainContent from '../content/MainContent'
 import RightSidebar from '../grid/RightSidebar'
 import { getPublishedItemsAll } from '../../actions/items'
 import { store }  from '../../store/configureStore'
-import ImageGallery from 'react-image-gallery'
-import connect from 'react-redux/es/connect/connect'
+import { connect } from 'react-redux'
 
-class FrontPage extends Component {
+class CategoryPage extends Component {
   componentDidMount() {
     store.dispatch(getPublishedItemsAll());
   }
 
   render() {
-    const { classes, images } = this.props;
+    const { classes } = this.props;
     return (
       <div>
         <Header />
@@ -29,7 +29,7 @@ class FrontPage extends Component {
               <LeftSidebar/>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <ImageGallery items={images} />
+              <MainContent items={this.props.items} category={this.props.category}/>
             </Grid>
             <Grid item xs={12} sm={2} className={classes.marginLeft}>
               <RightSidebar/>
@@ -42,20 +42,17 @@ class FrontPage extends Component {
   }
 }
 
-const MapStateToProps = (state) => {
-  let images = [];
-  if (state.products.length > 0 ) {
-    state.products.slice(0, 4).forEach((item) => {
-      if (item.images) {
-        item.images.forEach((image) => {
-          images.push({original: image.url, thumbnail: image.url});
-        })
-      }
-    });
-  }
+const MapStateToProps = (state, props) => {
+  let categoryItems = [];
+  state.products.find((item) => {
+    if (item.category === props.match.params.id) {
+      categoryItems.push(item);
+    }
+  });
   return {
-    images: images
+    items: categoryItems !== undefined ? categoryItems : [],
+    category: state.categories.all.find((category) => category.id === props.match.params.id)
   }
 };
 
-export default connect(MapStateToProps)(withStyles(componentsStyle)(FrontPage));
+export default connect(MapStateToProps)(withStyles(componentsStyle)(CategoryPage));

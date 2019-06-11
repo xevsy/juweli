@@ -6,6 +6,12 @@ import Icon from '@material-ui/core/Icon'
 import { withStyles } from '@material-ui/core/styles';
 import T from 'i18n-react'
 import MenuItem from '@material-ui/core/MenuItem/MenuItem'
+import Spinner from '../imageUpload/Spinner'
+import Images from '../imageUpload/Images'
+import Buttons from '../imageUpload/Buttons'
+import { storage } from '../../../firebase/firebase'
+import generateRandomID from 'uuid/v4'
+import * as mime from 'mime-types'
 
 class MainCategoryForm extends React.Component {
   constructor(props) {
@@ -18,7 +24,37 @@ class MainCategoryForm extends React.Component {
       description: props.currentCategory ? props.currentCategory.description : '',
       parentId: props.currentCategory && props.currentCategory.parentId ? props.currentCategory.parentId : 0,
       error: '',
+      uploading: false,
+      images: props.currentCategory && props.currentCategory.images ? props.currentCategory.images : [],
     }
+  }
+
+  onImageChange = event => {
+    const files = Array.from(event.target.files)
+    this.setState({ uploading: true })
+
+    files.forEach((file) => {
+      let randomFileName = generateRandomID() + '.' +   mime.extension(file.type);
+      storage
+        .ref("images")
+        .child(randomFileName)
+        .put(file)
+        .then((snapshot) => {
+            snapshot.ref.getDownloadURL().then((url) => this.setState({images: [...this.state.images, {public_id: randomFileName, url: url}]}))
+          }
+        );
+    })
+
+    this.setState({uploading: false})
+  }
+
+  removeImage = id => {
+    storage.ref(`images/${id}`).delete().then(() => {
+      //store.dispatch(startRemoveImage(id))
+      this.setState({
+        images: this.state.images.filter(image => image.public_id !== id)
+      })
+    });
   }
 
   handleChange = name => event => {
@@ -34,11 +70,25 @@ class MainCategoryForm extends React.Component {
       {
         title: this.state.title,
         description: this.state.description,
-        parentId: this.state.parentId
+        parentId: this.state.parentId,
+        images: this.state.images
       });
   }
 
   render() {
+    console.log(this.state)
+    const { uploading, images } = this.state
+    const imageArea = () => {
+      switch(true) {
+        case uploading:
+          return <Spinner />
+        case images.length > 0:
+          return <Images images={images} removeImage={this.removeImage} />
+        default:
+          return <Buttons onChange={this.onImageChange} />
+      }
+    }
+
     return (
       <form>
         <TextField
@@ -54,8 +104,9 @@ class MainCategoryForm extends React.Component {
           id={"description"}
           label={T.translate("cabinet.categoryDescription")}
           multiline
-          rowsMax={"4"}
-          className={this.props.classes.textFieldFull}
+          rowsMax={"6"}
+          rows={"6"}
+          className={this.props.classes.textAreaFull}
           value={this.state.description}
           onChange={this.handleChange('description')}
           errortext={this.state.error}
@@ -87,6 +138,9 @@ class MainCategoryForm extends React.Component {
             </MenuItem>
           ))}
         </TextField>
+        <div className={this.props.classes.buttons}>
+          { imageArea() }
+        </div>
         <div>
           <Button
             variant="contained"
@@ -109,6 +163,11 @@ const styles = theme => ({
     flexWrap: 'wrap',
   },
   textFieldFull: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: '80%',
+  },
+  textAreaFull: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: '80%',

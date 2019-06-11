@@ -5,17 +5,19 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon'
 import DeleteIcon from '@material-ui/icons/Delete'
 import MenuItem from '@material-ui/core/MenuItem';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import { withStyles } from '@material-ui/core/styles';
-import FileUploader from "react-firebase-file-uploader";
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import generateRandomID from 'uuid/v4';
+import * as mime from 'mime-types';
 
 import { storage } from '../../../firebase/firebase';
 import DownshiftMultiple from '../partial/DownshiftMultiple'
 import Switch from '@material-ui/core/Switch/Switch'
 import Typography from '@material-ui/core/Typography/Typography'
 import T from 'i18n-react'
+import Spinner from '../imageUpload/Spinner'
+import Images from '../imageUpload/Images'
+import Buttons from '../imageUpload/Buttons'
 
 const currencies = [
   {
@@ -43,26 +45,17 @@ class MainItemForm extends React.PureComponent {
     this.state = {
       title: props.item ? props.item.title : '',
       description: props.item ? props.item.description : '',
+      identifier: props.item ? props.item.identifier : '',
       category: props.item ? props.item.category : 'dd',
-      currency: props.item ? props.item.currency : 'UAH',
+      currency: props.item ? props.item.currency : 'USD',
       amount: props.item ? props.item.amount : 0,
-      count: props.item ? props.item.count : 0,
-      image: props.item ? props.item.image : '',
-      isUploading: false,
-      progress: 0,
-      imageUrl: "",
-      files: [],
+      count: props.item ? props.item.count : '',
       error: '',
       auth: props.auth,
       tags: props.item ? props.item.tags : [],
       published: props.item ? props.item.published : true,
-    }
-
-    if (props.item) {
-      storage
-        .ref("images")
-        .child(props.item.image)
-        .getDownloadURL().then((url) => this.setState({'imageUrl': url}));
+      uploading: false,
+      images: props.item && props.item.images ? props.item.images : [],
     }
   }
 
@@ -72,20 +65,33 @@ class MainItemForm extends React.PureComponent {
     this.setState({ published: !published });
   }
 
-  handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
-  handleProgress = progress => this.setState({ progress });
-  handleUploadError = error => {
-    this.setState({ isUploading: false });
-    console.error(error);
-  };
-  handleUploadSuccess = filename => {
-    this.setState({ image: filename, progress: 100, isUploading: false });
-    storage
-      .ref("images")
-      .child(filename)
-      .getDownloadURL()
-      .then(url => this.setState({ imageUrl: url }));
-  };
+  onImageChange = event => {
+    const files = Array.from(event.target.files)
+    this.setState({ uploading: true })
+
+    files.forEach((file) => {
+      let randomFileName = generateRandomID() + '.' +   mime.extension(file.type);
+      storage
+        .ref("images")
+        .child(randomFileName)
+        .put(file)
+        .then((snapshot) => {
+            snapshot.ref.getDownloadURL().then((url) => this.setState({images: [...this.state.images, {public_id: randomFileName, url: url}]}))
+          }
+        );
+    })
+
+    this.setState({uploading: false})
+  }
+
+  removeImage = id => {
+    storage.ref(`images/${id}`).delete().then(() => {
+      //store.dispatch(startRemoveImage(id))
+      this.setState({
+        images: this.state.images.filter(image => image.public_id !== id)
+      })
+    });
+  }
 
   handleChange = name => event => {
     this.setState({
@@ -103,11 +109,12 @@ class MainItemForm extends React.PureComponent {
     this.setState({
       title: '',
       description: '',
+      identifier: '',
       category: '',
       currency: 'UAH',
       amount: 0,
-      count: 0,
-      image: '',
+      count: '',
+      images: [],
       tags: [],
       published: true,
     });
@@ -130,11 +137,12 @@ class MainItemForm extends React.PureComponent {
     {
       title: this.state.title,
       description: this.state.description,
+      identifier: this.state.identifier,
       category: this.state.category,
       currency: this.state.currency,
       amount: this.state.amount,
       count: this.state.count,
-      image: this.state.image,
+      images: this.state.images,
       author_id: this.state.auth.uid,
       tags: this.state.tags,
       published: this.state.published,
@@ -142,6 +150,21 @@ class MainItemForm extends React.PureComponent {
   }
 
   render() {
+
+    const { uploading, images } = this.state
+    const imageArea = () => {
+      switch(true) {
+        case uploading:
+          return <Spinner />
+        case images.length > 0:
+          return (
+              <Images images={images} removeImage={this.removeImage} />
+          )
+        default:
+          return <Buttons onChange={this.onImageChange} />
+      }
+    }
+
     return (
       <ValidatorForm
         ref="form"
@@ -172,10 +195,21 @@ class MainItemForm extends React.PureComponent {
           id={"description"}
           label={T.translate("cabinet.itemDescription")}
           multiline
-          rowsMax={"4"}
+          rowsMax={"6"}
+          rows={"6"}
           className={this.props.classes.textFieldFull}
           value={this.state.description}
           onChange={this.handleChange('description')}
+          margin={"normal"}
+        />
+        <TextField
+          id={"identifier"}
+          label={T.translate("cabinet.itemIdentifier")}
+          className={this.props.classes.textFieldFull}
+          name={"identifier"}
+          value={this.state.identifier}
+          onChange={this.handleChange('identifier')}
+          errortext={this.state.error}
           margin={"normal"}
         />
         <TextValidator
@@ -248,42 +282,20 @@ class MainItemForm extends React.PureComponent {
           value={this.state.count}
           onChange={this.handleChange('count')}
           errortext={this.state.error}
-          type={"number"}
           InputLabelProps={{
             shrink: true,
           }}
           margin={"normal"}
         />
-        <DownshiftMultiple
-          selectedValues={this.state.tags}
-          inputValues={this.props.tags}
-          handleTagChange={this.handleTagChange}
-        />
-        <div>
-          {this.state.isUploading && <p>{T.translate("cabinet.itemImageProgress")}: {this.state.progress}</p>}
-          {this.state.image ?
-            <Card className={this.props.classes.card}>
-              <CardMedia
-                component="img"
-                className={this.props.classes.media}
-                height="140"
-                width="140"
-                src={this.state.imageUrl}
-                image={this.state.imageUrl}
-                title=""
-              />
-            </Card> : ''
-          }
-          <FileUploader
-            accept="image/*"
-            name="image"
-            randomizeFilename
-            storageRef={storage.ref('images')}
-            onUploadStart={this.handleUploadStart}
-            onUploadError={this.handleUploadError}
-            onUploadSuccess={this.handleUploadSuccess}
-            onProgress={this.handleProgress}
+        <div className={this.props.classes.textFieldFull}>
+          <DownshiftMultiple
+            selectedValues={this.state.tags}
+            inputValues={this.props.tags}
+            handleTagChange={this.handleTagChange}
           />
+        </div>
+        <div className={this.props.classes.buttons}>
+          { imageArea() }
         </div>
         <div>
           <Button
@@ -324,12 +336,15 @@ class MainItemForm extends React.PureComponent {
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexDirection: 'column',
+    height: '100vh',
+    justifyContent: 'space-around',
   },
   textFieldFull: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: '80%',
+    display: "inline-flex"
   },
   textFieldMedium: {
     marginLeft: theme.spacing.unit,
@@ -346,6 +361,13 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing.unit
+  },
+  buttons: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+    height: "75vh"
   },
   leftIcon: {
     marginRight: theme.spacing.unit,

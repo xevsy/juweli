@@ -8,6 +8,7 @@ import List from '@material-ui/core/List/List'
 import ListItem from '@material-ui/core/ListItem/ListItem'
 import Collapse from '@material-ui/core/Collapse'
 import T from 'i18n-react'
+import { Link } from 'react-router-dom'
 
 class SidebarMenu extends React.Component {
   constructor(props) {
@@ -39,10 +40,10 @@ class SidebarMenu extends React.Component {
           return (
             <div key={categoryId}>
               {!this.state.nestedMenu[categoryId].subcategory &&
-                <ListItem button dense disableGutters
-                          onClick={() => this.onHandleClick(categoryId)}
-                >
-                  <ListItemText classes={{primary: this.props.classes.primary}} inset primary={this.state.nestedMenu[categoryId].title}/>
+                <ListItem button dense disableGutters>
+                  <Link to={"/category/" + categoryId}>
+                    <ListItemText classes={{primary: this.props.classes.primary}} inset primary={this.state.nestedMenu[categoryId].title}/>
+                  </Link>
                 </ListItem>
               }
               {this.state.nestedMenu[categoryId].subcategory &&
@@ -57,10 +58,12 @@ class SidebarMenu extends React.Component {
                         return (
                           <ListItem key={subCategoryId} button dense
                                     className={this.props.classes.nested}
-                                    onClick={() => this.onHandleClick(subCategoryId)}
+                                    // onClick={() => this.onHandleClick(subCategoryId)}
                                     selected={this.state.selectedIndex === subCategoryId}
                           >
-                            <ListItemText inset primary={this.state.nestedMenu[categoryId].subcategory[subCategoryId].title} />
+                            <Link to={"/category/" + subCategoryId}>
+                              <ListItemText inset primary={this.state.nestedMenu[categoryId].subcategory[subCategoryId].title} />
+                            </Link>
                           </ListItem>
                         )
                       })
