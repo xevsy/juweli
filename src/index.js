@@ -9,6 +9,7 @@ import { login, logout } from './actions/auth';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 import "./styles/scss/material-kit-react.css?v=1.2.0"
+import "./styles/App.css"
 import { PersistGate } from 'redux-persist/integration/react'
 import { getCategories, getNestedCategories, getParentCategories } from './actions/categories'
 import { getLanguage, setLanguage } from './actions/language'
