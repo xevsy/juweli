@@ -1,4 +1,4 @@
-const languageReducerDefaultState = 'en';
+const languageReducerDefaultState = 'ua';
 
 export default (language = languageReducerDefaultState, action) => {
   switch (action.type) {
