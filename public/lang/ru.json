@@ -27,7 +27,8 @@
     "categoriesList": "Категории",
     "currencyTitle": "Курс валют",
     "currencyUSD": "Курс $",
-    "currencyEUR": "Курс €"
+    "currencyEUR": "Курс €",
+    "tagsList": "Список тегов"
   },
   "common": {
     "deleteButton": "Удалить",
@@ -48,7 +49,12 @@
     "selected": "выбрано",
     "email": "Email",
     "password": "Пароль",
-    "loading": "Загрузка..."
+    "loading": "Загрузка...",
+    "fio": "ФИО",
+    "phone": "Контактный телефон",
+    "delivery": "Способ доставки",
+    "deliveryBranch": "Отделение",
+    "comments": "Комментарий"
   },
   "social": {
     "follow_facebook": "Ищите нас на Facebook",

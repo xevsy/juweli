@@ -27,7 +27,8 @@
     "categoriesList": "Categories",
     "currencyTitle": "Currency rate",
     "currencyUSD": "Rate $",
-    "currencyEUR": "Rate €"
+    "currencyEUR": "Rate €",
+    "tagsList": "Tags list"
   },
   "common": {
     "deleteButton": "Delete",
@@ -48,7 +49,12 @@
     "selected": "selected",
     "email": "Email",
     "password": "Password",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "fio": "Full name",
+    "phone": "Phone",
+    "delivery": "Delivery provider",
+    "deliveryBranch": "Delivery branch",
+    "comments": "Comments"
   },
   "social": {
     "follow_facebook": "Follow us on Facebook",
