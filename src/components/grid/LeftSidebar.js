@@ -13,11 +13,12 @@ const LeftSidebar = (props) => (
       categories={props.categories}
       onHandleClick={props.onHandleClick}
       role={props.role}
+      category={props.category ? props.category : {}}
     />
   </Paper>
 );
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     categories: state.categories,
     role: state.auth.role,

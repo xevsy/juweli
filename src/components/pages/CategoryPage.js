@@ -26,7 +26,7 @@ class CategoryPage extends Component {
         <div className={classNames(classes.main, classes.mainRaised)}>
           <Grid container>
             <Grid item xs={12} sm={2}>
-              <LeftSidebar/>
+              <LeftSidebar category={this.props.category}/>
             </Grid>
             <Grid item xs={12} sm={8}>
               <MainContent items={this.props.items} category={this.props.category}/>

@@ -13,23 +13,16 @@ import { Link } from 'react-router-dom'
 class SidebarMenu extends React.Component {
   constructor(props) {
     super(props);
-    this.onHandleClick = this.onHandleClick.bind(this);
     this.onHandleToggleSubcategories = this.onHandleToggleSubcategories.bind(this);
     this.state = {
-      selectedIndex: 0,
       open: true,
       nestedMenu: this.props.categories.nested
     };
-  }
-  onHandleClick = (categoryId) => {
-    this.setState({ selectedIndex: categoryId });
-    this.props.onHandleClick(categoryId);
   }
   onHandleToggleSubcategories = (categoryId) => {
     this.setState((state) => {
       return {open: !state.open[categoryId]}
     });
-    console.log(categoryId)
   }
   render() {
     return (
@@ -40,7 +33,7 @@ class SidebarMenu extends React.Component {
           return (
             <div key={categoryId}>
               {!this.state.nestedMenu[categoryId].subcategory &&
-                <ListItem button dense disableGutters>
+                <ListItem button dense disableGutters  selected={this.props.category.id === categoryId}>
                   <Link to={"/category/" + categoryId}>
                     <ListItemText classes={{primary: this.props.classes.primary}} inset primary={this.state.nestedMenu[categoryId].title}/>
                   </Link>
@@ -58,8 +51,7 @@ class SidebarMenu extends React.Component {
                         return (
                           <ListItem key={subCategoryId} button dense
                                     className={this.props.classes.nested}
-                                    // onClick={() => this.onHandleClick(subCategoryId)}
-                                    selected={this.state.selectedIndex === subCategoryId}
+                                    selected={this.props.category.id === subCategoryId}
                           >
                             <Link to={"/category/" + subCategoryId}>
                               <ListItemText inset primary={this.state.nestedMenu[categoryId].subcategory[subCategoryId].title} />
