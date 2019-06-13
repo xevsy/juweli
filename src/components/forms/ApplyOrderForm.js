@@ -87,6 +87,7 @@ class ApplyOrderForm extends React.PureComponent {
         <Dialog
           open={this.state.open}
           onClose={this.handleCloseDialog}
+          scroll={"paper"}
           aria-labelledby="form-dialog-title"
         >
           <ValidatorForm
