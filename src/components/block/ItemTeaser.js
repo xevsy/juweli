@@ -38,12 +38,12 @@ class ItemTeaser extends React.Component {
     return (
         <Card className={classes.card}>
           <CardHeader
-            avatar={
-              item.amount > 0 &&
-              <Avatar aria-label={item.amount} className={classes.avatar}>
-                {(item.amount * currency[item.currency.toLowerCase()]).toFixed(2)} {this.state.uah}
-              </Avatar>
-            }
+            // avatar={
+            //   item.amount > 0 &&
+            //   <Avatar aria-label={item.amount} className={classes.avatar}>
+            //     {(item.amount * currency[item.currency.toLowerCase()]).toFixed(2)} {this.state.uah}
+            //   </Avatar>
+            // }
             action={
               this.props.role === 'admin' ?
               <Link to={"/cabinet/edit/" + item.id} >
@@ -52,7 +52,7 @@ class ItemTeaser extends React.Component {
                 </IconButton>
               </Link> : <div></div>
             }
-            title={item.title}
+            title={item.title + (item.identifier ? " / " + item.identifier : '')}
             subheader={itemDate}
           />
           <Link to={"/item/" + item.id} >
