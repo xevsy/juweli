@@ -8,6 +8,7 @@ import tagsReducer from '../reducers/tags'
 import messageReducer from '../reducers/message'
 import languageReducer from '../reducers/language'
 import currencyReducer from '../reducers/currency'
+import ordersReducer from '../reducers/orders'
 import { reducer as formReducer } from 'redux-form';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
@@ -19,7 +20,7 @@ const persistConfig = {
   key: 'root',
   storage: storage,
   stateReconciler: hardSet,
-  blacklist: ['categories', 'form', 'products', 'tags', 'notification']
+  blacklist: ['categories', 'form', 'products', 'tags', 'notification', 'orders']
 }
 
 const rootReducer = persistReducer(persistConfig, combineReducers({
@@ -31,6 +32,7 @@ const rootReducer = persistReducer(persistConfig, combineReducers({
   notification: messageReducer,
   language: languageReducer,
   currency: currencyReducer,
+  orders: ordersReducer,
   form: formReducer
 }));
 

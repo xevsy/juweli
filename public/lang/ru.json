@@ -28,7 +28,8 @@
     "currencyTitle": "Курс валют",
     "currencyUSD": "Курс $",
     "currencyEUR": "Курс €",
-    "tagsList": "Список тегов"
+    "tagsList": "Список тегов",
+    "ordersList": "Заказы"
   },
   "common": {
     "deleteButton": "Удалить",
@@ -53,6 +54,7 @@
     "fio": "ФИО",
     "phone": "Контактный телефон",
     "delivery": "Способ доставки",
+    "deliveryProviderName": "Новая почта",
     "deliveryBranch": "Отделение",
     "comments": "Комментарий"
   },
@@ -79,7 +81,9 @@
     "itemsRemoved": "Количество удаленных товаров: ",
     "itemAdded": " добавленна в корзину",
     "loginSuccess": "Вы успешно зашли в систему как ",
-    "currencyChange": "Курс валют успешно обновлен"
+    "currencyChange": "Курс валют успешно обновлен",
+    "emptyBucket": "Нету товаров в корзине для выполения заказа",
+    "orderSuccess": "Ваш заказ успешно отправлен! Мы с Вами свяжемся в ближайшее время"
   },
   "menu": {
     "profile": "Профиль",
@@ -87,5 +91,12 @@
     "account": "Мой аккаунт",
     "login" : "Вход",
     "logout" : "Выход"
+  },
+  "order": {
+    "count": "Количество",
+    "title": "Название",
+    "identifier": "Идентификатор",
+    "link": "Ссылка",
+    "goto": "К товару"
   }
 }

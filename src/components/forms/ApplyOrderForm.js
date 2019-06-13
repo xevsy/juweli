@@ -9,12 +9,18 @@ import Favorite from "@material-ui/icons/Favorite"
 import Button from '@material-ui/core/Button/Button'
 import Dialog from '@material-ui/core/Dialog/Dialog'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
+import Select from '@material-ui/core/Select'
 import classNames from 'classnames'
 import InputAdornment from '@material-ui/core/InputAdornment/InputAdornment'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import Phone from '@material-ui/icons/Phone'
 import Email from '@material-ui/icons/Email'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { applyOrder } from '../../actions/orders'
+import { removeItemsFromBucket } from '../../actions/bucket'
+import { addMessage } from '../../actions/message'
+import MenuItem from '@material-ui/core/MenuItem/MenuItem'
 
 class ApplyOrderForm extends React.PureComponent {
   constructor(props) {
@@ -25,8 +31,14 @@ class ApplyOrderForm extends React.PureComponent {
       email: '',
       phone: '',
       comments: '',
+      delivery: 0,
+      deliveryProvider: [
+        T.translate("common.deliveryProviderName")
+      ],
+      deliveryBranch: '',
     }
   }
+
 
   handleChange = prop => event => {
     this.setState({ [prop]: event.target.value });
@@ -36,26 +48,31 @@ class ApplyOrderForm extends React.PureComponent {
     this.setState({ open: false });
   }
 
-  handleApplyOrder = (e) => {
-    e.preventDefault();
-    console.log(this.state)
-    console.log(this.props)
-
-    const data = {
-      message: 'Test message'
-    }
-
-    axios.post('/api/send_email', data)
-      .then( res => {
-        console.log(res)
-      })
-      .catch( () => {
-        console.log('Message not sent')
-      })
-  }
+  // handleApplyOrder = (e) => {
+  //   e.preventDefault();
+  //   console.log(this.state)
+  //   console.log(this.props)
+  //
+  //   const data = {
+  //     message: 'Test message'
+  //   }
+  //
+  //   axios.post('/api/send_email', data)
+  //     .then( res => {
+  //       console.log(res)
+  //     })
+  //     .catch( () => {
+  //       console.log('Message not sent')
+  //     })
+  // }
 
   applyOrder = () => {
     this.setState(state => ({ open: !state.open }));
+  }
+
+  handleApplyOrder = () => {
+    this.props.handleApplyOrder(this.state, this.props.bucket)
+    this.applyOrder()
   }
 
   render() {
@@ -74,7 +91,7 @@ class ApplyOrderForm extends React.PureComponent {
         >
           <ValidatorForm
             ref="form"
-            onSubmit={(event) => {this.handleApplyOrder(event)}}
+            onSubmit={this.handleApplyOrder}
             onError={errors => console.log(errors)}
           >
             <DialogTitle id="form-dialog-apply-order">{T.translate("common.applyOrderTitle")}</DialogTitle>
@@ -135,6 +152,38 @@ class ApplyOrderForm extends React.PureComponent {
                   }}
                 />
                 <TextValidator
+                  id="delivery"
+                  select
+                  label={T.translate("common.delivery")}
+                  name={"delivery"}
+                  className={classNames(classes.margin, classes.textField)}
+                  value={this.state.delivery}
+                  onChange={this.handleChange('delivery')}
+                  validators={[]}
+                  errorMessages={[]}
+                  helperText={T.translate("common.delivery")}
+                  margin="normal"
+                >
+                  {Boolean(this.state.deliveryProvider) && this.state.deliveryProvider.map((option, i) => (
+                    <MenuItem key={i} value={i}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextValidator>
+                <TextValidator
+                  id={"deliveryBranch"}
+                  label={T.translate("common.deliveryBranch")}
+                  name={"deliveryBranch"}
+                  multiline
+                  variant={"outlined"}
+                  className={classNames(classes.margin, classes.textField)}
+                  value={this.state.deliveryBranch}
+                  onChange={this.handleChange('deliveryBranch')}
+                  validators={['required']}
+                  errorMessages={[T.translate("cabinet.requiredField")]}
+                  margin={"normal"}
+                />
+                <TextValidator
                   id={"comments"}
                   label={T.translate("common.comments")}
                   name={"comments"}
@@ -167,6 +216,14 @@ const style = theme => ({
     height: "17px",
     color: "#FFFFFF"
   },
+  margin: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+  },
+  textField: {
+    width: "96%",
+    display: "inline-flex"
+  }
 });
 
 ApplyOrderForm.propTypes = {
@@ -174,4 +231,18 @@ ApplyOrderForm.propTypes = {
   bucket: PropTypes.array.isRequired,
 };
 
-export default withStyles(style)(ApplyOrderForm);
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    handleApplyOrder: (data, bucket) => {
+      if (bucket.length > 0) {
+        dispatch(applyOrder(data, bucket));
+        dispatch(removeItemsFromBucket(bucket.map((item) => item.id)))
+        dispatch(addMessage(T.translate("messages.orderSuccess"), 'success'))
+      } else {
+        dispatch(addMessage(T.translate("messages.emptyBucket"), 'info'))
+      }
+    }
+  }
+}
+
+export default connect(undefined, mapDispatchToProps)(withStyles(style)(ApplyOrderForm));

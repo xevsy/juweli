@@ -20,7 +20,7 @@ app.post("/api/send_email", function(req, res) {
   /* Send email here */
   email('order', person, function(error, result){
     console.log(' - - - - - - - - - - - - - - - - - - - - -> email sent: ');
-    console.log(result);
+    console.log(error);
     console.log(' - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
   })
 

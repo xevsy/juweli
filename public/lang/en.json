@@ -28,7 +28,8 @@
     "currencyTitle": "Currency rate",
     "currencyUSD": "Rate $",
     "currencyEUR": "Rate €",
-    "tagsList": "Tags list"
+    "tagsList": "Tags list",
+    "ordersList": "Orders"
   },
   "common": {
     "deleteButton": "Delete",
@@ -53,6 +54,7 @@
     "fio": "Full name",
     "phone": "Phone",
     "delivery": "Delivery provider",
+    "deliveryProviderName": "Nova Poshta",
     "deliveryBranch": "Delivery branch",
     "comments": "Comments"
   },
@@ -79,7 +81,9 @@
     "itemsRemoved": "Amount of removed items: ",
     "itemAdded": " item has been added to the bucket",
     "loginSuccess": "You are successfully logged in as ",
-    "currencyChange": "Currency rate has been successfully updated"
+    "currencyChange": "Currency rate has been successfully updated",
+    "emptyBucket": "Bucket is empty to proceed with order",
+    "orderSuccess": "You order has been successfully sent. We will call you soon"
   },
   "menu": {
     "profile": "Profile",
@@ -87,5 +91,12 @@
     "account": "My account",
     "login" : "Login",
     "logout" : "Logout"
+  },
+  "order": {
+    "count": "Count",
+    "title": "Title",
+    "identifier": "Identifier",
+    "link": "Link",
+    "goto": "Link"
   }
 }
