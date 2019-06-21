@@ -18,6 +18,7 @@ import TagsList from '../components/cabinet/TagsList'
 import ItemPage from '../components/pages/ItemPage'
 import CategoryPage from '../components/pages/CategoryPage'
 import OrdersList from '../components/cabinet/OrdersList'
+import ContactsPage from '../components/cabinet/ContactsPage'
 
 const AppRouter = (props) => {
   return (
@@ -38,6 +39,7 @@ const AppRouter = (props) => {
           <PrivateRoute path={"/cabinet/edit/:id"} component={EditItem}/>
           <PrivateRoute path={"/cabinet/currency"} component={Currency}/>
           <PrivateRoute path={"/cabinet/orders"} component={OrdersList} exact={true}/>
+          <PrivateRoute path={"/cabinet/contacts"} component={ContactsPage} exact={true}/>
           <Route component={NotFoundPage}/>
         </Switch>
       </div>

@@ -21,7 +21,7 @@ class AddTag extends React.Component {
           <Grid container spacing={24}>
             <Grid item xs={12} sm={4}>
               <Paper className={this.props.classes.paper}>
-                <MainMenu/>
+                <MainMenu path={this.props.path}/>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={8}>
@@ -38,9 +38,10 @@ class AddTag extends React.Component {
   }
 }
 
-const MapStateToProps = (state) => {
+const MapStateToProps = (state, props) => {
   return {
     language: state.language,
+    path: props.match.path
   }
 };
 

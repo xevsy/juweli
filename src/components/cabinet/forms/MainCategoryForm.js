@@ -76,7 +76,6 @@ class MainCategoryForm extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     const { uploading, images } = this.state
     const imageArea = () => {
       switch(true) {

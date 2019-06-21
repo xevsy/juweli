@@ -30,7 +30,7 @@ class AddItem extends React.Component {
           <Grid container spacing={24}>
             <Grid item xs={12} sm={4}>
               <Paper className={classes.paper}>
-                <MainMenu/>
+                <MainMenu path={this.props.path}/>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={8}>
@@ -52,12 +52,13 @@ class AddItem extends React.Component {
   }
 }
 
-const MapStateToProps = (state) => {
+const MapStateToProps = (state, props) => {
   return {
     categories: state.categories.all,
     auth: state.auth,
     tags: state.tags,
     language: state.language,
+    path: props.match.path
   }
 };
 

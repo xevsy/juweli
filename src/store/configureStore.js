@@ -9,6 +9,7 @@ import messageReducer from '../reducers/message'
 import languageReducer from '../reducers/language'
 import currencyReducer from '../reducers/currency'
 import ordersReducer from '../reducers/orders'
+import contactsReducer from '../reducers/contacts'
 import { reducer as formReducer } from 'redux-form';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
@@ -33,6 +34,7 @@ const rootReducer = persistReducer(persistConfig, combineReducers({
   language: languageReducer,
   currency: currencyReducer,
   orders: ordersReducer,
+  contacts: contactsReducer,
   form: formReducer
 }));
 

@@ -1,7 +1,7 @@
 {
   "cabinet": {
     "dashboard": "Главная",
-    "addCategory": "Новую категория",
+    "addCategory": "Новая категория",
     "addTag": "Новый тег",
     "addProduct": "Новый продукт",
     "preview": "Превью",
@@ -29,7 +29,8 @@
     "currencyUSD": "Курс $",
     "currencyEUR": "Курс €",
     "tagsList": "Список тегов",
-    "ordersList": "Заказы"
+    "ordersList": "Заказы",
+    "contacts": "Контакты"
   },
   "common": {
     "deleteButton": "Удалить",

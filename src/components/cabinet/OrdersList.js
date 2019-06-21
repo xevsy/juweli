@@ -38,7 +38,7 @@ class OrdersList extends React.Component {
           <Grid container spacing={24}>
             <Grid item xs={12} sm={4}>
               <Paper className={classes.paper}>
-                <MainMenu/>
+                <MainMenu path={this.props.path}/>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={8}>
@@ -149,10 +149,11 @@ const ExpansionPanelSummary = withStyles(theme => ({
   expanded: {},
 }))(MuiExpansionPanelSummary);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     orders: state.orders,
     language: state.language,
+    path: props.match.path,
   }
 };
 

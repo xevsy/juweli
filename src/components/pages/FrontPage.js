@@ -12,10 +12,19 @@ import { getPublishedItemsAll } from '../../actions/items'
 import { store }  from '../../store/configureStore'
 import ImageGallery from 'react-image-gallery'
 import connect from 'react-redux/es/connect/connect'
+import { getMainContacts } from '../../actions/contacts'
+import Card from '@material-ui/core/Card/Card'
+import CardContent from '@material-ui/core/CardContent/CardContent'
+import Typography from '@material-ui/core/Typography/Typography'
 
 class FrontPage extends Component {
   componentDidMount() {
     store.dispatch(getPublishedItemsAll());
+    store.dispatch(getMainContacts());
+  }
+
+  rawMarkup(content){
+    return { __html: content };
   }
 
   render() {
@@ -30,6 +39,14 @@ class FrontPage extends Component {
             </Grid>
             <Grid item xs={12} sm={8}>
               <ImageGallery items={images} />
+              <div><br/></div>
+              <Card>
+                <CardContent>
+                  <Typography variant="body1" component="p" width={"100%"} align="center">
+                    <span dangerouslySetInnerHTML={this.rawMarkup(this.props.contacts)} />
+                  </Typography>
+                </CardContent>
+              </Card>
             </Grid>
             <Grid item xs={12} sm={2} className={classes.marginLeft}>
               <RightSidebar/>
@@ -54,7 +71,8 @@ const MapStateToProps = (state) => {
     });
   }
   return {
-    images: images
+    images: images,
+    contacts: state.contacts,
   }
 };
 

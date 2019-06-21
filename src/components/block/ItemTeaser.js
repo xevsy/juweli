@@ -1,7 +1,6 @@
 import React from 'react'
 import Card from '@material-ui/core/Card/Card'
 import CardHeader from '@material-ui/core/CardHeader/CardHeader'
-import Avatar from '@material-ui/core/Avatar/Avatar'
 import IconButton from '@material-ui/core/IconButton/IconButton'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import CardMedia from '@material-ui/core/CardMedia/CardMedia'

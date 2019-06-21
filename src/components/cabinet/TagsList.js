@@ -12,7 +12,7 @@ import { store } from '../../store/configureStore'
 import { getTags, startRemoveTag } from '../../actions/tags'
 import ListItem from '@material-ui/core/ListItem/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon/ListItemIcon'
-import DraftsIcon from '@material-ui/core/SvgIcon/SvgIcon'
+import DraftsIcon from '@material-ui/icons/Drafts'
 import DeleteIcon from '@material-ui/icons/Delete'
 import ListItemText from '@material-ui/core/ListItemText/ListItemText'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction/ListItemSecondaryAction'
@@ -33,7 +33,7 @@ class TagsList extends React.Component {
           <Grid container spacing={24}>
             <Grid item xs={12} sm={4}>
               <Paper className={classes.paper}>
-                <MainMenu/>
+                <MainMenu path={this.props.path}/>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={8}>
@@ -68,10 +68,11 @@ class TagsList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, props) => {
   return {
     tags: state.tags,
     language: state.language,
+    path: props.match.path,
   }
 };
 

@@ -1,5 +1,4 @@
 import database from '../firebase/firebase';
-import { removeMainCategory } from './categories'
 
 // ADD_CATEGORY
 export const addTag = (category) => ({

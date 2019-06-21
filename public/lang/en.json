@@ -29,7 +29,8 @@
     "currencyUSD": "Rate $",
     "currencyEUR": "Rate €",
     "tagsList": "Tags list",
-    "ordersList": "Orders"
+    "ordersList": "Orders",
+    "contacts": "Contacts"
   },
   "common": {
     "deleteButton": "Delete",
