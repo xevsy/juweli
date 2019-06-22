@@ -81,6 +81,7 @@
   "messages": {
     "itemsRemoved": "Amount of removed items: ",
     "itemAdded": " item has been added to the bucket",
+    "itemError": " item cannot be added to the bucket, empty identifier",
     "loginSuccess": "You are successfully logged in as ",
     "currencyChange": "Currency rate has been successfully updated",
     "emptyBucket": "Bucket is empty to proceed with order",

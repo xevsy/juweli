@@ -18,7 +18,7 @@ const Header = (props) => {
         handleMessageClose={() => props.handleMessageClose(props.notification.status)}
       />
       <NavBar
-        // color="transparent"
+        color="#ecbebe"
         startLogin={startLogin()}
         startLogout={startLogout()}
         rightLinks={<HeaderLinks changeLanguage={props.changeLanguage} />}

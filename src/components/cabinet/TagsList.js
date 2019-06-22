@@ -26,6 +26,7 @@ class TagsList extends React.Component {
 
   render () {
     const {classes} = this.props;
+
     return (
       <div className={classNames(classes.main, classes.mainRaised)}>
         <Header/>

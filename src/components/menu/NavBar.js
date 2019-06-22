@@ -92,7 +92,8 @@ class NavBar extends React.Component {
       [classes.appBar]: true,
       [classes[color]]: color,
       [classes.absolute]: absolute,
-      [classes.fixed]: fixed
+      [classes.fixed]: fixed,
+      CustomAppBar: 'CustomAppBar',
     });
 
     return (
@@ -122,7 +123,7 @@ class NavBar extends React.Component {
             >
               Авторские украшения <br/>из натуральных камней Индии
             </Typography>
-            <Hidden xsDown>
+            <Hidden smDown>
               <Typography
                 component={Link}
                 to={"/bucket"}
