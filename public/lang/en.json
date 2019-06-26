@@ -1,6 +1,6 @@
 {
   "cabinet": {
-    "dashboard": "Dashboard",
+    "dashboard": "Items",
     "addCategory": "Add new category",
     "addTag": "Add new tag",
     "addProduct": "Add new product",
@@ -30,7 +30,7 @@
     "currencyEUR": "Rate €",
     "tagsList": "Tags list",
     "ordersList": "Orders",
-    "contacts": "Contacts"
+    "contacts": "Main page"
   },
   "common": {
     "deleteButton": "Delete",

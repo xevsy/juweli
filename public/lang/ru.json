@@ -1,6 +1,6 @@
 {
   "cabinet": {
-    "dashboard": "Главная",
+    "dashboard": "Товары",
     "addCategory": "Новая категория",
     "addTag": "Новый тег",
     "addProduct": "Новый продукт",
@@ -30,7 +30,7 @@
     "currencyEUR": "Курс €",
     "tagsList": "Список тегов",
     "ordersList": "Заказы",
-    "contacts": "Контакты"
+    "contacts": "Главная"
   },
   "common": {
     "deleteButton": "Удалить",
