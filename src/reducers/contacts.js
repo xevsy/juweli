@@ -5,7 +5,7 @@ export default (contacts = contactsReducerDefaultState, action) => {
     case 'ADD_CONTACTS':
       return action.data;
     case 'GET_CONTACTS':
-      return contacts;
+      return action.data;
     default:
       return contacts;
   }
