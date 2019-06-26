@@ -38,8 +38,6 @@ class FrontPage extends Component {
               <LeftSidebar/>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <ImageGallery items={images} />
-              <div><br/></div>
               <Card>
                 <CardContent>
                   <Typography variant="body1" component="p" width={"100%"} align="center">
@@ -47,6 +45,7 @@ class FrontPage extends Component {
                   </Typography>
                 </CardContent>
               </Card>
+              <ImageGallery items={images} />
             </Grid>
             <Grid item xs={12} sm={2} className={classes.marginLeft}>
               <RightSidebar/>
