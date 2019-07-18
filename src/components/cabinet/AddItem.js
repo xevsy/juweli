@@ -65,8 +65,9 @@ const MapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onFormSubmit: item => {
-      dispatch(startAddMainItem(item));
-      props.history.push('/cabinet');
+      dispatch(startAddMainItem(item)).then(() => {
+        props.history.push('/cabinet');
+      });
     },
     onHandleChange: item => {
       //dispatch(startAddMainItem(item));

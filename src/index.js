@@ -49,7 +49,6 @@ store.dispatch(getCategories());
 store.dispatch(getParentCategories());
 store.dispatch(getCurrency());
 store.dispatch(getPublishedItemsAll());
-//store.dispatch(getNestedCategories());
 store.dispatch(getNestedCategories()).then(async () => {
   const user = firebase.auth().currentUser;
   if (user) {

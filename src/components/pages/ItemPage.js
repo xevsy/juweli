@@ -29,7 +29,7 @@ class ItemPage extends Component {
               <LeftSidebar/>
             </Grid>
             <Grid item xs={12} sm={8}>
-              <MainItem item={this.props.item}/>
+              <MainItem item={this.props.item} currency={this.props.currency}/>
             </Grid>
             <Grid item xs={12} sm={2} className={classes.marginLeft}>
               <RightSidebar/>

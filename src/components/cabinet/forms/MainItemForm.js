@@ -40,7 +40,6 @@ class MainItemForm extends React.PureComponent {
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDeleteButton = this.handleDeleteButton.bind(this);
-    this.handleClearButton = this.handleClearButton.bind(this);
 
     this.state = {
       title: props.item ? props.item.title : '',
@@ -69,6 +68,7 @@ class MainItemForm extends React.PureComponent {
     const files = Array.from(event.target.files)
     this.setState({ uploading: true })
 
+    console.log(files)
     files.forEach((file) => {
       let randomFileName = generateRandomID() + '.' +   mime.extension(file.type);
       storage
@@ -104,21 +104,6 @@ class MainItemForm extends React.PureComponent {
       ...this.state
     });
   };
-
-  handleClearButton = event => {
-    this.setState({
-      title: '',
-      description: '',
-      identifier: '',
-      category: '',
-      currency: 'UAH',
-      amount: 0,
-      count: '',
-      images: [],
-      tags: [],
-      published: true,
-    });
-  }
 
   handleDeleteButton = event => {
     this.props.onHandleDelete({
@@ -158,7 +143,10 @@ class MainItemForm extends React.PureComponent {
           return <Spinner />
         case images.length > 0:
           return (
+            <span>
               <Images images={images} removeImage={this.removeImage} />
+              <Buttons onChange={this.onImageChange} />
+            </span>
           )
         default:
           return <Buttons onChange={this.onImageChange} />
@@ -294,7 +282,7 @@ class MainItemForm extends React.PureComponent {
             handleTagChange={this.handleTagChange}
           />
         </div>
-        <div className={this.props.classes.buttons}>
+        <div className={this.props.classes.imageArea}>
           { imageArea() }
         </div>
         <div>
@@ -306,15 +294,6 @@ class MainItemForm extends React.PureComponent {
           >
             {T.translate("common.saveButton")}
             <Icon className={this.props.classes.rightIcon}>send</Icon>
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={this.props.classes.button}
-            onClick={this.handleClearButton}
-          >
-            {T.translate("common.clearButton")}
-            <Icon className={this.props.classes.rightIcon}>clear</Icon>
           </Button>
           {this.props.item ?
             <Button
@@ -368,6 +347,12 @@ const styles = theme => ({
     justifyContent: "space-around",
     flexWrap: "wrap",
     height: "75vh"
+  },
+  imageArea: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
   },
   leftIcon: {
     marginRight: theme.spacing.unit,

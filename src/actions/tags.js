@@ -1,9 +1,9 @@
 import database from '../firebase/firebase';
 
 // ADD_CATEGORY
-export const addTag = (category) => ({
+export const addTag = (tag) => ({
   type: 'ADD_TAG',
-  category
+  tag
 });
 
 export const startAddTag = (tagData = {}) => {

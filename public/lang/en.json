@@ -57,7 +57,8 @@
     "delivery": "Delivery provider",
     "deliveryProviderName": "Nova Poshta",
     "deliveryBranch": "Delivery branch",
-    "comments": "Comments"
+    "comments": "Comments",
+    "search": "Search"
   },
   "social": {
     "follow_facebook": "Follow us on Facebook",

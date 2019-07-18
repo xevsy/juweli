@@ -57,7 +57,8 @@
     "delivery": "Способ доставки",
     "deliveryProviderName": "Новая почта",
     "deliveryBranch": "Отделение",
-    "comments": "Комментарий"
+    "comments": "Комментарий",
+    "search": "Поиск"
   },
   "social": {
     "follow_facebook": "Ищите нас на Facebook",

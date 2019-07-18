@@ -41,6 +41,7 @@ class AddTag extends React.Component {
 const MapStateToProps = (state, props) => {
   return {
     language: state.language,
+    tags: state.tags,
     path: props.match.path
   }
 };
@@ -48,8 +49,9 @@ const MapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch, props) => {
   return {
     onFormSubmit: tag => {
-      dispatch(startAddTag(tag));
-      props.history.push('/cabinet/tags');
+      dispatch(startAddTag(tag)).then(() => {
+        props.history.push('/cabinet/tags')
+      });
     }
   }
 }
