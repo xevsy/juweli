@@ -104,13 +104,8 @@ const MapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onBucketClick: item => {
-      if (!item.identifier) {
-        dispatch(addMessage(item.title + T.translate("messages.itemError"), 'info'))
-      }
-      else {
-        dispatch(addItemToBucket(item));
-        dispatch(addMessage(item.title + T.translate("messages.itemAdded"), 'success'))
-      }
+      dispatch(addItemToBucket(item));
+      dispatch(addMessage(item.title + T.translate("messages.itemAdded"), 'success'))
     }
   }
 }

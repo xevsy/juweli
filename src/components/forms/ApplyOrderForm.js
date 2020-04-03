@@ -95,7 +95,14 @@ class ApplyOrderForm extends React.PureComponent {
             onSubmit={this.handleApplyOrder}
             onError={errors => console.log(errors)}
           >
-            <DialogTitle id="form-dialog-apply-order">{T.translate("common.applyOrderTitle")}</DialogTitle>
+            <DialogActions>
+              <Button onClick={this.handleCloseDialog} color="inherit">
+                {T.translate("common.cancelButton")}
+              </Button>
+              <Button type={"submit"} color="primary">
+                {T.translate("common.applyOrderButton")}
+              </Button>
+            </DialogActions>
             <DialogContent>
                 <TextValidator
                   id={"fio"}
