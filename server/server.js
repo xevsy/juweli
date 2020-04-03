@@ -5,6 +5,11 @@ const publicPath = path.join(__dirname, '..', 'build');
 const port = process.env.PORT || 3000;
 
 app.use((req, res, next) => {
+  const host = req.header("host");
+  console.log(host)
+  if (!host.match(/^www\..*/i)) {
+    res.redirect(301, "https://www." + host);
+  }
   if (req.header('x-forwarded-proto') !== 'https')
     res.redirect(`https://${req.header('host')}${req.url}`)
   else
