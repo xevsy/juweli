@@ -4,19 +4,13 @@ const app = express();
 const publicPath = path.join(__dirname, '..', 'build');
 const port = process.env.PORT || 3000;
 
-// const { email, set_template_directory } = require('sendemail')
-// set_template_directory('./templates')
+app.use((req, res, next) => {
+  if (req.header('x-forwarded-proto') !== 'https')
+    res.redirect(`https://${req.header('host')}${req.url}`)
+  else
+    next()
+})
 
-
-if(process.env.NODE_ENV === 'production') {
-  app.use((req, res, next) => {
-    if (req.header('x-forwarded-proto') !== 'https')
-      res.redirect(`https://${req.header('host')}${req.url}`)
-    else
-      next()
-  })
-
-}
 app.use(express.static(publicPath));
 
 // app.post("/api/send_email", function(req, res) {
