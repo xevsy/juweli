@@ -25,7 +25,7 @@
     "keycode": "^2.2.0",
     "material-ui-pagination": "^1.1.7",
     "mime-types": "^2.1.26",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "path": "^0.12.7",
     "prop-types": "^15.6.2",
     "react": "^16.13.1",
